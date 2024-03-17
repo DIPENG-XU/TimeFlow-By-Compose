@@ -30,10 +30,9 @@ val defaultFontFamily = FontFamily(
 )
 
 fun getFontSize(deviceType: Device): TextUnit = when (deviceType) {
-    is Device.Phone -> 16.sp
-    is Device.Tablet -> 32.sp
-    is Device.TV -> 32.sp
-    else -> 32.sp
+    is Device.Phone -> 24.sp
+    is Device.Tablet -> 36.sp
+    is Device.TV -> 36.sp
 }
 
 sealed class Device {
