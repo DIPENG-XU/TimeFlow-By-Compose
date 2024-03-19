@@ -12,7 +12,7 @@ class MainViewModelProviderFactory : ViewModelProvider.Factory {
             return when {
                 isAssignableFrom(MainViewModel::class.java) -> MainViewModel(
                     TimeFormatRecordDataStoreService.getInstance(),
-                    TimeDataService.getInstance()
+                    TimeDataService.getInstance(),
                 )
 
                 else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")

@@ -11,17 +11,14 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.apollo.timeflow.bycompose.Device
+import com.apollo.timeflow.bycompose.compose.component.TimeCard
 import com.apollo.timeflow.bycompose.defaultFontFamily
 import com.apollo.timeflow.bycompose.getFontSize
-import com.apollo.timeflow.bycompose.compose.component.TimeCard
 import com.apollo.timeflow.bycompose.viewmodel.MainViewModel
 
 @Preview(
@@ -29,12 +26,11 @@ import com.apollo.timeflow.bycompose.viewmodel.MainViewModel
     heightDp = 411,
 )
 @Composable
-fun CardLargeLandSpace(
-    deviceTypes: Device = Device.Phone(),
-    leftOnClick: () -> Unit = {},
-    rightOnClick: () -> Unit = {},
+fun CardLandSpace(
     viewModel: MainViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
 ) {
+    val timeFormat = viewModel.timeFormatRecordDataStoreFlow.collectAsState(initial = false)
+    val dateFormat = viewModel.isDateShowDataStoreFlow.collectAsState(initial = false)
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -51,24 +47,26 @@ fun CardLargeLandSpace(
             ) {
                 Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
                     TimeCard(
-                        deviceTypes = deviceTypes,
-                        clickable = leftOnClick,
-                        isShowTimeFormat = viewModel.timeFormatRecordDataStoreFlow.collectAsState(
-                            initial = false
-                        ),
-                        amOrPm = viewModel.amOrPm,
-                        leftNumber = viewModel.hourLeftNumberState,
-                        rightNumber = viewModel.hourRightNumberState,
+                        deviceTypes = viewModel.deviceType.value,
+                        clickable = {
+                            viewModel.timeFormatRecordUpdate(!timeFormat.value)
+                        },
+                        isTimeFormat = timeFormat.value,
+                        amOrPm = viewModel.amOrPm.value,
+                        leftNumber = viewModel.hourLeftNumberState.value,
+                        rightNumber = viewModel.hourRightNumberState.value,
                     )
                 }
                 Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
                     TimeCard(
-                        deviceTypes = deviceTypes,
-                        clickable = rightOnClick,
-                        isShowTimeFormat = remember { mutableStateOf(false) },
+                        deviceTypes = viewModel.deviceType.value,
+                        clickable = {
+                            viewModel.isDateShow(!dateFormat.value)
+                        },
+                        isTimeFormat = false,
                         amOrPm = null,
-                        leftNumber = viewModel.minuteLeftNumberState,
-                        rightNumber = viewModel.minuteRightNumberState,
+                        leftNumber = viewModel.minuteLeftNumberState.value,
+                        rightNumber = viewModel.minuteRightNumberState.value,
                     )
                 }
             }
@@ -82,7 +80,7 @@ fun CardLargeLandSpace(
                 Text(
                     viewModel.currentDate.collectAsState(initial = "").value,
                     color = Color.White,
-                    fontSize = getFontSize(deviceTypes),
+                    fontSize = getFontSize(viewModel.deviceType.value),
                     modifier = Modifier.padding(bottom = 10.dp),
                     fontFamily = defaultFontFamily,
                 )

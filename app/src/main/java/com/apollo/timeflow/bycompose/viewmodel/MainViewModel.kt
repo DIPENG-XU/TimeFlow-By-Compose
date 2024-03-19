@@ -1,11 +1,13 @@
 package com.apollo.timeflow.bycompose.viewmodel
 
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.apollo.timeflow.bycompose.Device
 import com.apollo.timeflow.bycompose.service.TimeDataService
 import com.apollo.timeflow.bycompose.service.TimeFormatRecordDataStoreService
 import kotlinx.coroutines.Dispatchers
@@ -17,11 +19,17 @@ import kotlinx.coroutines.withContext
 
 class MainViewModel(
     private val timeFormatRecordService: TimeFormatRecordDataStoreService,
-    private val timeDataService: TimeDataService
+    private val timeDataService: TimeDataService,
 ) : ViewModel() {
 
+    private val _deviceType: MutableState<Device> = mutableStateOf(Device.Phone())
+    val deviceType: State<Device> = _deviceType
+    fun notifyDeviceType(device: Device) {
+        _deviceType.value = device
+    }
+
     private var _timeFormat = MutableLiveData(TimeFormat.Base12)
-    fun editTimeFormat(it: Boolean) {
+    private fun editTimeFormat(it: Boolean) {
         viewModelScope.launch(Dispatchers.Main) {
             _timeFormat.value = (if (it) TimeFormat.Base12 else TimeFormat.Base24)
             this@MainViewModel.updateTime()
@@ -118,6 +126,7 @@ class MainViewModel(
         this.editTimeFormat(it)
         it
     }
+
     fun timeFormatRecordUpdate(value: Boolean) {
         viewModelScope.launch {
             timeFormatRecordService.timeFormat(value)

@@ -16,8 +16,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import com.apollo.timeflow.bycompose.broadcast.DateBroadcast
 import com.apollo.timeflow.bycompose.broadcast.TimeBroadcast
-import com.apollo.timeflow.bycompose.getDeviceType
 import com.apollo.timeflow.bycompose.compose.screenAdaptation.Card
+import com.apollo.timeflow.bycompose.getDeviceType
 import com.apollo.timeflow.bycompose.viewmodel.MainViewModel
 import com.apollo.timeflow.bycompose.viewmodel.MainViewModelProviderFactory
 
@@ -34,15 +34,15 @@ class MainActivityByCompose : ComponentActivity() {
 
         this.addBroadcast()
 
+        mainViewModel.notifyDeviceType(this.getDeviceType())
+        mainViewModel.updateDate()
+
         val mContext = applicationContext ?: return
         val view = ComposeView(mContext)
-
         view.setContent {
             ComposeUI()
         }
         setContentView(view)
-
-        mainViewModel.updateDate()
     }
 
     @Preview
@@ -50,21 +50,7 @@ class MainActivityByCompose : ComponentActivity() {
     private fun ComposeUI() {
         Scaffold { padding ->
             padding.hashCode()
-
-            val isShowTimeFormatState =
-                mainViewModel.timeFormatRecordDataStoreFlow.collectAsState(initial = false)
-            val isShowDateFormatState =
-                mainViewModel.isDateShowDataStoreFlow.collectAsState(initial = false)
-
-            Card(
-                deviceTypes = getDeviceType(),
-                leftOnClick = {
-                    mainViewModel.timeFormatRecordUpdate(!isShowTimeFormatState.value)
-                },
-                rightOnClick = {
-                    mainViewModel.isDateShow(!isShowDateFormatState.value)
-                },
-            )
+            Card()
         }
     }
 

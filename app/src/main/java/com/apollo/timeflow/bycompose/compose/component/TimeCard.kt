@@ -12,9 +12,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,10 +33,10 @@ import com.apollo.timeflow.bycompose.imageHash
 fun TimeCard(
     deviceTypes: Device = Device.Phone(),
     clickable: () -> Unit = {},
-    isShowTimeFormat: State<Boolean?> = mutableStateOf(true),
-    amOrPm: State<String?>? = mutableStateOf("AM"),
-    leftNumber: State<Int> = mutableIntStateOf(0),
-    rightNumber: State<Int> = mutableIntStateOf(1),
+    isTimeFormat: Boolean = true,
+    amOrPm: String? = "AM",
+    leftNumber: Int = 0,
+    rightNumber: Int = 1,
 ) {
     val width = deviceTypes.width
     val height = deviceTypes.height
@@ -66,7 +63,7 @@ fun TimeCard(
             ) {
                 Image(
                     painter = painterResource(
-                        id = imageHash[leftNumber.value] ?: R.drawable.ic_number0
+                        id = imageHash[leftNumber] ?: R.drawable.ic_number0
                     ),
                     contentDescription = null,
                     contentScale = ContentScale.FillWidth,
@@ -76,7 +73,7 @@ fun TimeCard(
                 )
                 Image(
                     painter = painterResource(
-                        id = imageHash[rightNumber.value] ?: R.drawable.ic_number0
+                        id = imageHash[rightNumber] ?: R.drawable.ic_number0
                     ),
                     contentDescription = null,
                     contentScale = ContentScale.FillWidth,
@@ -85,9 +82,9 @@ fun TimeCard(
                         .background(Color.Black)
                 )
             }
-            if (isShowTimeFormat.value == true) {
+            if (isTimeFormat) {
                 Text(
-                    amOrPm?.value ?: "",
+                    amOrPm ?: "AM",
                     modifier = Modifier.align(Alignment.BottomEnd),
                     color = Color.White,
                     fontFamily = FontFamily(
