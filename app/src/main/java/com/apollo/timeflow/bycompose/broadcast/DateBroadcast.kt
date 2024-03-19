@@ -1,4 +1,4 @@
-package com.apollo.timeflow.bycompose.boardcast
+package com.apollo.timeflow.bycompose.broadcast
 
 import android.content.BroadcastReceiver
 import android.content.Context

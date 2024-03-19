@@ -25,7 +25,7 @@
         </activity>
 
         <receiver
-            android:name=".boardcast.TimeBroadcast"
+            android:name=".broadcast.TimeBroadcast"
             android:enabled="true"
             android:exported="false"
             tools:ignore="Instantiatable" />

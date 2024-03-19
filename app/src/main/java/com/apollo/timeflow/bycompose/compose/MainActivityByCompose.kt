@@ -14,8 +14,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
-import com.apollo.timeflow.bycompose.boardcast.DateBroadcast
-import com.apollo.timeflow.bycompose.boardcast.TimeBroadcast
+import com.apollo.timeflow.bycompose.broadcast.DateBroadcast
+import com.apollo.timeflow.bycompose.broadcast.TimeBroadcast
 import com.apollo.timeflow.bycompose.getDeviceType
 import com.apollo.timeflow.bycompose.compose.screenAdaptation.Card
 import com.apollo.timeflow.bycompose.viewmodel.MainViewModel
@@ -23,12 +23,11 @@ import com.apollo.timeflow.bycompose.viewmodel.MainViewModelProviderFactory
 
 class MainActivityByCompose : ComponentActivity() {
     private lateinit var mainViewModel: MainViewModel
-    private lateinit var timeChangeReceiver: TimeBroadcast
-    private lateinit var dateChangeReceiver: DateBroadcast
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.requestFeature(Window.FEATURE_NO_TITLE)
+
         mainViewModel = ViewModelProvider(
             this, MainViewModelProviderFactory()
         )[MainViewModel::class.java]
@@ -86,7 +85,7 @@ class MainActivityByCompose : ComponentActivity() {
         intentFilterTimeChange.addAction(Intent.ACTION_TIMEZONE_CHANGED)
         intentFilterTimeChange.addAction(Intent.ACTION_LOCALE_CHANGED)
 
-        timeChangeReceiver = TimeBroadcast {
+        val timeChangeReceiver = TimeBroadcast {
             mainViewModel.updateTime()
         }
 
@@ -102,9 +101,15 @@ class MainActivityByCompose : ComponentActivity() {
         intentFilterDateChange.addAction(Intent.ACTION_TIMEZONE_CHANGED)
         intentFilterDateChange.addAction(Intent.ACTION_LOCALE_CHANGED)
 
-        dateChangeReceiver = DateBroadcast {
+        val dateChangeReceiver = DateBroadcast {
             mainViewModel.updateDate()
         }
-        registerReceiver(dateChangeReceiver, intentFilterDateChange)
+
+        ContextCompat.registerReceiver(
+            applicationContext,
+            dateChangeReceiver,
+            intentFilterDateChange,
+            ContextCompat.RECEIVER_NOT_EXPORTED
+        )
     }
 }
