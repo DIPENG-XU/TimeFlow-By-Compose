@@ -12,21 +12,22 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.apollo.timeflow.bycompose.compose.component.TimeCard
 import com.apollo.timeflow.bycompose.defaultFontFamily
 import com.apollo.timeflow.bycompose.getFontSize
-import com.apollo.timeflow.bycompose.viewmodel.MainViewModel
+import com.apollo.timeflow.bycompose.viewmodel.TimeViewModel
 
 @Preview(
     widthDp = 411,
     heightDp = 872,
 )
 @Composable
-fun CardPortrait(
-    viewModel: MainViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
-) {
+fun CardPortrait() {
+    val viewModel: TimeViewModel = hiltViewModel()
     val timeFormat = viewModel.timeFormatRecordDataStoreFlow.collectAsState(initial = false)
     val dateFormat = viewModel.isDateShowDataStoreFlow.collectAsState(initial = false)
     Column(
@@ -43,7 +44,7 @@ fun CardPortrait(
                     viewModel.timeFormatRecordUpdate(!timeFormat.value)
                 },
                 isTimeFormat = timeFormat.value,
-                amOrPm = viewModel.amOrPm.value,
+                amOrPm = viewModel.amOrPm.value?.let { stringResource(id = it) },
                 leftNumber = viewModel.hourLeftNumberState.value,
                 rightNumber = viewModel.hourRightNumberState.value,
             )
