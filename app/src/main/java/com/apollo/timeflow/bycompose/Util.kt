@@ -1,7 +1,7 @@
 package com.apollo.timeflow.bycompose
 
-import android.app.Activity
 import android.util.DisplayMetrics
+import androidx.activity.ComponentActivity
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -46,7 +46,7 @@ sealed class Device {
 }
 
 @Suppress("DEPRECATION")
-fun Activity.getDeviceType(): Device {
+fun ComponentActivity.getDeviceType(): Device {
     val dm = DisplayMetrics()
     this.windowManager.defaultDisplay?.getMetrics(dm)
     val diagonalPixels =

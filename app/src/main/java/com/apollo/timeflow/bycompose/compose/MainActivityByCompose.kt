@@ -5,44 +5,37 @@ import android.content.IntentFilter
 import android.os.Bundle
 import android.view.Window
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.ViewModelProvider
 import com.apollo.timeflow.bycompose.broadcast.DateBroadcast
 import com.apollo.timeflow.bycompose.broadcast.TimeBroadcast
 import com.apollo.timeflow.bycompose.compose.screenAdaptation.Card
 import com.apollo.timeflow.bycompose.getDeviceType
-import com.apollo.timeflow.bycompose.viewmodel.MainViewModel
-import com.apollo.timeflow.bycompose.viewmodel.MainViewModelProviderFactory
+import com.apollo.timeflow.bycompose.viewmodel.TimeViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivityByCompose : ComponentActivity() {
-    private lateinit var mainViewModel: MainViewModel
+    private val mainViewModel: TimeViewModel by viewModels<TimeViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.requestFeature(Window.FEATURE_NO_TITLE)
-
-        mainViewModel = ViewModelProvider(
-            this, MainViewModelProviderFactory()
-        )[MainViewModel::class.java]
 
         this.addBroadcast()
 
         mainViewModel.notifyDeviceType(this.getDeviceType())
         mainViewModel.updateDate()
 
-        val mContext = applicationContext ?: return
-        val view = ComposeView(mContext)
-        view.setContent {
+        setContent {
             ComposeUI()
         }
-        setContentView(view)
     }
 
     @Preview

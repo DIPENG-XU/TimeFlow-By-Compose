@@ -1,24 +1,18 @@
 package com.apollo.timeflow.bycompose.service
 
-import com.apollo.timeflow.bycompose.MyApplication
 import com.apollo.timeflow.bycompose.R
-import com.apollo.timeflow.bycompose.viewmodel.MainViewModel
+import com.apollo.timeflow.bycompose.TimeFormat
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
+import javax.inject.Inject
 
-class TimeDataService private constructor() {
-    companion object {
-        private var instance: TimeDataService? = null
-        fun getInstance(): TimeDataService {
-            if (instance == null) instance = TimeDataService()
-            return instance!!
-        }
-    }
-
-    fun getCurrentTime(timeFormat: MainViewModel.TimeFormat): List<Int> {
+class TimeDataService @Inject constructor() {
+    fun getCurrentTime(timeFormat: TimeFormat): List<Int> {
         val calendar: Calendar = Calendar.getInstance()
         val timeList = ArrayList<Int>().apply {
-            if (timeFormat == MainViewModel.TimeFormat.Base24) {
+            if (timeFormat == TimeFormat.Base24) {
                 add(0, calendar.get(Calendar.HOUR_OF_DAY))
             } else {
                 if (calendar.get(Calendar.HOUR_OF_DAY) == 12) add(0, 12)
@@ -29,9 +23,9 @@ class TimeDataService private constructor() {
         return timeList
     }
 
-    fun amOrPm(): String? {
+    fun amOrPm(): Int {
         val calendar: Calendar = Calendar.getInstance()
-        return if (calendar.get(Calendar.HOUR_OF_DAY) > 12) MyApplication.instance?.getString(R.string.pm) else MyApplication.instance?.getString(R.string.am)
+        return if (calendar.get(Calendar.HOUR_OF_DAY) > 12) R.string.pm else R.string.am
     }
 
     fun getCurrentDate(): String {

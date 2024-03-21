@@ -8,16 +8,20 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.apollo.timeflow.bycompose.Device
+import com.apollo.timeflow.bycompose.TimeFormat
 import com.apollo.timeflow.bycompose.service.TimeDataService
 import com.apollo.timeflow.bycompose.service.TimeFormatRecordDataStoreService
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class MainViewModel(
+@HiltViewModel
+class TimeViewModel @Inject constructor(
     private val timeFormatRecordService: TimeFormatRecordDataStoreService,
     private val timeDataService: TimeDataService,
 ) : ViewModel() {
@@ -32,7 +36,7 @@ class MainViewModel(
     private fun editTimeFormat(it: Boolean) {
         viewModelScope.launch(Dispatchers.Main) {
             _timeFormat.value = (if (it) TimeFormat.Base12 else TimeFormat.Base24)
-            this@MainViewModel.updateTime()
+            this@TimeViewModel.updateTime()
         }
     }
 
@@ -50,7 +54,6 @@ class MainViewModel(
         _hourRightNumberState.intValue = it
     }
 
-
     private var _minuteLeftNumberState = mutableIntStateOf(0)
     val minuteLeftNumberState: State<Int> = _minuteLeftNumberState
     private suspend fun editMinuteLeft(it: Int) = withContext(Dispatchers.IO) {
@@ -63,8 +66,8 @@ class MainViewModel(
         _minuteRightNumberState.intValue = it
     }
 
-    private val _amOrPm = mutableStateOf("")
-    val amOrPm: State<String> = _amOrPm
+    private val _amOrPm = mutableStateOf<Int?>(null)
+    val amOrPm: State<Int?> = _amOrPm
 
     fun updateTime() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -93,7 +96,7 @@ class MainViewModel(
 
             assert(hourLeft < 10 && hourRight < 10 && minuteLeft < 10 && minuteRight < 10)
             assert(hourLeft >= 0 && hourRight >= 0 && minuteLeft >= 0 && minuteRight >= 0)
-            _amOrPm.value = timeDataService.amOrPm() ?: ""
+            _amOrPm.value = timeDataService.amOrPm()
             editHourLeft(hourLeft)
             editHourRight(hourRight)
             editMinuteLeft(minuteLeft)
@@ -108,11 +111,6 @@ class MainViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             _currentDate.emit(timeDataService.getCurrentDate())
         }
-    }
-
-    enum class TimeFormat {
-        Base12,
-        Base24
     }
 
     val isDateShowDataStoreFlow = timeFormatRecordService.isDateShow
