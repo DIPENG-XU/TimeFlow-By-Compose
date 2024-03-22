@@ -7,21 +7,18 @@ import android.view.Window
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import com.apollo.timeflow.bycompose.broadcast.DateBroadcast
 import com.apollo.timeflow.bycompose.broadcast.TimeBroadcast
-import com.apollo.timeflow.bycompose.compose.screenAdaptation.Card
+import com.apollo.timeflow.bycompose.compose.screenAdaptation.CardHomeFeed
 import com.apollo.timeflow.bycompose.getDeviceType
 import com.apollo.timeflow.bycompose.viewmodel.TimeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivityByCompose : ComponentActivity() {
+class TimeActivity : ComponentActivity() {
     private val mainViewModel: TimeViewModel by viewModels<TimeViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,16 +31,7 @@ class MainActivityByCompose : ComponentActivity() {
         mainViewModel.updateDate()
 
         setContent {
-            ComposeUI()
-        }
-    }
-
-    @Preview
-    @Composable
-    private fun ComposeUI() {
-        Scaffold { padding ->
-            padding.hashCode()
-            Card()
+            CardHomeFeed()
         }
     }
 

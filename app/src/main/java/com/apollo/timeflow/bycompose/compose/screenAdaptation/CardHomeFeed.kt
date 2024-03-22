@@ -12,7 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
     heightDp = 411,
 )
 @Composable
-fun Card() {
+fun CardHomeFeed() {
     val isPortrait = (LocalConfiguration.current.orientation == Configuration.ORIENTATION_PORTRAIT)
     if (isPortrait) {
         CardPortrait()
