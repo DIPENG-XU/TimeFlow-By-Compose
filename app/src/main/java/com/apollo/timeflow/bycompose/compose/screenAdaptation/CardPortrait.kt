@@ -31,48 +31,54 @@ fun CardPortrait() {
     val timeFormat = viewModel.timeFormatRecordDataStoreFlow.collectAsState(initial = false)
     val dateFormat = viewModel.isDateShowDataStoreFlow.collectAsState(initial = false)
     val timeUIState = viewModel.timeUIState.value ?: return
-    Column(
+
+    Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Black),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
-            TimeCard(
-                deviceTypes = viewModel.deviceType.value,
-                clickable = {
-                    viewModel.timeFormatRecordUpdate(!timeFormat.value)
-                },
-                isTimeFormat = timeFormat.value,
-                amOrPm = stringResource(id = timeUIState.amOrPM),
-                leftNumber = timeUIState.hoursLeft,
-                rightNumber = timeUIState.hoursRight,
-            )
-        }
-        Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
-            TimeCard(
-                deviceTypes = viewModel.deviceType.value,
-                clickable = {
-                    viewModel.isDateShow(!dateFormat.value)
-                },
-                isTimeFormat = false,
-                amOrPm = null,
-                leftNumber = timeUIState.minutesLeft,
-                rightNumber = timeUIState.minutesRight,
-            )
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.align(Alignment.Center),
+        ) {
+            Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
+                TimeCard(
+                    deviceTypes = viewModel.deviceType.value,
+                    clickable = {
+                        viewModel.timeFormatRecordUpdate(!timeFormat.value)
+                    },
+                    isTimeFormat = timeFormat.value,
+                    amOrPm = stringResource(id = timeUIState.amOrPM),
+                    leftNumber = timeUIState.hoursLeft,
+                    rightNumber = timeUIState.hoursRight,
+                )
+            }
+
+            Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
+                TimeCard(
+                    deviceTypes = viewModel.deviceType.value,
+                    clickable = {
+                        viewModel.isDateShow(!dateFormat.value)
+                    },
+                    isTimeFormat = false,
+                    amOrPm = null,
+                    leftNumber = timeUIState.minutesLeft,
+                    rightNumber = timeUIState.minutesRight,
+                )
+            }
         }
 
         if (dateFormat.value) {
-            Box(contentAlignment = Alignment.BottomCenter) {
-                Text(
-                    viewModel.currentDate.value,
-                    color = Color.White,
-                    fontSize = getFontSize(viewModel.deviceType.value),
-                    modifier = Modifier.padding(bottom = 10.dp),
-                    fontFamily = defaultFontFamily,
-                )
-            }
+            Text(
+                viewModel.currentDate.value,
+                color = Color.White,
+                fontSize = getFontSize(viewModel.deviceType.value),
+                fontFamily = defaultFontFamily,
+                modifier = Modifier
+                    .padding(bottom = 10.dp)
+                    .align(Alignment.BottomCenter),
+            )
         }
     }
 }

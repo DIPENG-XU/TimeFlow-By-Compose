@@ -3,11 +3,9 @@ package com.apollo.timeflow.bycompose.compose.screenAdaptation
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -33,61 +31,53 @@ fun CardLandSpace() {
     val timeFormat = viewModel.timeFormatRecordDataStoreFlow.collectAsState(initial = false)
     val dateFormat = viewModel.isDateShowDataStoreFlow.collectAsState(initial = false)
     val timeUIState = viewModel.timeUIState.value ?: return
-    Column(
+
+    Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Black),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Box(contentAlignment = Alignment.Center, modifier = Modifier.weight(10f)) {
-            Row(
-                modifier = Modifier
-                    .background(Color.Black),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
-                    TimeCard(
-                        deviceTypes = viewModel.deviceType.value,
-                        clickable = {
-                            viewModel.timeFormatRecordUpdate(!timeFormat.value)
-                        },
-                        isTimeFormat = timeFormat.value,
-                        amOrPm = stringResource(id = timeUIState.amOrPM),
-                        leftNumber = timeUIState.hoursLeft,
-                        rightNumber = timeUIState.hoursRight,
-                    )
-                }
-                Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
-                    TimeCard(
-                        deviceTypes = viewModel.deviceType.value,
-                        clickable = {
-                            viewModel.isDateShow(!dateFormat.value)
-                        },
-                        isTimeFormat = false,
-                        amOrPm = null,
-                        leftNumber = timeUIState.minutesLeft,
-                        rightNumber = timeUIState.minutesRight,
-                    )
-                }
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.align(Alignment.Center),
+        ) {
+            Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
+                TimeCard(
+                    deviceTypes = viewModel.deviceType.value,
+                    clickable = {
+                        viewModel.timeFormatRecordUpdate(!timeFormat.value)
+                    },
+                    isTimeFormat = timeFormat.value,
+                    amOrPm = stringResource(id = timeUIState.amOrPM),
+                    leftNumber = timeUIState.hoursLeft,
+                    rightNumber = timeUIState.hoursRight,
+                )
             }
-        }
-
-        if (viewModel.isDateShowDataStoreFlow.collectAsState(initial = false).value) {
-            Box(
-                contentAlignment = Alignment.BottomCenter,
-                modifier = Modifier.wrapContentHeight()
-            ) {
-                Text(
-                    viewModel.currentDate.value,
-                    color = Color.White,
-                    fontSize = getFontSize(viewModel.deviceType.value),
-                    modifier = Modifier.padding(bottom = 10.dp),
-                    fontFamily = defaultFontFamily,
+            Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
+                TimeCard(
+                    deviceTypes = viewModel.deviceType.value,
+                    clickable = {
+                        viewModel.isDateShow(!dateFormat.value)
+                    },
+                    isTimeFormat = false,
+                    amOrPm = null,
+                    leftNumber = timeUIState.minutesLeft,
+                    rightNumber = timeUIState.minutesRight,
                 )
             }
         }
 
+        if (viewModel.isDateShowDataStoreFlow.collectAsState(initial = false).value) {
+            Text(
+                viewModel.currentDate.value,
+                color = Color.White,
+                fontSize = getFontSize(viewModel.deviceType.value),
+                fontFamily = defaultFontFamily,
+                modifier = Modifier
+                    .padding(bottom = 10.dp)
+                    .align(Alignment.BottomCenter),
+            )
+        }
     }
 }
