@@ -30,6 +30,7 @@ fun CardPortrait() {
     val viewModel: TimeViewModel = hiltViewModel()
     val timeFormat = viewModel.timeFormatRecordDataStoreFlow.collectAsState(initial = false)
     val dateFormat = viewModel.isDateShowDataStoreFlow.collectAsState(initial = false)
+    val timeUIState = viewModel.timeUIState.value ?: return
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -44,9 +45,9 @@ fun CardPortrait() {
                     viewModel.timeFormatRecordUpdate(!timeFormat.value)
                 },
                 isTimeFormat = timeFormat.value,
-                amOrPm = viewModel.amOrPm.value?.let { stringResource(id = it) },
-                leftNumber = viewModel.hourLeftNumberState.value,
-                rightNumber = viewModel.hourRightNumberState.value,
+                amOrPm = stringResource(id = timeUIState.amOrPM),
+                leftNumber = timeUIState.hoursLeft,
+                rightNumber = timeUIState.hoursRight,
             )
         }
         Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
@@ -57,15 +58,15 @@ fun CardPortrait() {
                 },
                 isTimeFormat = false,
                 amOrPm = null,
-                leftNumber = viewModel.minuteLeftNumberState.value,
-                rightNumber = viewModel.minuteRightNumberState.value,
+                leftNumber = timeUIState.minutesLeft,
+                rightNumber = timeUIState.minutesRight,
             )
         }
 
         if (dateFormat.value) {
             Box(contentAlignment = Alignment.BottomCenter) {
                 Text(
-                    viewModel.currentDate.collectAsState(initial = "").value,
+                    viewModel.currentDate.value,
                     color = Color.White,
                     fontSize = getFontSize(viewModel.deviceType.value),
                     modifier = Modifier.padding(bottom = 10.dp),

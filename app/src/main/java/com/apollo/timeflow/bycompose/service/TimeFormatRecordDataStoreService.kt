@@ -11,11 +11,11 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "Time Unit Record DataStore")
-
 class TimeFormatRecordDataStoreService @Inject constructor(
     @ApplicationContext val context: Context,
 ) {
+    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "Time Unit Record DataStore")
+
     val isDateShow: Flow<Boolean> = context.dataStore.data
         .map { preferences ->
             preferences[IS_DATE_SHOW] ?: false
