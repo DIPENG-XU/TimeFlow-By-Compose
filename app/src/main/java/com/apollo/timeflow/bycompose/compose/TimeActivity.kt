@@ -7,6 +7,11 @@ import android.view.Window
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -31,7 +36,9 @@ class TimeActivity : ComponentActivity() {
         mainViewModel.updateDate()
 
         setContent {
-            CardHomeFeed()
+            Box(modifier = Modifier.background(Color.Black).fillMaxSize()) {
+                CardHomeFeed()
+            }
         }
     }
 
