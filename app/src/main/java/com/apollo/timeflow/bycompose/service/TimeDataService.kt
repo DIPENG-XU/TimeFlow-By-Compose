@@ -10,10 +10,15 @@ import java.util.Date
 import java.util.Locale
 import javax.inject.Inject
 
-class TimeDataService @Inject constructor() {
+class TimeDataService(
+    private val iFetchTimeData: IFetchTimeData,
+) {
+    @Inject
+    constructor() : this(FetchTimeData())
+
     suspend fun getCurrentTime(timeFormat: TimeFormat): Pair<Int, Int> =
         withContext(Dispatchers.IO) {
-            val calendar: Calendar = Calendar.getInstance()
+            val calendar: Calendar = iFetchTimeData.fetchCalendar()
             val hours = when {
                 timeFormat == TimeFormat.Base24 -> calendar.get(Calendar.HOUR_OF_DAY)
                 (calendar.get(Calendar.HOUR_OF_DAY) == 12) -> 12
@@ -24,13 +29,26 @@ class TimeDataService @Inject constructor() {
         }
 
     suspend fun amOrPm(): Int = withContext(Dispatchers.IO) {
-        val calendar: Calendar = Calendar.getInstance()
+        val calendar: Calendar = iFetchTimeData.fetchCalendar()
         if (calendar.get(Calendar.HOUR_OF_DAY) > 12) R.string.pm else R.string.am
     }
 
     suspend fun getCurrentDate(): String = withContext(Dispatchers.IO) {
-        val date = Date()
+        val date = iFetchTimeData.fetchDate()
         val simpleDateFormat = SimpleDateFormat("MM.dd.yyyy", Locale.CHINA)
         simpleDateFormat.format(date)
     }
+}
+
+interface IFetchTimeData {
+    fun fetchCalendar(): Calendar
+
+    fun fetchDate(): Date
+}
+
+class FetchTimeData : IFetchTimeData {
+    override fun fetchCalendar(): Calendar = Calendar.getInstance()
+
+    override fun fetchDate(): Date = Date()
+
 }
