@@ -20,6 +20,10 @@ TimeFlow by Jetpack Compose in Android.
   You should only focus on your thing and notice your time.
 - So as an Android Tablet user and an Android developer, I though it was a great time that I should
   try to design and develop it.
+- If you have any better ideas or find any bugs, you
+  can [pull the issue](https://github.com/DIPENG-XU/TimeFlow-By-Compose/issues/new) to me. When
+  leisure, I will reply you. If I think it's interesting enough and I happen to be capable, I will
+  code it for you.
 
 ### UX
 
@@ -32,12 +36,13 @@ TimeFlow by Jetpack Compose in Android.
 ### Effect Pictures
 
 There are all the effect pictures.
-- Tablet: TimeFormat Base on 12
-![IMAGE1](show_img/img1.png)
 
-- In addition, [there](show_img) are other effects at a glance
+- Tablet: Time format Base on 12
+  ![IMAGE1](show_img/img1.png)
 
-### The following is Chinese document, you can skip if you have read the previous post ###
+- In addition, [there](show_img) are other effects preview.
+
+#### The following is Chinese document, you can skip if you have read the previous content
 
 ### 项目
 
@@ -50,14 +55,18 @@ There are all the effect pictures.
 ### 为什么设计和构建这个APP?
 
 - 起初是因为当时还在仲恺的时候，看到那帮用iPad的同学经常用平板当成时钟放在隔壁，感觉挺有学习氛围的。
-- 但苦于我是Android设备爱好者，在PlayStore和三星APP商店小米APP商店这些地方下载，那些APP花里胡哨的内容和广告都非常多。
-  作为Android开发，我就自己设计和写起来了。
+- 但苦于我是Android设备爱好者，在Play Store、三星APP商店还有小米APP商店这些地方下载，那些APP花里胡哨的内容和广告都非常多，需要一大堆的权限，超级离谱。
+  我个人觉得，（免费无广告的别人写好的软件 > 能够一次性购买的无广告软件 > 自己写的软件 >
+  订阅制无广告软件 > 广告软件），在这条优先链下，我只能自己设计和写代码。
 
 ### 用户交互
 
 - 就是比较单纯的两张卡片分别包含时钟和分钟两个字段组成
     - 点击时钟的卡片，可以切换时间查看的进制。
     - 点击分钟的卡片，可以选择是否显示当前的年月日。
+
+- 如果你有更好的UX交互逻辑或者什么有意思的想法，随时issue联系我，在[这里](https://github.com/DIPENG-XU/TimeFlow-By-Compose/issues/new)
+  提出来就可以了，我有空然后也觉得你的想法有意思而且我又会做的话，我随时会新增加你需要的功能。
 
 ### 效果图
 
