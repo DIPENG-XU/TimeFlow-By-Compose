@@ -46,7 +46,7 @@ fun CardPortrait() {
                 TimeCard(
                     deviceTypes = viewModel.deviceType.value,
                     clickable = {
-                        viewModel.timeFormatRecordUpdate(!timeFormat.value)
+                        viewModel.updateTimeFormat(!timeFormat.value)
                     },
                     isTimeFormat = timeFormat.value,
                     amOrPm = stringResource(id = timeUIState.amOrPM),
@@ -59,7 +59,7 @@ fun CardPortrait() {
                 TimeCard(
                     deviceTypes = viewModel.deviceType.value,
                     clickable = {
-                        viewModel.isDateShow(!dateFormat.value)
+                        viewModel.updateDateRecord(!dateFormat.value)
                     },
                     isTimeFormat = false,
                     amOrPm = null,

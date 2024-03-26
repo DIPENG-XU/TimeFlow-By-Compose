@@ -7,34 +7,41 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class TimeFormatRecordDataStoreService @Inject constructor(
-    @ApplicationContext val context: Context,
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "Time Unit Record DataStore")
+
+class TimeFormatRecordDataStoreService(
+    private val coroutineScope: CoroutineScope,
+    private val context: Context,
 ) {
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "Time Unit Record DataStore")
+    @Inject
+    constructor(@ApplicationContext context: Context, coroutineScope: CoroutineScope) : this(
+        coroutineScope,
+        context,
+    )
 
-    val isDateShow: Flow<Boolean> = context.dataStore.data
-        .map { preferences ->
-            preferences[IS_DATE_SHOW] ?: false
-        }
+    val dateFlow: Flow<Boolean> = this.context.dataStore.data.map { preferences ->
+        preferences[TIME_FORMAT_RECORD_TAG] ?: false
+    }
 
-    suspend fun isDateShow(value: Boolean) {
-        context.dataStore.edit { settings ->
-            settings[IS_DATE_SHOW] = value
+    suspend fun updateDateRecord(value: Boolean): Unit = withContext(coroutineScope.coroutineContext) {
+        context.dataStore.edit { preferences ->
+            preferences[IS_DATE_SHOW] = value
         }
     }
 
-    val timeFormatRecord: Flow<Boolean> = context.dataStore.data
-        .map { preferences ->
-            preferences[TIME_FORMAT_RECORD_TAG] ?: false
-        }
+    val timeFormatFlow: Flow<Boolean> = this.context.dataStore.data.map { preferences ->
+        preferences[TIME_FORMAT_RECORD_TAG] ?: false
+    }
 
-    suspend fun timeFormat(value: Boolean) {
-        context.dataStore.edit { settings ->
-            settings[TIME_FORMAT_RECORD_TAG] = value
+    suspend fun updateTimeFormat(value: Boolean): Unit = withContext(coroutineScope.coroutineContext) {
+        context.dataStore.edit { preferences ->
+            preferences[TIME_FORMAT_RECORD_TAG] = value
         }
     }
 

@@ -70,21 +70,21 @@ class TimeViewModel @Inject constructor(
         }
     }
 
-    val isDateShowDataStoreFlow = timeFormatRecordService.isDateShow
-    fun isDateShow(value: Boolean) {
+    val isDateShowDataStoreFlow = timeFormatRecordService.dateFlow
+    fun updateDateRecord(value: Boolean) {
         viewModelScope.launch {
-            timeFormatRecordService.isDateShow(value)
+            timeFormatRecordService.updateDateRecord(value)
         }
     }
 
-    val timeFormatRecordDataStoreFlow = timeFormatRecordService.timeFormatRecord.map {
+    val timeFormatRecordDataStoreFlow = timeFormatRecordService.timeFormatFlow.map {
         this.editTimeFormat(it)
         it
     }
 
-    fun timeFormatRecordUpdate(value: Boolean) {
+    fun updateTimeFormat(value: Boolean) {
         viewModelScope.launch {
-            timeFormatRecordService.timeFormat(value)
+            timeFormatRecordService.updateTimeFormat(value)
         }
     }
 }
