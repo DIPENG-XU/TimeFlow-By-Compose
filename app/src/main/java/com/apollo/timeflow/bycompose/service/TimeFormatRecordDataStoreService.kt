@@ -26,7 +26,7 @@ class TimeFormatRecordDataStoreService(
     )
 
     val dateFlow: Flow<Boolean> = this.context.dataStore.data.map { preferences ->
-        preferences[TIME_FORMAT_RECORD_TAG] ?: false
+        preferences[IS_DATE_SHOW] ?: false
     }
 
     suspend fun updateDateRecord(value: Boolean): Unit = withContext(coroutineScope.coroutineContext) {
