@@ -19,6 +19,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.apollo.timeflow.bycompose.compose.component.TimeCard
 import com.apollo.timeflow.bycompose.defaultFontFamily
 import com.apollo.timeflow.bycompose.getFontSize
+import com.apollo.timeflow.bycompose.uistate.DateUIState
 import com.apollo.timeflow.bycompose.viewmodel.TimeViewModel
 
 @Preview(
@@ -29,8 +30,8 @@ import com.apollo.timeflow.bycompose.viewmodel.TimeViewModel
 fun CardLandSpace() {
     val viewModel: TimeViewModel = hiltViewModel()
     val timeFormat = viewModel.timeFormatRecordDataStoreFlow.collectAsState(initial = false)
-    val dateFormat = viewModel.isDateShowDataStoreFlow.collectAsState(initial = false)
     val timeUIState = viewModel.timeUIState.value ?: return
+    val dateUIState = viewModel.dateUIStateFlow.collectAsState(initial = DateUIState()).value
 
     Box(
         modifier = Modifier
@@ -58,7 +59,7 @@ fun CardLandSpace() {
                 TimeCard(
                     deviceTypes = viewModel.deviceType.value,
                     clickable = {
-                        viewModel.updateDateRecord(!dateFormat.value)
+                        viewModel.updateDateRecord(!dateUIState.showOrHide)
                     },
                     isTimeFormat = false,
                     amOrPm = null,
@@ -68,9 +69,9 @@ fun CardLandSpace() {
             }
         }
 
-        if (viewModel.isDateShowDataStoreFlow.collectAsState(initial = false).value) {
+        if (dateUIState.showOrHide) {
             Text(
-                viewModel.currentDate.value,
+                dateUIState.currentDate,
                 color = Color.White,
                 fontSize = getFontSize(viewModel.deviceType.value),
                 fontFamily = defaultFontFamily,

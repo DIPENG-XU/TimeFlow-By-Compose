@@ -10,9 +10,13 @@ import com.apollo.timeflow.bycompose.Device
 import com.apollo.timeflow.bycompose.TimeFormat
 import com.apollo.timeflow.bycompose.service.TimeDataService
 import com.apollo.timeflow.bycompose.service.TimeFormatRecordDataStoreService
+import com.apollo.timeflow.bycompose.uistate.DateUIState
 import com.apollo.timeflow.bycompose.uistate.TimeUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -61,16 +65,21 @@ class TimeViewModel @Inject constructor(
         }
     }
 
-    private val _currentDate = mutableStateOf("")
-    val currentDate: State<String> = _currentDate
-
+    private val _currentDateFlow: MutableStateFlow<String> = MutableStateFlow("")
     fun updateDate() {
         viewModelScope.launch(Dispatchers.IO) {
-            _currentDate.value = timeDataService.getCurrentDate()
+            _currentDateFlow.emit(timeDataService.getCurrentDate())
         }
     }
 
-    val isDateShowDataStoreFlow = timeFormatRecordService.dateFlow
+    val dateUIStateFlow: Flow<DateUIState> =
+        _currentDateFlow.combine(timeFormatRecordService.dateFlow) { currentDate, showOrHide ->
+            DateUIState(
+                showOrHide = showOrHide,
+                currentDate = currentDate,
+            )
+        }
+
     fun updateDateRecord(value: Boolean) {
         viewModelScope.launch {
             timeFormatRecordService.updateDateRecord(value)
