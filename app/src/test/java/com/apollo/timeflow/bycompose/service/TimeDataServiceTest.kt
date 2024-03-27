@@ -1,15 +1,15 @@
 package com.apollo.timeflow.bycompose.service
 
-import org.junit.Assert
-import org.junit.Assert.*
-
+import com.apollo.timeflow.bycompose.R
+import com.apollo.timeflow.bycompose.TimeFormat
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.TestCoroutineScheduler
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import java.util.Calendar
 import java.util.Date
-import com.apollo.timeflow.bycompose.R
-import com.apollo.timeflow.bycompose.TimeFormat
-import kotlinx.coroutines.runBlocking
 
 class TimeDataServiceTest {
 
@@ -19,6 +19,8 @@ class TimeDataServiceTest {
     private lateinit var amService: TimeDataService
     private lateinit var pmService: TimeDataService
 
+    private val scheduler = TestCoroutineScheduler()
+    private val coroutineScope = CoroutineScope(scheduler)
 
     @Before
     fun setUp() {
@@ -36,7 +38,8 @@ class TimeDataServiceTest {
 
                 override fun fetchDate(): Date = amDate
 
-            }
+            },
+            coroutineScope = coroutineScope,
         )
         pmService = TimeDataService(
             iFetchTimeData = object : IFetchTimeData {
@@ -45,12 +48,13 @@ class TimeDataServiceTest {
                 }
 
                 override fun fetchDate(): Date = pmDate
-            }
+            },
+            coroutineScope = coroutineScope,
         )
     }
 
     @Test
-    fun getCurrentTime() = runBlocking {
+    fun getCurrentTime() = runBlocking(scheduler) {
         val amBase12 = amService.getCurrentTime(TimeFormat.Base12)
         val amBase24 = amService.getCurrentTime(TimeFormat.Base24)
         val pmBase12 = pmService.getCurrentTime(TimeFormat.Base12)
@@ -67,7 +71,7 @@ class TimeDataServiceTest {
     }
 
     @Test
-    fun amOrPm() = runBlocking {
+    fun amOrPm() = runBlocking(scheduler) {
         val am = amService.amOrPm()
         val pm = pmService.amOrPm()
 
@@ -76,7 +80,7 @@ class TimeDataServiceTest {
     }
 
     @Test
-    fun getCurrentDate() = runBlocking {
+    fun getCurrentDate() = runBlocking(scheduler) {
         val amCurrentDate = amService.getCurrentDate()
         val pmCurrentDate = pmService.getCurrentDate()
 
