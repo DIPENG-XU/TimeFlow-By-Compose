@@ -1,7 +1,7 @@
 package com.apollo.timeflow.bycompose.service
 
 import com.apollo.timeflow.bycompose.R
-import com.apollo.timeflow.bycompose.TimeFormat
+import com.apollo.timeflow.bycompose.utils.TimeFormat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestCoroutineScheduler

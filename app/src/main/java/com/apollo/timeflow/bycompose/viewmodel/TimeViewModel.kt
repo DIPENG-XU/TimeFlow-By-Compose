@@ -1,17 +1,19 @@
 package com.apollo.timeflow.bycompose.viewmodel
 
+import android.app.Application
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.apollo.timeflow.bycompose.Device
-import com.apollo.timeflow.bycompose.TimeFormat
+import com.apollo.timeflow.bycompose.utils.TimeFormat
 import com.apollo.timeflow.bycompose.service.TimeDataService
 import com.apollo.timeflow.bycompose.service.TimeFormatRecordDataStoreService
 import com.apollo.timeflow.bycompose.uistate.DateUIState
 import com.apollo.timeflow.bycompose.uistate.TimeUIState
+import com.apollo.timeflow.bycompose.utils.DeviceUIState
+import com.apollo.timeflow.bycompose.utils.getDeviceType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -25,13 +27,16 @@ import javax.inject.Inject
 class TimeViewModel @Inject constructor(
     private val timeFormatRecordService: TimeFormatRecordDataStoreService,
     private val timeDataService: TimeDataService,
-) : ViewModel() {
+    private val application: Application,
+) : AndroidViewModel(application) {
 
-    private val _deviceType: MutableState<Device> = mutableStateOf(Device.Phone())
-    val deviceType: State<Device> = _deviceType
-    fun notifyDeviceType(device: Device) {
-        _deviceType.value = device
-    }
+    private val _deviceUIState: MutableState<DeviceUIState> =
+        mutableStateOf(DeviceUIState.Phone())
+    val deviceUIState: State<DeviceUIState>
+        get() {
+            _deviceUIState.value = getDeviceType(application)
+            return _deviceUIState
+        }
 
     private var _timeFormat = MutableLiveData(TimeFormat.Base12)
     private fun editTimeFormat(it: Boolean) {

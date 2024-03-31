@@ -18,7 +18,6 @@ import androidx.core.view.WindowInsetsCompat
 import com.apollo.timeflow.bycompose.broadcast.DateBroadcast
 import com.apollo.timeflow.bycompose.broadcast.TimeBroadcast
 import com.apollo.timeflow.bycompose.compose.screenAdaptation.CardHomeFeed
-import com.apollo.timeflow.bycompose.getDeviceType
 import com.apollo.timeflow.bycompose.viewmodel.TimeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,7 +31,6 @@ class TimeActivity : ComponentActivity() {
 
         this.addBroadcast()
 
-        mainViewModel.notifyDeviceType(this.getDeviceType())
         mainViewModel.updateDate()
 
         setContent {

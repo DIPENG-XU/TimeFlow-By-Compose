@@ -22,24 +22,24 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.apollo.timeflow.bycompose.Device
 import com.apollo.timeflow.bycompose.R
-import com.apollo.timeflow.bycompose.getFontSize
 import com.apollo.timeflow.bycompose.imageHash
+import com.apollo.timeflow.bycompose.utils.DeviceUIState
+import com.apollo.timeflow.bycompose.utils.getFontSize
 
 
 @Preview(showBackground = true)
 @Composable
 fun TimeCard(
-    deviceTypes: Device = Device.Phone(),
+    deviceUIState: DeviceUIState = DeviceUIState.Phone(),
     clickable: () -> Unit = {},
     isTimeFormat: Boolean = true,
     amOrPm: String? = "AM",
     leftNumber: Int = 0,
     rightNumber: Int = 1,
 ) {
-    val width = deviceTypes.width
-    val height = deviceTypes.height
+    val width = deviceUIState.width
+    val height = deviceUIState.height
     Scaffold(
         modifier = Modifier
             .clickable(onClick = clickable)
@@ -90,7 +90,7 @@ fun TimeCard(
                     fontFamily = FontFamily(
                         fonts = listOf(Font(R.font.poppins_bold, FontWeight.Light))
                     ),
-                    fontSize = getFontSize(deviceTypes),
+                    fontSize = getFontSize(deviceUIState),
                 )
             }
         }

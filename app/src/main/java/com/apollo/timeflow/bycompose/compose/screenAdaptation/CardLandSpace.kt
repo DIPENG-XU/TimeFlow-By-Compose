@@ -18,26 +18,23 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.apollo.timeflow.bycompose.compose.component.TimeCard
 import com.apollo.timeflow.bycompose.defaultFontFamily
-import com.apollo.timeflow.bycompose.getFontSize
 import com.apollo.timeflow.bycompose.uistate.DateUIState
+import com.apollo.timeflow.bycompose.utils.getFontSize
 import com.apollo.timeflow.bycompose.viewmodel.TimeViewModel
 
-@Preview(
-    widthDp = 872,
-    heightDp = 411,
-)
+@Preview(widthDp = 411, heightDp = 872)
 @Composable
 fun CardLandSpace() {
-    val viewModel: TimeViewModel = hiltViewModel()
-    val timeFormat = viewModel.timeFormatRecordDataStoreFlow.collectAsState(initial = false)
-    val timeUIState = viewModel.timeUIState.value ?: return
-    val dateUIState = viewModel.dateUIStateFlow.collectAsState(initial = DateUIState()).value
-
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Black),
     ) {
+        val viewModel: TimeViewModel = hiltViewModel()
+        val timeFormat = viewModel.timeFormatRecordDataStoreFlow.collectAsState(initial = false)
+        val timeUIState = viewModel.timeUIState.value ?: return
+        val dateUIState = viewModel.dateUIStateFlow.collectAsState(initial = DateUIState()).value
+        val deviceUIState = viewModel.deviceUIState.value
         Row(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically,
@@ -45,7 +42,7 @@ fun CardLandSpace() {
         ) {
             Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
                 TimeCard(
-                    deviceTypes = viewModel.deviceType.value,
+                    deviceUIState = deviceUIState,
                     clickable = {
                         viewModel.updateTimeFormat(!timeFormat.value)
                     },
@@ -57,7 +54,7 @@ fun CardLandSpace() {
             }
             Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
                 TimeCard(
-                    deviceTypes = viewModel.deviceType.value,
+                    deviceUIState = deviceUIState,
                     clickable = {
                         viewModel.updateDateRecord(!dateUIState.showOrHide)
                     },
@@ -73,7 +70,7 @@ fun CardLandSpace() {
             Text(
                 dateUIState.currentDate,
                 color = Color.White,
-                fontSize = getFontSize(viewModel.deviceType.value),
+                fontSize = getFontSize(deviceUIState),
                 fontFamily = defaultFontFamily,
                 modifier = Modifier
                     .padding(bottom = 10.dp)
