@@ -30,8 +30,9 @@ TimeFlow by Jetpack Compose in Android.
 - This point is very important, because there are no instructions on how to use it in the APP.
   You can only find and know it from this document.
 - It is a simple card consisting of two fields: clock and minute
-    - Click the card of the clock to choose your favourite time format.
-    - Click on the minute card to choose whether to display the current date.
+    - Click on the card of the clock to choose your favourite time format.
+    - Click on the minute card to choose whether to display the current date. (Show the date Card)
+    - In Version 2.1.0, click on the date card to switch theme. Now there are only two theme, Light and Dark, and I will support more themes next.
 
 ### Effect Pictures
 
@@ -63,11 +64,12 @@ There are all the effect pictures.
 
 - 就是比较单纯的两张卡片分别包含时钟和分钟两个字段组成
     - 点击时钟的卡片，可以切换时间查看的进制。
-    - 点击分钟的卡片，可以选择是否显示当前的年月日。
+    - 点击分钟的卡片，可以选择是否显示当前的年月日（日期卡片出现）。
+    - 在2.1.0版本后加入新的交互逻辑，点击日期卡片，可以切换主题，目前仅支持两个主题，亮色主题和暗色主题，后续会在这个基础上做其他的增加。
 
 - 如果你有更好的UX交互逻辑或者什么有意思的想法，随时issue联系我，在[这里](https://github.com/DIPENG-XU/TimeFlow-By-Compose/issues/new)
   提出来就可以了，我有空然后也觉得你的想法有意思而且我又会做的话，我随时会新增加你需要的功能。
 
 ### 效果图
 
-- 看上面，语言虽然有差异，但是图片应该也能够传递出去我所想表达的内容了，这里就不复述了x
+- 看上面，语言虽然有差异，但是图片应该也能够传递出去我所想表达的内容了，这里就不复述了

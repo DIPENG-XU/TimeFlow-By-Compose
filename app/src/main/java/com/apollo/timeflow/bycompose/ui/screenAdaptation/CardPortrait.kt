@@ -1,25 +1,22 @@
-package com.apollo.timeflow.bycompose.compose.screenAdaptation
+package com.apollo.timeflow.bycompose.ui.screenAdaptation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.apollo.timeflow.bycompose.compose.component.TimeCard
-import com.apollo.timeflow.bycompose.defaultFontFamily
+import com.apollo.timeflow.bycompose.ui.component.DateText
+import com.apollo.timeflow.bycompose.ui.component.TimeCard
 import com.apollo.timeflow.bycompose.uistate.DateUIState
-import com.apollo.timeflow.bycompose.utils.getFontSize
+import com.apollo.timeflow.bycompose.viewmodel.ThemeViewModel
 import com.apollo.timeflow.bycompose.viewmodel.TimeViewModel
 
 @Preview(widthDp = 411, heightDp = 872)
@@ -28,7 +25,7 @@ fun CardPortrait() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black),
+            .background(MaterialTheme.colorScheme.background),
     ) {
         val viewModel: TimeViewModel = hiltViewModel()
         val timeFormat = viewModel.timeFormatRecordDataStoreFlow.collectAsState(initial = false)
@@ -68,14 +65,13 @@ fun CardPortrait() {
         }
 
         if (dateUIState.showOrHide) {
-            Text(
-                text = dateUIState.currentDate,
-                color = Color.White,
-                fontSize = getFontSize(deviceUIState),
-                fontFamily = defaultFontFamily,
-                modifier = Modifier
-                    .padding(bottom = 10.dp)
-                    .align(Alignment.BottomCenter),
+            val themeViewModel = hiltViewModel<ThemeViewModel>()
+            DateText(
+                currentDate = dateUIState.currentDate,
+                deviceUIState = deviceUIState,
+                onClick = {
+                    themeViewModel.updateTheme()
+                }
             )
         }
     }

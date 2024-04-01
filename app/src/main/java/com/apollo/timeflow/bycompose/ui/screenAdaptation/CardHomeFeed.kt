@@ -1,4 +1,4 @@
-package com.apollo.timeflow.bycompose.compose.screenAdaptation
+package com.apollo.timeflow.bycompose.ui.screenAdaptation
 
 import android.content.res.Configuration
 import androidx.compose.runtime.Composable
@@ -12,6 +12,6 @@ fun CardHomeFeed() {
     if (isPortrait) {
         CardPortrait()
     } else {
-        CardLandSpace()
+        CardLandScape()
     }
 }
