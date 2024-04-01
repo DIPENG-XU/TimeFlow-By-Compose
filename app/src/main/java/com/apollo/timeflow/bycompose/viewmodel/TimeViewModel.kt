@@ -27,16 +27,12 @@ import javax.inject.Inject
 class TimeViewModel @Inject constructor(
     private val timeFormatRecordService: TimeFormatRecordDataStoreService,
     private val timeDataService: TimeDataService,
-    private val application: Application,
+    application: Application,
 ) : AndroidViewModel(application) {
 
     private val _deviceUIState: MutableState<DeviceUIState> =
-        mutableStateOf(DeviceUIState.Phone())
-    val deviceUIState: State<DeviceUIState>
-        get() {
-            _deviceUIState.value = getDeviceType(application)
-            return _deviceUIState
-        }
+        mutableStateOf(getDeviceType(application))
+    val deviceUIState: State<DeviceUIState> = _deviceUIState
 
     private var _timeFormat = MutableLiveData(TimeFormat.Base12)
     private fun editTimeFormat(it: Boolean) {
