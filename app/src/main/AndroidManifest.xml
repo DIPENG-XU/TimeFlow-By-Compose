@@ -14,7 +14,7 @@
         android:theme="@style/Theme.TimeFlow"
         tools:targetApi="31">
         <activity
-            android:name=".ui.TimeActivity"
+            android:name=".TimeActivity"
             android:exported="true"
             android:theme="@style/Theme.TimeFlow">
             <intent-filter>
