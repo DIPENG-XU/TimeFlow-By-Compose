@@ -1,4 +1,4 @@
-package com.apollo.timeflow.service
+package com.apollo.timeflow.module.homefeed.service
 
 import android.content.Context
 import androidx.datastore.core.DataStore

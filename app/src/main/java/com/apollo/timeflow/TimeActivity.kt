@@ -11,20 +11,33 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
 import androidx.compose.ui.Modifier
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.apollo.timeflow.broadcast.DateBroadcast
 import com.apollo.timeflow.broadcast.TimeBroadcast
-import com.apollo.timeflow.ui.card.CardHomeFeed
-import com.apollo.timeflow.ui.theme.TimeFlowTheme
+import com.apollo.timeflow.module.moduleNavHost.TimeFlowNavHost
+import com.apollo.timeflow.module.homefeed.ui.theme.TimeFlowTheme
+import com.apollo.timeflow.viewmodel.HostActivityViewModel
 import com.apollo.timeflow.viewmodel.TimeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class TimeActivity : ComponentActivity() {
     private val mainViewModel: TimeViewModel by viewModels<TimeViewModel>()
+
+    private val hostViewModel: HostActivityViewModel by viewModels<HostActivityViewModel>()
+
+    private val onDestinationChangedListener =
+        NavController.OnDestinationChangedListener { _, _, _ ->
+            this@TimeActivity.hideStatusAndNavigationBar()
+        }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,12 +50,28 @@ class TimeActivity : ComponentActivity() {
 
         setContent {
             TimeFlowTheme {
-                Box(
-                    modifier = Modifier
-                        .background(MaterialTheme.colorScheme.background)
-                        .fillMaxSize()
+                Scaffold(
+                    snackbarHost = {
+                        SnackbarHost(hostState = hostViewModel.snackbarHostState)
+                    }
                 ) {
-                    CardHomeFeed()
+                    it.calculateTopPadding()
+                    
+                    Box(
+                        modifier = Modifier
+                            .background(MaterialTheme.colorScheme.background)
+                            .fillMaxSize()
+                    ) {
+                        val navController = rememberNavController().also {
+                            it.removeOnDestinationChangedListener(onDestinationChangedListener)
+                            it.addOnDestinationChangedListener(onDestinationChangedListener)
+                        }
+
+                        TimeFlowNavHost(
+                            viewModelStoreOwner = this@TimeActivity,
+                            navController = navController,
+                        )
+                    }
                 }
             }
         }

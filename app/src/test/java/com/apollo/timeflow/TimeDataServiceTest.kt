@@ -1,7 +1,7 @@
 package com.apollo.timeflow
 
-import com.apollo.timeflow.service.IFetchTimeData
-import com.apollo.timeflow.service.TimeDataService
+import com.apollo.timeflow.module.homefeed.service.IFetchTimeData
+import com.apollo.timeflow.module.homefeed.service.TimeDataService
 import com.apollo.timeflow.utils.TimeFormat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.runBlocking
