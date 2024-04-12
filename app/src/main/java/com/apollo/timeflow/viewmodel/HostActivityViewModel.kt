@@ -1,6 +1,7 @@
 package com.apollo.timeflow.viewmodel
 
 import android.app.Application
+import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHostState
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,7 +17,11 @@ class HostActivityViewModel(
 
     fun showSnackbar(snackTips: String) {
         viewModelScope.launch {
-            _snackbarHostState.showSnackbar(snackTips)
+            _snackbarHostState.showSnackbar(
+                snackTips,
+                duration = SnackbarDuration.Short,
+                withDismissAction = true
+            )
         }
     }
 }
