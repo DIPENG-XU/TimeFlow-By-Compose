@@ -1,6 +1,8 @@
 package com.apollo.timeflow.module.settings.ui
 
+import android.os.Bundle
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,13 +13,16 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.os.LocaleListCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.NavController
 import com.apollo.timeflow.R
 import com.apollo.timeflow.component.DefaultText
 import com.apollo.timeflow.module.homefeed.uistate.DateUIState
+import com.apollo.timeflow.module.moduleNavHost.NavHostLanguageConfigurationConfirmDialogArgument
 import com.apollo.timeflow.module.moduleNavHost.NavHostRouteConfig
+import com.apollo.timeflow.module.settings.utils.languageMapping
 import com.apollo.timeflow.utils.getFontSizeInSetting
 import com.apollo.timeflow.viewmodel.HostActivityViewModel
 import com.apollo.timeflow.viewmodel.ThemeViewModel
@@ -28,6 +33,7 @@ fun ConfirmDialog(
     navController: NavController,
     route: String,
     viewModelStoreOwner: ViewModelStoreOwner,
+    bundle: Bundle = Bundle(),
 ) {
     val timeViewModel = hiltViewModel<TimeViewModel>(viewModelStoreOwner)
     val confirmDialogUIState = when (route) {
@@ -39,14 +45,12 @@ fun ConfirmDialog(
                 R.string.dark_mode to R.string.light_mode
             }
 
-            ConfirmDialogUIState(
-                pageName = R.string.theme_mode,
+            ConfirmDialogUIState(pageName = R.string.theme_mode,
                 current = current,
                 next = next,
                 onClickEvent = {
                     themeViewModel.updateTheme()
-                }
-            )
+                })
         }
 
         NavHostRouteConfig.TIME_FORMAT_DIALOG_ROUTE -> {
@@ -58,14 +62,12 @@ fun ConfirmDialog(
             } else {
                 R.string.base24 to R.string.base12
             }
-            ConfirmDialogUIState(
-                pageName = R.string.time_format,
+            ConfirmDialogUIState(pageName = R.string.time_format,
                 current = current,
                 next = next,
                 onClickEvent = {
                     timeViewModel.updateTimeFormat()
-                }
-            )
+                })
         }
 
         NavHostRouteConfig.DATE_FORMAT_DIALOG_ROUTE -> {
@@ -74,14 +76,29 @@ fun ConfirmDialog(
             } else {
                 R.string.close to R.string.open
             }
-            ConfirmDialogUIState(
-                pageName = R.string.update_the_date_display,
+            ConfirmDialogUIState(pageName = R.string.update_the_date_display,
                 current = current,
                 next = next,
                 onClickEvent = {
                     timeViewModel.updateDateDisplayOrNot()
-                }
+                })
+        }
+
+        NavHostRouteConfig.LANGUAGE_CONFIGURATION_CONFIRM_DIALOG_ROUTE -> {
+            val currentLanguage = AppCompatDelegate.getApplicationLocales().toLanguageTags()
+            val nextLanguage = bundle.getString(
+                NavHostLanguageConfigurationConfirmDialogArgument.SELECTED_AREA, "zh-CN"
             )
+            val (current, next) = currentLanguage.languageMapping() to nextLanguage.languageMapping()
+
+            ConfirmDialogUIState(pageName = R.string.update_language_confirm_title,
+                current = current,
+                next = next,
+                onClickEvent = {
+                    AppCompatDelegate.setApplicationLocales(
+                        LocaleListCompat.forLanguageTags(nextLanguage)
+                    )
+                })
         }
 
         else -> throw Exception("Unknown Route, Please check it again!")
@@ -90,8 +107,7 @@ fun ConfirmDialog(
     val fontSize = getFontSizeInSetting(timeViewModel.deviceUIState.value)
 
     val hostActivityViewModel = hiltViewModel<HostActivityViewModel>(viewModelStoreOwner)
-    AlertDialog(
-        shape = RoundedCornerShape(size = 8.dp),
+    AlertDialog(shape = RoundedCornerShape(size = 8.dp),
         modifier = Modifier.fillMaxWidth(),
         tonalElevation = 0.dp,
         title = {
@@ -103,6 +119,7 @@ fun ConfirmDialog(
                 fontSize = fontSize,
             )
         },
+
         text = {
             LazyColumn {
                 item {
@@ -125,28 +142,28 @@ fun ConfirmDialog(
                 }
             }
         },
+
         onDismissRequest = {
             navController.popBackStack(
                 NavHostRouteConfig.NAV_HOST_ROUTE_FOR_SETTINGS,
                 inclusive = false,
             )
         },
+
         confirmButton = {
             val successTips = String.format(
                 stringResource(id = R.string.success_to_update),
                 stringResource(id = confirmDialogUIState.pageName),
                 stringResource(id = confirmDialogUIState.next),
             )
-            TextButton(
-                onClick = {
-                    confirmDialogUIState.onClickEvent.invoke()
-                    navController.popBackStack(
-                        NavHostRouteConfig.NAV_HOST_ROUTE_FOR_SETTINGS,
-                        inclusive = true,
-                    )
-                    hostActivityViewModel.showSnackbar(successTips)
-                }
-            ) {
+            TextButton(onClick = {
+                confirmDialogUIState.onClickEvent.invoke()
+                navController.popBackStack(
+                    NavHostRouteConfig.NAV_HOST_ROUTE_FOR_SETTINGS,
+                    inclusive = true,
+                )
+                hostActivityViewModel.showSnackbar(successTips)
+            }) {
                 DefaultText(
                     text = stringResource(id = R.string.confirm),
                     fontSize = fontSize,
@@ -157,15 +174,13 @@ fun ConfirmDialog(
             val dismissTips = String.format(
                 stringResource(id = R.string.dismiss_to_update),
             )
-            TextButton(
-                onClick = {
-                    navController.popBackStack(
-                        NavHostRouteConfig.NAV_HOST_ROUTE_FOR_SETTINGS,
-                        inclusive = false,
-                    )
-                    hostActivityViewModel.showSnackbar(dismissTips)
-                }
-            ) {
+            TextButton(onClick = {
+                navController.popBackStack(
+                    NavHostRouteConfig.NAV_HOST_ROUTE_FOR_SETTINGS,
+                    inclusive = false,
+                )
+                hostActivityViewModel.showSnackbar(dismissTips)
+            }) {
                 DefaultText(
                     text = stringResource(id = R.string.dismiss),
                     fontSize = fontSize,
@@ -180,5 +195,5 @@ data class ConfirmDialogUIState(
     @StringRes val pageName: Int,
     @StringRes val current: Int,
     @StringRes val next: Int,
-    val onClickEvent: () -> Unit
+    val onClickEvent: () -> Unit,
 )

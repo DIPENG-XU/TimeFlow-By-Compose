@@ -17,6 +17,7 @@ class HostActivityViewModel(
 
     fun showSnackbar(snackTips: String) {
         viewModelScope.launch {
+            _snackbarHostState.currentSnackbarData?.dismiss()
             _snackbarHostState.showSnackbar(
                 snackTips,
                 duration = SnackbarDuration.Short,

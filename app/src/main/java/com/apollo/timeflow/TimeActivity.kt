@@ -4,9 +4,9 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
 import android.view.Window
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,18 +17,22 @@ import androidx.compose.ui.Modifier
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.apollo.timeflow.broadcast.DateBroadcast
 import com.apollo.timeflow.broadcast.TimeBroadcast
-import com.apollo.timeflow.module.moduleNavHost.TimeFlowNavHost
 import com.apollo.timeflow.module.homefeed.ui.theme.TimeFlowTheme
+import com.apollo.timeflow.module.moduleNavHost.TimeFlowNavHost
 import com.apollo.timeflow.viewmodel.HostActivityViewModel
 import com.apollo.timeflow.viewmodel.TimeViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class TimeActivity : ComponentActivity() {
+class TimeActivity : AppCompatActivity() {
     private val mainViewModel: TimeViewModel by viewModels<TimeViewModel>()
 
     private val hostViewModel: HostActivityViewModel by viewModels<HostActivityViewModel>()
@@ -54,9 +58,8 @@ class TimeActivity : ComponentActivity() {
                     snackbarHost = {
                         SnackbarHost(hostState = hostViewModel.snackbarHostState)
                     }
-                ) {
-                    it.calculateTopPadding()
-                    
+                ) { paddingValues ->
+                    paddingValues.calculateTopPadding()
                     Box(
                         modifier = Modifier
                             .background(MaterialTheme.colorScheme.background)

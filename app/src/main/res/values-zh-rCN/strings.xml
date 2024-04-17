@@ -20,5 +20,8 @@
     <string name="success_to_update">已经成功更新%s为%s</string>
     <string name="dismiss_to_update">已经取消更新</string>
 
+    <string name="english">英语</string>
+    <string name="update_language_confirm_title">语言设置</string>
+
     <string name="current_version">当前版本: %s</string>
 </resources>
