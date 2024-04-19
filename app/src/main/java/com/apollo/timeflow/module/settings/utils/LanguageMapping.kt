@@ -3,18 +3,30 @@ package com.apollo.timeflow.module.settings.utils
 import androidx.annotation.StringRes
 import com.apollo.timeflow.R
 
-const val ENGLISH = "en"
-const val SIMPLIFY_CHINESE = "zh-CN"
-const val TRADITIONAL_CHINESE_FOR_HK = "zh-HK"
-const val TRADITIONAL_CHINESE_FOR_TAIWAN = "zh-TW"
+sealed class LanguageType(
+    val name: String,
+    @StringRes val stringRes: Int,
+) {
+    data object English : LanguageType("en", R.string.english)
+
+    data object SimplifyChinese : LanguageType("zh-CN", R.string.chinese_zh_cn)
+
+    data object TraditionalChineseForHK : LanguageType("zh-HK", R.string.chinese_zh_hk)
+
+    data object TraditionalChineseForTW : LanguageType("zh-TW", R.string.chinese_zh_tw)
+}
+
+val LANGUAGE_LIST = listOf(
+    LanguageType.English,
+    LanguageType.SimplifyChinese,
+    LanguageType.TraditionalChineseForHK,
+    LanguageType.TraditionalChineseForTW,
+)
 
 @StringRes
-fun String.languageMapping(): Int {
-    return when (this) {
-        ENGLISH -> R.string.english
-        SIMPLIFY_CHINESE -> R.string.chinese_zh_cn
-        TRADITIONAL_CHINESE_FOR_HK -> R.string.chinese_zh_hk
-        TRADITIONAL_CHINESE_FOR_TAIWAN -> R.string.chinese_zh_tw
-        else -> throw Exception("Unknown Type")
+fun String.mappedToAStringResByName(): Int {
+    LANGUAGE_LIST.forEach {
+        if (this == it.name) return it.stringRes
     }
+    return R.string.unknown_language
 }

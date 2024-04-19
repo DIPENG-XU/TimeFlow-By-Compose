@@ -22,7 +22,7 @@ import com.apollo.timeflow.component.DefaultText
 import com.apollo.timeflow.module.homefeed.uistate.DateUIState
 import com.apollo.timeflow.module.moduleNavHost.NavHostLanguageConfigurationConfirmDialogArgument
 import com.apollo.timeflow.module.moduleNavHost.NavHostRouteConfig
-import com.apollo.timeflow.module.settings.utils.languageMapping
+import com.apollo.timeflow.module.settings.utils.mappedToAStringResByName
 import com.apollo.timeflow.utils.getFontSizeInSetting
 import com.apollo.timeflow.viewmodel.HostActivityViewModel
 import com.apollo.timeflow.viewmodel.ThemeViewModel
@@ -89,7 +89,7 @@ fun ConfirmDialog(
             val nextLanguage = bundle.getString(
                 NavHostLanguageConfigurationConfirmDialogArgument.SELECTED_AREA, "zh-CN"
             )
-            val (current, next) = currentLanguage.languageMapping() to nextLanguage.languageMapping()
+            val (current, next) = currentLanguage.mappedToAStringResByName() to nextLanguage.mappedToAStringResByName()
 
             ConfirmDialogUIState(pageName = R.string.update_language_confirm_title,
                 current = current,
@@ -107,7 +107,8 @@ fun ConfirmDialog(
     val fontSize = getFontSizeInSetting(timeViewModel.deviceUIState.value)
 
     val hostActivityViewModel = hiltViewModel<HostActivityViewModel>(viewModelStoreOwner)
-    AlertDialog(shape = RoundedCornerShape(size = 8.dp),
+    AlertDialog(
+        shape = RoundedCornerShape(size = 8.dp),
         modifier = Modifier.fillMaxWidth(),
         tonalElevation = 0.dp,
         title = {
@@ -186,7 +187,7 @@ fun ConfirmDialog(
                     fontSize = fontSize,
                 )
             }
-        }
+        },
     )
 }
 

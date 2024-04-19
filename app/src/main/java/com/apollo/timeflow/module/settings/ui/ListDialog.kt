@@ -1,5 +1,6 @@
 package com.apollo.timeflow.module.settings.ui
 
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,11 +21,7 @@ import androidx.navigation.NavController
 import com.apollo.timeflow.R
 import com.apollo.timeflow.component.DefaultText
 import com.apollo.timeflow.module.moduleNavHost.NavHostRouteConfig
-import com.apollo.timeflow.module.settings.utils.ENGLISH
-import com.apollo.timeflow.module.settings.utils.SIMPLIFY_CHINESE
-import com.apollo.timeflow.module.settings.utils.TRADITIONAL_CHINESE_FOR_HK
-import com.apollo.timeflow.module.settings.utils.TRADITIONAL_CHINESE_FOR_TAIWAN
-import com.apollo.timeflow.module.settings.utils.languageMapping
+import com.apollo.timeflow.module.settings.utils.LANGUAGE_LIST
 import com.apollo.timeflow.utils.getFontSizeInSetting
 import com.apollo.timeflow.viewmodel.TimeViewModel
 
@@ -51,28 +48,25 @@ fun ListDialog(
             }
         },
         text = {
-            val list = listOf(
-                ENGLISH,
-                SIMPLIFY_CHINESE,
-                TRADITIONAL_CHINESE_FOR_HK,
-                TRADITIONAL_CHINESE_FOR_TAIWAN,
-            )
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier.fillMaxWidth(),
             ) {
-                list.forEach {
-                    Text(
-                        text = stringResource(id = it.languageMapping()),
-                        fontSize = getFontSizeInSetting(timeViewModel.deviceUIState.value),
-                        modifier = Modifier
-                            .clickable {
-                                navController.navigate("${NavHostRouteConfig.LANGUAGE_CONFIGURATION_CONFIRM_DIALOG_ROUTE}/$it")
-                            }
-                            .padding(12.dp),
-                    )
-                }
+                val currentLanguage = AppCompatDelegate.getApplicationLocales().toLanguageTags()
+                LANGUAGE_LIST
+                    .filter { it.name != currentLanguage }
+                    .forEach {
+                        Text(
+                            text = stringResource(id = it.stringRes),
+                            fontSize = getFontSizeInSetting(timeViewModel.deviceUIState.value),
+                            modifier = Modifier
+                                .clickable {
+                                    navController.navigate("${NavHostRouteConfig.LANGUAGE_CONFIGURATION_CONFIRM_DIALOG_ROUTE}/${it.name}")
+                                }
+                                .padding(12.dp),
+                        )
+                    }
             }
         },
         onDismissRequest = {
