@@ -32,5 +32,6 @@
     <string name="chinese_zh_hk" translatable="false">繁體中文(香港地區)</string>
     <string name="chinese_zh_tw" translatable="false">繁體中文(臺灣地區)</string>
     <string name="language" translatable="false">Please select your language</string>
-    <string name="unknown_language" translatable="false">Unknown Language</string>
+    <string name="unknown_language">Unknown Language</string>
+    <string name="system_language">System Language</string>
 </resources>

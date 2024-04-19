@@ -25,6 +25,8 @@ val LANGUAGE_LIST = listOf(
 
 @StringRes
 fun String.mappedToAStringResByName(): Int {
+    if (this.isEmpty()) return R.string.system_language
+
     LANGUAGE_LIST.forEach {
         if (this == it.name) return it.stringRes
     }

@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.Window
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,11 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.apollo.timeflow.basesupport.BaseActivity
 import com.apollo.timeflow.broadcast.DateBroadcast
 import com.apollo.timeflow.broadcast.TimeBroadcast
 import com.apollo.timeflow.module.homefeed.ui.theme.TimeFlowTheme
@@ -29,10 +26,9 @@ import com.apollo.timeflow.module.moduleNavHost.TimeFlowNavHost
 import com.apollo.timeflow.viewmodel.HostActivityViewModel
 import com.apollo.timeflow.viewmodel.TimeViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class TimeActivity : AppCompatActivity() {
+class TimeActivity : BaseActivity("TimeActivity") {
     private val mainViewModel: TimeViewModel by viewModels<TimeViewModel>()
 
     private val hostViewModel: HostActivityViewModel by viewModels<HostActivityViewModel>()
@@ -46,11 +42,12 @@ class TimeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        this.window.requestFeature(Window.FEATURE_NO_TITLE)
-        this.parseColorToStatusBarAndNavigation()
-        this.addBroadcast()
-
-        this.mainViewModel.updateDate()
+        if (savedInstanceState == null) {
+            this.window.requestFeature(Window.FEATURE_NO_TITLE)
+            this.parseColorToStatusBarAndNavigation()
+            this.addBroadcast()
+            this.mainViewModel.updateDate()
+        }
 
         setContent {
             TimeFlowTheme {

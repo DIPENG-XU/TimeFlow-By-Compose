@@ -15,7 +15,6 @@ fun DefaultText(
 ) {
     Text(
         text = text,
-        maxLines = 1,
         fontSize = fontSize,
         fontFamily = defaultFontFamily,
         color = MaterialTheme.colorScheme.primary,
