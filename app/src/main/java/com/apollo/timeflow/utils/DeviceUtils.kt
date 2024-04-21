@@ -34,9 +34,9 @@ fun getFontSizeInHomeFeed(deviceType: DeviceUIState): TextUnit = when (deviceTyp
 }
 
 fun getFontSizeInSetting(deviceType: DeviceUIState): TextUnit = when (deviceType) {
-    is DeviceUIState.Phone -> 16.sp
-    is DeviceUIState.Tablet -> 28.sp
-    is DeviceUIState.TV -> 28.sp
+    is DeviceUIState.Phone -> 18.sp
+    is DeviceUIState.Tablet -> 24.sp
+    is DeviceUIState.TV -> 24.sp
 }
 
 sealed class DeviceUIState {

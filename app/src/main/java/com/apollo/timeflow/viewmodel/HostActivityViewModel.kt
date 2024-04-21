@@ -5,9 +5,12 @@ import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHostState
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HostActivityViewModel(
+@HiltViewModel
+class HostActivityViewModel @Inject constructor(
     application: Application,
 ) : AndroidViewModel(
     application = application
@@ -17,6 +20,7 @@ class HostActivityViewModel(
 
     fun showSnackbar(snackTips: String) {
         viewModelScope.launch {
+            _snackbarHostState.currentSnackbarData?.dismiss()
             _snackbarHostState.showSnackbar(
                 snackTips,
                 duration = SnackbarDuration.Short,
