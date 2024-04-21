@@ -1,6 +1,37 @@
 <resources>
-    <string name="app_name">TimeFlow</string>
+    <string name="app_name" translatable="false">TimeFlow</string>
+    <string name="am" translatable="false">AM</string>
+    <string name="pm" translatable="false">PM</string>
 
-    <string name="am">AM</string>
-    <string name="pm">PM</string>
+    <string name="theme_mode">Update Theme Mode</string>
+    <string name="time_format">Update Time Format</string>
+    <string name="update_the_date_display">Update The Date Display</string>
+    <string name="update_language" translatable="false">Language Configuration</string>
+
+    <string name="title_confirm">%s</string>
+    <string name="current_state_confirm">The Current State is: <u>%s</u></string>
+    <string name="new_state_confirm">The NewState will be: <u>%s</u></string>
+    <string name="confirm">Confirm</string>
+    <string name="dismiss">Dismiss</string>
+
+    <string name="base12">12-hour Base</string>
+    <string name="base24">24-hour Base</string>
+    <string name="light_mode">Light Mode</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
+    <string name="success_to_update">It have successfully changed %s to %s for you</string>
+    <string name="dismiss_to_update">It have been dismissed</string>
+
+    <string name="current_version">Current Version: %s</string>
+
+    <string name="update_language_confirm_title">Update Language</string>
+    <string name="english">English</string>
+    <string name="chinese_zh_cn" translatable="false">简体中文</string>
+    <string name="chinese_zh_hk" translatable="false">繁體中文(香港地區)</string>
+    <string name="chinese_zh_tw" translatable="false">繁體中文(臺灣地區)</string>
+    <string name="language" translatable="false">Please select your language</string>
+    <string name="unknown_language">Unknown Language</string>
+    <string name="system_language">System Language</string>
 </resources>

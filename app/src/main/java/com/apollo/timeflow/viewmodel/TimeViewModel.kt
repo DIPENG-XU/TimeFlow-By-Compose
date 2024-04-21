@@ -7,10 +7,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.apollo.timeflow.service.TimeDataService
-import com.apollo.timeflow.service.TimeFormatRecordDataStoreService
-import com.apollo.timeflow.uistate.DateUIState
-import com.apollo.timeflow.uistate.TimeUIState
+import com.apollo.timeflow.module.homefeed.service.TimeDataService
+import com.apollo.timeflow.module.homefeed.service.TimeFormatRecordDataStoreService
+import com.apollo.timeflow.module.homefeed.uistate.DateUIState
+import com.apollo.timeflow.module.homefeed.uistate.TimeUIState
 import com.apollo.timeflow.utils.DeviceUIState
 import com.apollo.timeflow.utils.TimeFormat
 import com.apollo.timeflow.utils.getDeviceType
@@ -82,7 +82,7 @@ class TimeViewModel @Inject constructor(
             )
         }
 
-    fun updateDateRecord() {
+    fun updateDateDisplayOrNot() {
         viewModelScope.launch {
             val isDateDisplay = dateUIStateFlow.stateIn(this).value
             timeFormatRecordService.updateDateRecord(isDateDisplay.showOrHide xor true)

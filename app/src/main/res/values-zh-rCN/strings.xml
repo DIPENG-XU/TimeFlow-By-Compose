@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="theme_mode">主题设置</string>
+    <string name="time_format">时间格式设置</string>
+    <string name="update_the_date_display">日期显示设置</string>
+
+    <string name="title_confirm">%s</string>
+    <string name="current_state_confirm">旧状态: <u>%s</u></string>
+    <string name="new_state_confirm">新状态: <u>%s</u></string>
+    <string name="confirm">确认</string>
+    <string name="dismiss">取消</string>
+
+    <string name="base12">12小时进制</string>
+    <string name="base24">24小时进制</string>
+    <string name="light_mode">亮色模式</string>
+    <string name="dark_mode">暗色模式</string>
+    <string name="open">打开</string>
+    <string name="close">关闭</string>
+
+    <string name="success_to_update">已经成功更新%s为%s</string>
+    <string name="dismiss_to_update">已经取消更新</string>
+
+    <string name="english">英语</string>
+    <string name="update_language_confirm_title">语言设置</string>
+    <string name="unknown_language">未知语言</string>
+    <string name="system_language">系统语言</string>
+
+    <string name="current_version">当前版本: %s</string>
+</resources>

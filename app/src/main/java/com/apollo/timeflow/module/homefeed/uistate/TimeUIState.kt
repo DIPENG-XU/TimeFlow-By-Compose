@@ -1,4 +1,4 @@
-package com.apollo.timeflow.uistate
+package com.apollo.timeflow.module.homefeed.uistate
 
 import androidx.annotation.StringRes
 

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="theme_mode">主題應用</string>
+    <string name="time_format">時間格式應用</string>
+    <string name="update_the_date_display">日期顯示應用</string>
+
+    <string name="title_confirm">%s</string>
+    <string name="current_state_confirm">現在是這樣子: <u>%s</u></string>
+    <string name="new_state_confirm">往這個狀態變: <u>%s</u></string>
+    <string name="confirm">想好了就這樣改</string>
+    <string name="dismiss">還沒想好啦</string>
+
+    <string name="base12">12小時進制</string>
+    <string name="base24">24小時進制</string>
+    <string name="light_mode">白天模式</string>
+    <string name="dark_mode">夜晚模式</string>
+    <string name="open">打開</string>
+    <string name="close">關上</string>
+
+    <string name="success_to_update">已經幫你成功更新%s爲%s了吼</string>
+    <string name="dismiss_to_update">已經先幫你取消了吼，想好了再來一次吼</string>
+
+    <string name="english">英文</string>
+    <string name="update_language_confirm_title">語言變更</string>
+    <string name="unknown_language">未知語言</string>
+    <string name="system_language">系統语言</string>
+
+    <string name="current_version">軟體版本: %s</string>
+</resources>

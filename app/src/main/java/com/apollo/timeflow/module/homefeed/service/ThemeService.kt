@@ -1,4 +1,4 @@
-package com.apollo.timeflow.service
+package com.apollo.timeflow.module.homefeed.service
 
 import android.content.Context
 import androidx.datastore.core.DataStore
@@ -15,16 +15,10 @@ import javax.inject.Inject
 
 private val Context.themeDataStore: DataStore<Preferences> by preferencesDataStore(name = "Theme Record DataStore")
 
-class ThemeService(
+class ThemeService @Inject constructor(
+    @ApplicationContext private val context: Context,
     private val coroutineScope: CoroutineScope,
-    private val context: Context,
 ) {
-    @Inject
-    constructor(@ApplicationContext context: Context, coroutineScope: CoroutineScope) : this(
-        coroutineScope,
-        context,
-    )
-
     val themeFlow: Flow<Int> = this.context.themeDataStore.data.map { preferences ->
         preferences[THEME_DATA_STORE_KEY] ?: 1
     }

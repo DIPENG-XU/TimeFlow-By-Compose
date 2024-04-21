@@ -1,4 +1,4 @@
-package com.apollo.timeflow.service
+package com.apollo.timeflow.module.homefeed.service
 
 import com.apollo.timeflow.R
 import com.apollo.timeflow.utils.TimeFormat
