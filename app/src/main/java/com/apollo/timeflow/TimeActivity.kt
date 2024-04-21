@@ -2,7 +2,6 @@ package com.apollo.timeflow
 
 import android.content.Intent
 import android.content.IntentFilter
-import android.graphics.Paint.Align
 import android.os.Bundle
 import android.view.Window
 import androidx.activity.compose.setContent
