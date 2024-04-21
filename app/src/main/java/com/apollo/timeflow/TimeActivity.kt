@@ -2,6 +2,7 @@ package com.apollo.timeflow
 
 import android.content.Intent
 import android.content.IntentFilter
+import android.graphics.Paint.Align
 import android.os.Bundle
 import android.view.Window
 import androidx.activity.compose.setContent
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
@@ -53,7 +55,12 @@ class TimeActivity : BaseActivity("TimeActivity") {
             TimeFlowTheme {
                 Scaffold(
                     snackbarHost = {
-                        SnackbarHost(hostState = hostViewModel.snackbarHostState)
+                        Box(modifier = Modifier.fillMaxSize()) {
+                            SnackbarHost(
+                                hostState = hostViewModel.snackbarHostState,
+                                modifier = Modifier.align(Alignment.TopCenter),
+                            )
+                        }
                     }
                 ) { paddingValues ->
                     paddingValues.calculateTopPadding()
