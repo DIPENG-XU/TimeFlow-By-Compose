@@ -45,18 +45,18 @@ TimeFlow by Jetpack Compose in Android.
   page, which will help you to config this app.
   ![IMAGE_FOR_SETTING_PAGE](show_img/english_setting_page.png)
   - In this Page, you can update theme mode, time format the date display and language. Now, It only support English, Simplify Chinese and Traditional Chinese. If you want to support more language(such as your regional language), you can [pull the issue](https://github.com/DIPENG-XU/TimeFlow-By-Compose/issues/new) with your translation to me. Here's what you need to translate. And Thanks your help.
-        - The Current State is:
-        - The New State will be:
-        - Update Theme Mode
-        - Light Mode
-        - Dark Mode
-        - Update Time Format
-        - 12-hour Base
-        - 24-hour Base
-        - Update The Date Display
-        - Open
-        - Close
-        - Current Version
+    - **The Current State is:**
+    - **The New State will be:**
+    - **Update Theme Mode**
+    - **Light Mode**
+    - **Dark Mode**
+    - **Update Time Format**
+    - **12-hour Base**
+    - **24-hour Base**
+    - **Update The Date Display**
+    - **Open**
+    - **Close**
+    - **Current Version**
 
 ### Effect Pictures
 
