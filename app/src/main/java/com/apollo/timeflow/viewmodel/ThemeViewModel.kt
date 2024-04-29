@@ -28,14 +28,4 @@ class ThemeViewModel @Inject constructor(
             themeService.updateThemeRecord(last xor 1)
         }
     }
-
-    /**
-     * If support more theme later, use this and deprecate the [updateTheme]
-     */
-    @Suppress("MemberVisibilityCanBePrivate")
-    fun updateTheme(value: Int) {
-        viewModelScope.launch {
-            themeService.updateThemeRecord(value)
-        }
-    }
 }

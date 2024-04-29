@@ -11,6 +11,7 @@ import com.apollo.timeflow.module.homefeed.service.TimeDataService
 import com.apollo.timeflow.module.homefeed.service.TimeFormatRecordDataStoreService
 import com.apollo.timeflow.module.homefeed.uistate.DateUIState
 import com.apollo.timeflow.module.homefeed.uistate.TimeUIState
+import com.apollo.timeflow.module.settings.service.DateFormatService
 import com.apollo.timeflow.utils.DeviceUIState
 import com.apollo.timeflow.utils.TimeFormat
 import com.apollo.timeflow.utils.getDeviceType
@@ -28,6 +29,7 @@ import javax.inject.Inject
 class TimeViewModel @Inject constructor(
     private val timeFormatRecordService: TimeFormatRecordDataStoreService,
     private val timeDataService: TimeDataService,
+    private val dateFormatService: DateFormatService,
     application: Application,
 ) : AndroidViewModel(application) {
 
@@ -70,7 +72,14 @@ class TimeViewModel @Inject constructor(
     private val _currentDateFlow: MutableStateFlow<String> = MutableStateFlow("")
     fun updateDate() {
         viewModelScope.launch(Dispatchers.IO) {
-            _currentDateFlow.emit(timeDataService.getCurrentDate())
+            val dateFormatPattern = dateFormatUIState.stateIn(this).value
+            _currentDateFlow.emit(timeDataService.getCurrentDate(dateFormatPattern))
+        }
+    }
+
+    private fun updateDate(dateFormatPattern: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            _currentDateFlow.emit(timeDataService.getCurrentDate(dateFormatPattern))
         }
     }
 
@@ -99,5 +108,15 @@ class TimeViewModel @Inject constructor(
             val timeFormat = timeFormatRecordDataStoreFlow.stateIn(this).value
             timeFormatRecordService.updateTimeFormat(timeFormat xor true)
         }
+    }
+
+
+    val dateFormatUIState: Flow<String> = dateFormatService.dateFormatFlow.map {
+        this.updateDate(it)
+        it
+    }
+
+    fun updateDateFormat(dateFormat: String) = viewModelScope.launch {
+        dateFormatService.updateThemeRecord(dateFormat)
     }
 }

@@ -4,6 +4,7 @@ import com.apollo.timeflow.R
 import com.apollo.timeflow.utils.TimeFormat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.withContext
+import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -38,10 +39,14 @@ class TimeDataService(
         if (calendar.get(Calendar.HOUR_OF_DAY) > 12) R.string.pm else R.string.am
     }
 
-    suspend fun getCurrentDate(): String = withContext(coroutineScope.coroutineContext) {
+    suspend fun getCurrentDate(dateFormatPattern: String): String = withContext(coroutineScope.coroutineContext) {
         val date = iFetchTimeData.fetchDate()
-        val simpleDateFormat = SimpleDateFormat("MM.dd.yyyy", Locale.CHINA)
-        simpleDateFormat.format(date)
+        try {
+            SimpleDateFormat(dateFormatPattern, Locale.CHINA)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            SimpleDateFormat("MM.dd.yyyy", Locale.CHINA)
+        }.format(date)
     }
 }
 

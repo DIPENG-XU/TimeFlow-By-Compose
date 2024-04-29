@@ -6,6 +6,7 @@
     <string name="theme_mode">Update Theme Mode</string>
     <string name="time_format">Update Time Format</string>
     <string name="update_the_date_display">Update The Date Display</string>
+    <string name="update_date_format">Update Date Format</string>
     <string name="update_language" translatable="false">Language Configuration</string>
 
     <string name="title_confirm">%s</string>
@@ -34,4 +35,8 @@
     <string name="language" translatable="false">Please select your language</string>
     <string name="unknown_language">Unknown Language</string>
     <string name="system_language">System Language</string>
+
+    <string name="yyyyMMdd" translatable="false">yyyy.MM.dd</string>
+    <string name="ddMMyyyy" translatable="false">dd.MM.yyyy</string>
+    <string name="MMddyyyy" translatable="false">MM.dd.yyyy</string>
 </resources>

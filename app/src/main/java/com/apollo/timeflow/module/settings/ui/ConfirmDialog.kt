@@ -20,6 +20,7 @@ import androidx.navigation.NavController
 import com.apollo.timeflow.R
 import com.apollo.timeflow.component.DefaultText
 import com.apollo.timeflow.module.homefeed.uistate.DateUIState
+import com.apollo.timeflow.module.moduleNavHost.NavHostDateFormatSelectorConfigurationConfirmDialogArgument
 import com.apollo.timeflow.module.moduleNavHost.NavHostLanguageConfigurationConfirmDialogArgument
 import com.apollo.timeflow.module.moduleNavHost.NavHostRouteConfig
 import com.apollo.timeflow.module.settings.utils.mappedToAStringResByName
@@ -101,6 +102,23 @@ fun ConfirmDialog(
                 })
         }
 
+        NavHostRouteConfig.DATE_FORMAT_SELECTOR_CONFIRM_DIALOG_ROUTE -> {
+            val current = timeViewModel.dateFormatUIState.collectAsState(initial = "")
+            val next = bundle.getString(
+                NavHostDateFormatSelectorConfigurationConfirmDialogArgument.SELECTED_DATE_FORMAT
+            )
+
+            ConfirmDialogUIState(
+                pageName = R.string.update_date_format,
+                currentString = current.value,
+                nextString = next,
+                onClickEvent = {
+                    next?.let { timeViewModel.updateDateFormat(it) }
+                }
+            )
+        }
+
+
         else -> throw Exception("Unknown Route, Please check it again!")
     }
 
@@ -127,7 +145,8 @@ fun ConfirmDialog(
                     DefaultText(
                         text = String.format(
                             stringResource(id = R.string.current_state_confirm),
-                            stringResource(id = confirmDialogUIState.current),
+                            confirmDialogUIState.current?.let { stringResource(id = it) }
+                                ?: confirmDialogUIState.currentString,
                         ),
                         fontSize = fontSize,
                     )
@@ -136,7 +155,8 @@ fun ConfirmDialog(
                     DefaultText(
                         text = String.format(
                             stringResource(id = R.string.new_state_confirm),
-                            stringResource(id = confirmDialogUIState.next),
+                            confirmDialogUIState.next?.let { stringResource(id = it) }
+                                ?: confirmDialogUIState.nextString,
                         ),
                         fontSize = fontSize,
                     )
@@ -155,7 +175,8 @@ fun ConfirmDialog(
             val successTips = String.format(
                 stringResource(id = R.string.success_to_update),
                 stringResource(id = confirmDialogUIState.pageName),
-                stringResource(id = confirmDialogUIState.next),
+                confirmDialogUIState.next?.let { stringResource(id = confirmDialogUIState.next) }
+                    ?: confirmDialogUIState.nextString,
             )
             TextButton(onClick = {
                 confirmDialogUIState.onClickEvent.invoke()
@@ -194,7 +215,11 @@ fun ConfirmDialog(
 
 data class ConfirmDialogUIState(
     @StringRes val pageName: Int,
-    @StringRes val current: Int,
-    @StringRes val next: Int,
+
+    @StringRes val current: Int? = null,
+    val currentString: String? = null,
+    @StringRes val next: Int? = null,
+    val nextString: String? = null,
+
     val onClickEvent: () -> Unit,
 )

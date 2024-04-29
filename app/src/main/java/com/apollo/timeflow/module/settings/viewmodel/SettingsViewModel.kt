@@ -1,7 +1,6 @@
 package com.apollo.timeflow.module.settings.viewmodel
 
 import android.app.Application
-import android.os.Build
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
