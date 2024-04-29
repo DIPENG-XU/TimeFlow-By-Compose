@@ -30,7 +30,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class TimeActivity : BaseActivity("TimeActivity") {
-    private val mainViewModel: TimeViewModel by viewModels<TimeViewModel>()
+    private val timeViewModel: TimeViewModel by viewModels<TimeViewModel>()
 
     private val hostViewModel: HostActivityViewModel by viewModels<HostActivityViewModel>()
 
@@ -47,7 +47,6 @@ class TimeActivity : BaseActivity("TimeActivity") {
             this.window.requestFeature(Window.FEATURE_NO_TITLE)
             this.parseColorToStatusBarAndNavigation()
             this.addBroadcast()
-            this.mainViewModel.updateDate()
         }
 
         setContent {
@@ -83,6 +82,11 @@ class TimeActivity : BaseActivity("TimeActivity") {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        this.timeViewModel.updateDate()
+    }
+
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         hideStatusAndNavigationBar()
@@ -110,7 +114,7 @@ class TimeActivity : BaseActivity("TimeActivity") {
         intentFilterTimeChange.addAction(Intent.ACTION_LOCALE_CHANGED)
 
         val timeChangeReceiver = TimeBroadcast {
-            mainViewModel.updateTime()
+            timeViewModel.updateTime()
         }
 
         ContextCompat.registerReceiver(
@@ -126,7 +130,7 @@ class TimeActivity : BaseActivity("TimeActivity") {
         intentFilterDateChange.addAction(Intent.ACTION_LOCALE_CHANGED)
 
         val dateChangeReceiver = DateBroadcast {
-            mainViewModel.updateDate()
+            timeViewModel.updateDate()
         }
 
         ContextCompat.registerReceiver(
