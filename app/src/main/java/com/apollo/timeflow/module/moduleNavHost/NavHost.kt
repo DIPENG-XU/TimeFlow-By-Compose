@@ -16,7 +16,8 @@ import androidx.navigation.navArgument
 import com.apollo.timeflow.module.settings.ui.ConfirmDialog
 import com.apollo.timeflow.module.settings.ui.TimeFlowSettings
 import com.apollo.timeflow.module.homefeed.ui.card.CardHomeFeed
-import com.apollo.timeflow.module.settings.ui.ListDialog
+import com.apollo.timeflow.module.settings.ui.DateFormatListDialog
+import com.apollo.timeflow.module.settings.ui.LanguageConfigurationListDialog
 
 @Composable
 fun TimeFlowNavHost(
@@ -91,7 +92,36 @@ fun TimeFlowNavHost(
         }
 
         composable(route = NavHostRouteConfig.LANGUAGE_CONFIGURATION_DIALOG_ROUTE) {
-            ListDialog(
+            LanguageConfigurationListDialog(
+                navController = navController,
+                viewModelStoreOwner = viewModelStoreOwner,
+            )
+        }
+
+        composable(
+            route = "${NavHostRouteConfig.DATE_FORMAT_SELECTOR_CONFIRM_DIALOG_ROUTE}/{${NavHostDateFormatSelectorConfigurationConfirmDialogArgument.SELECTED_DATE_FORMAT}}",
+            arguments = listOf(navArgument(NavHostDateFormatSelectorConfigurationConfirmDialogArgument.SELECTED_DATE_FORMAT) {
+                type = NavType.StringType
+            })
+        ) { backStackEntry ->
+            ConfirmDialog(
+                navController = navController,
+                route = NavHostRouteConfig.DATE_FORMAT_SELECTOR_CONFIRM_DIALOG_ROUTE,
+                viewModelStoreOwner = viewModelStoreOwner,
+                bundle = Bundle().also {
+                    val selectedDateFormat = backStackEntry.arguments?.getString(
+                        NavHostDateFormatSelectorConfigurationConfirmDialogArgument.SELECTED_DATE_FORMAT
+                    )
+                    it.putString(
+                        NavHostDateFormatSelectorConfigurationConfirmDialogArgument.SELECTED_DATE_FORMAT,
+                        selectedDateFormat
+                    )
+                }
+            )
+        }
+
+        composable(route = NavHostRouteConfig.DATE_FORMAT_SELECTOR_DIALOG_ROUTE) {
+            DateFormatListDialog(
                 navController = navController,
                 viewModelStoreOwner = viewModelStoreOwner,
             )

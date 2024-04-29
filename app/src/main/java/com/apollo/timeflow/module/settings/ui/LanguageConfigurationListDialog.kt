@@ -26,7 +26,7 @@ import com.apollo.timeflow.utils.getFontSizeInSetting
 import com.apollo.timeflow.viewmodel.TimeViewModel
 
 @Composable
-fun ListDialog(
+fun LanguageConfigurationListDialog(
     navController: NavController,
     viewModelStoreOwner: ViewModelStoreOwner,
 ) {

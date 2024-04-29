@@ -22,19 +22,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.apollo.timeflow.R
 import com.apollo.timeflow.component.DefaultText
+import com.apollo.timeflow.module.moduleNavHost.NavHostRouteConfig
 import com.apollo.timeflow.module.settings.uiState.SettingsUIState
 import com.apollo.timeflow.module.settings.viewmodel.SettingsViewModel
-import com.apollo.timeflow.module.moduleNavHost.NavHostRouteConfig
 import com.apollo.timeflow.utils.defaultFontFamily
 import com.apollo.timeflow.utils.getFontSizeInSetting
 import com.apollo.timeflow.viewmodel.TimeViewModel
@@ -98,20 +95,19 @@ private fun SettingsElementItem(
 ) {
     Box(
         modifier = Modifier
-            .clickable(
-                interactionSource = remember {
-                    MutableInteractionSource()
-                }, indication = null, onClick = {
-                    val navigateRoute = when (settingsElementUIState.nameRes) {
-                        R.string.theme_mode -> NavHostRouteConfig.THEME_FORMAT_DIALOG_ROUTE
-                        R.string.update_the_date_display -> NavHostRouteConfig.DATE_FORMAT_DIALOG_ROUTE
-                        R.string.time_format -> NavHostRouteConfig.TIME_FORMAT_DIALOG_ROUTE
-                        R.string.update_language -> NavHostRouteConfig.LANGUAGE_CONFIGURATION_DIALOG_ROUTE
-                        else -> NavHostRouteConfig.THEME_FORMAT_DIALOG_ROUTE
-                    }
-                    navHostController.navigate(navigateRoute)
+            .clickable(interactionSource = remember {
+                MutableInteractionSource()
+            }, indication = null, onClick = {
+                val navigateRoute = when (settingsElementUIState.nameRes) {
+                    R.string.theme_mode -> NavHostRouteConfig.THEME_FORMAT_DIALOG_ROUTE
+                    R.string.update_the_date_display -> NavHostRouteConfig.DATE_FORMAT_DIALOG_ROUTE
+                    R.string.update_date_format -> NavHostRouteConfig.DATE_FORMAT_SELECTOR_DIALOG_ROUTE
+                    R.string.time_format -> NavHostRouteConfig.TIME_FORMAT_DIALOG_ROUTE
+                    R.string.update_language -> NavHostRouteConfig.LANGUAGE_CONFIGURATION_DIALOG_ROUTE
+                    else -> NavHostRouteConfig.THEME_FORMAT_DIALOG_ROUTE
                 }
-            )
+                navHostController.navigate(navigateRoute)
+            })
             .fillMaxWidth()
             .wrapContentHeight()
     ) {
@@ -143,16 +139,4 @@ private fun SettingsElementItem(
             )
         }
     }
-}
-
-@Preview
-@Composable
-private fun SettingsElementItemPreview() {
-    SettingsElementItem(
-        settingsElementUIState = SettingsUIState.SettingsElementUIState(
-            R.string.theme_mode,
-        ),
-        navHostController = rememberNavController(),
-        fontSize = 16.sp,
-    )
 }
