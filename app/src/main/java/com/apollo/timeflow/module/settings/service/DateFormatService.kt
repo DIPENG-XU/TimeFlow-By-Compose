@@ -20,7 +20,7 @@ class DateFormatService @Inject constructor(
     private val coroutineScope: CoroutineScope,
 ) {
     val dateFormatFlow: Flow<String> = this.context.dateFormatDataStore.data.map { preferences ->
-        preferences[DATE_FORMAT_RECORD_DATA_STORE_KEY] ?: ""
+        preferences[DATE_FORMAT_RECORD_DATA_STORE_KEY] ?: "MM.dd.yyyy"
     }
 
     suspend fun updateThemeRecord(dateFormat: String): Unit =

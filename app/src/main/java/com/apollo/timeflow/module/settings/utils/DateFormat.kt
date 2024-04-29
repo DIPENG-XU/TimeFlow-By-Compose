@@ -5,7 +5,7 @@ sealed class DateFormat(
 ) {
     data object YyyyMMdd : DateFormat("yyyy.MM.dd")
     data object MMddyyyy : DateFormat("MM.dd.yyyy")
-    data object DdMMyyyy : DateFormat("dd.MM.YYYY")
+    data object DdMMyyyy : DateFormat("dd.MM.yyyy")
 }
 
 val DATE_FORMAT_LIST = listOf(
