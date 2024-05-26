@@ -3,7 +3,7 @@
     <string name="theme_mode">主題變更</string>
     <string name="time_format">時間格式變更</string>
     <string name="update_the_date_display">日期顯示變更</string>
-    <string name="update_date_format">日期顯示變更</string>
+    <string name="update_date_format">日期格式變更</string>
 
     <string name="title_confirm">%s</string>
     <string name="current_state_confirm">而家噶狀態: <u>%s</u></string>
