@@ -1,9 +1,9 @@
 package com.apollo.timeflow.component
 
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.TextUnit
 import com.apollo.timeflow.utils.defaultFontFamily
 
@@ -17,7 +17,7 @@ fun DefaultText(
         text = text,
         fontSize = fontSize,
         fontFamily = defaultFontFamily,
-        color = MaterialTheme.colorScheme.primary,
+        color = Color.Black,
         modifier = modifier
     )
 }

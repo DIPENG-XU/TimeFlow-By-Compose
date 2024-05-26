@@ -9,10 +9,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -32,6 +32,7 @@ fun LanguageConfigurationListDialog(
 ) {
     val timeViewModel = hiltViewModel<TimeViewModel>(viewModelStoreOwner)
     AlertDialog(
+        containerColor = Color.White,
         shape = RoundedCornerShape(size = 8.dp),
         modifier = Modifier.fillMaxWidth(),
         tonalElevation = 0.dp,
@@ -57,7 +58,7 @@ fun LanguageConfigurationListDialog(
                 LANGUAGE_LIST
                     .filter { it.name != currentLanguage }
                     .forEach {
-                        Text(
+                        DefaultText(
                             text = stringResource(id = it.stringRes),
                             fontSize = getFontSizeInSetting(timeViewModel.deviceUIState.value),
                             modifier = Modifier

@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -63,9 +62,11 @@ fun TimeCard(
             horizontalArrangement = Arrangement.Absolute.Center,
         ) {
             Image(
-                colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.primary),
+                colorFilter = ColorFilter.tint(
+                    color = MaterialTheme.colorScheme.primary,
+                ),
                 painter = painterResource(
-                    id = imageHash[leftNumber] ?: R.drawable.ic_number0
+                    id = imageHash[leftNumber] ?: R.drawable.ic_number0,
                 ),
                 contentDescription = null,
                 contentScale = ContentScale.FillWidth,
@@ -74,9 +75,11 @@ fun TimeCard(
                     .background(MaterialTheme.colorScheme.background),
             )
             Image(
-                colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.primary),
+                colorFilter = ColorFilter.tint(
+                    color = MaterialTheme.colorScheme.primary,
+                ),
                 painter = painterResource(
-                    id = imageHash[rightNumber] ?: R.drawable.ic_number0
+                    id = imageHash[rightNumber] ?: R.drawable.ic_number0,
                 ),
                 contentDescription = null,
                 contentScale = ContentScale.FillWidth,
@@ -91,7 +94,9 @@ fun TimeCard(
                 modifier = Modifier.align(Alignment.BottomEnd),
                 color = MaterialTheme.colorScheme.primary,
                 fontFamily = FontFamily(
-                    fonts = listOf(Font(R.font.poppins_bold, FontWeight.Light))
+                    fonts = listOf(
+                        Font(R.font.poppins_bold, FontWeight.Light),
+                    )
                 ),
                 fontSize = getFontSizeInHomeFeed(deviceUIState),
             )
