@@ -11,6 +11,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.os.LocaleListCompat
@@ -126,6 +127,7 @@ fun ConfirmDialog(
 
     val hostActivityViewModel = hiltViewModel<HostActivityViewModel>(viewModelStoreOwner)
     AlertDialog(
+        containerColor = Color.White,
         shape = RoundedCornerShape(size = 8.dp),
         modifier = Modifier.fillMaxWidth(),
         tonalElevation = 0.dp,
