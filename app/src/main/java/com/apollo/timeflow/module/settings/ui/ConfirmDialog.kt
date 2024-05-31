@@ -1,7 +1,6 @@
 package com.apollo.timeflow.module.settings.ui
 
 import android.os.Bundle
-import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
@@ -24,6 +23,7 @@ import com.apollo.timeflow.module.homefeed.uistate.DateUIState
 import com.apollo.timeflow.module.moduleNavHost.NavHostDateFormatSelectorConfigurationConfirmDialogArgument
 import com.apollo.timeflow.module.moduleNavHost.NavHostLanguageConfigurationConfirmDialogArgument
 import com.apollo.timeflow.module.moduleNavHost.NavHostRouteConfig
+import com.apollo.timeflow.module.settings.uiState.ConfirmDialogUIState
 import com.apollo.timeflow.module.settings.utils.mappedToAStringResByName
 import com.apollo.timeflow.utils.getFontSizeInSetting
 import com.apollo.timeflow.viewmodel.HostActivityViewModel
@@ -215,13 +215,3 @@ fun ConfirmDialog(
 }
 
 
-data class ConfirmDialogUIState(
-    @StringRes val pageName: Int,
-
-    @StringRes val current: Int? = null,
-    val currentString: String? = null,
-    @StringRes val next: Int? = null,
-    val nextString: String? = null,
-
-    val onClickEvent: () -> Unit,
-)
