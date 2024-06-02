@@ -1,4 +1,4 @@
-package com.apollo.timeflow.module.homefeed.ui.theme
+package com.apollo.timeflow.theme
 
 import androidx.compose.ui.graphics.Color
 

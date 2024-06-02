@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.apollo.timeflow.module.homefeed.ui.theme.TimeFlowTheme
+import com.apollo.timeflow.theme.TimeFlowTheme
 import com.apollo.timeflow.module.moduleNavHost.TimeFlowNavHost
 
 @Composable
