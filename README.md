@@ -1,13 +1,11 @@
-TimeFlow by Jetpack Compose in Android.
+TimeFlow, an APP you can use to show the time when you are focused on studying, work, etc.
 
 ### Project
 
-- Modified from [TimeFlow](https://github.com/DIPENG-XU/TimeFlow), but the old project coded by
-  View, in this new project, I choose Jetpack Compose to build the UI.
-- Besides, I use the Automatic injection framework to generate something, which is easier to build
-  the code.
-- Recode the ViewModel, which is more suitable from Jetpack Compose when I need to use the state in
-  UI.
+- If you don't have any interests in Android or other frontend platform, ignore the project introduction(the sharing of tech details).
+- Modified from [TimeFlow](https://github.com/DIPENG-XU/TimeFlow), but the old project coded by View, in this new project, I choose Jetpack Compose to build the UI. (A new UIFramework when build the UI for Android)
+- Besides, I use the Automatic injection framework to generate something, which is easier to build the code.
+- Recode the ViewModel, which is more suitable from Jetpack Compose when I need to use the state in the UI.
 
 ### Why design and develop it?
 
@@ -28,8 +26,7 @@ TimeFlow by Jetpack Compose in Android.
 ### Statement
 
 - There are no permission this app request, including Network or other local storage permission.
-- This app is absolutely free and keep open source. If you think this app helps you a lot, You can give me some comments [here](https://github.com/DIPENG-XU/TimeFlow-By-Compose/issues/new) instead of I place a QRCode to ask the money from you.
-  I love the praise very much rather than money, which is better than I get a Grand prize.
+- This app is absolutely free and keep open source. NO CHARGE and NO AD!
 
 ### UX
 
@@ -72,11 +69,11 @@ There are all the effect pictures.
 ### 项目
 
 - 由[TimeFlow](https://github.com/DIPENG-XU/TimeFlow)迁移而来。
-- 你如果不玩大前端的开发，不用里面这部分的描述。
+- 你如果不玩大前端的开发，不用里面这部分的描述，这里都是一些关于技术细节的介绍。
 - 原项目使用使用View体系布局，这种方式已经跟不上时代了，我自己不跟着大家卷两下就难受，
   于是改用Jetpack Compose声明式UI布局的方式去重新构建这个新项目。
-- 这个项目采用了更加合适于Compose的ViewModel注入方式去创建ViewModel
-- 以及使用了State替代了原来的数据通知方式，还有就是调整了一下数据格式，其他不变
+- 这个项目采用了更加合适于Compose的ViewModel注入方式去创建ViewModel。
+- 以及使用了State替代了原来的数据通知方式，还有就是调整了一下数据格式，其他不变。
 
 ### 为什么设计和构建这个APP?
 
@@ -88,7 +85,7 @@ There are all the effect pictures.
 ### 免责申明
 
 - 这个APP没有申请任何网络权限，所有存储的内容都是在你自己的手机上面（比如你选择了24小时进制或者暗色主题等等，下次进来它会记住你的选择这种）。
-- 这个APP完全免费及开源，不收取任何费用，你用着觉得好也不用打钱给我，在[这里](https://github.com/DIPENG-XU/TimeFlow-By-Compose/issues/new)夸夸我就行了，我很喜欢别人夸奖我，这比让我去刮刮乐中了几千块都还快乐。
+- 这个APP完全免费及开源，没有任何付费操作，也没有任何广告内容。
 
 ### 用户交互
 
