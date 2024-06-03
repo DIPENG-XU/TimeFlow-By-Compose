@@ -9,15 +9,16 @@ import com.apollo.timeflow.utils.defaultFontFamily
 
 @Composable
 fun DefaultText(
+    modifier: Modifier = Modifier,
     text: String,
     fontSize: TextUnit,
-    modifier: Modifier = Modifier,
+    color: Color = Color.Black,
 ) {
     Text(
         text = text,
         fontSize = fontSize,
         fontFamily = defaultFontFamily,
-        color = Color.Black,
+        color = color,
         modifier = modifier
     )
 }

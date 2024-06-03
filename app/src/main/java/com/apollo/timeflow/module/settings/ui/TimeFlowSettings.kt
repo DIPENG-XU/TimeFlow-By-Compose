@@ -80,6 +80,7 @@ fun TimeFlowSettings(
         DefaultText(
             text = String.format(stringResource(id = R.string.current_version, versionCode)),
             fontSize = fontSize,
+            color = MaterialTheme.colorScheme.primary,
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(12.dp)
