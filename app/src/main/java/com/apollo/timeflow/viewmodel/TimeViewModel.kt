@@ -7,11 +7,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.apollo.timeflow.module.homefeed.service.TimeDataService
-import com.apollo.timeflow.module.homefeed.service.TimeFormatRecordDataStoreService
+import com.apollo.timeflow.module.homefeed.service.feature.ITimeDataService
+import com.apollo.timeflow.module.homefeed.service.feature.ITimeFormatRecordDataStoreService
 import com.apollo.timeflow.module.homefeed.uistate.DateUIState
 import com.apollo.timeflow.module.homefeed.uistate.TimeUIState
-import com.apollo.timeflow.module.settings.service.DateFormatService
+import com.apollo.timeflow.module.settings.service.feature.IDateFormatService
 import com.apollo.timeflow.utils.DeviceUIState
 import com.apollo.timeflow.utils.TimeFormat
 import com.apollo.timeflow.utils.getDeviceType
@@ -27,9 +27,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TimeViewModel @Inject constructor(
-    private val timeFormatRecordService: TimeFormatRecordDataStoreService,
-    private val timeDataService: TimeDataService,
-    private val dateFormatService: DateFormatService,
+    private val iTimeFormatRecordService: ITimeFormatRecordDataStoreService,
+    private val iTimeDataService: ITimeDataService,
+    private val iDateFormatService: IDateFormatService,
     application: Application,
 ) : AndroidViewModel(application) {
 
@@ -51,13 +51,13 @@ class TimeViewModel @Inject constructor(
     fun updateTime() {
         viewModelScope.launch(Dispatchers.IO) {
             val timeFormat = _timeFormat.value ?: TimeFormat.Base12
-            val (hours, minutes) = timeDataService.getCurrentTime(timeFormat)
+            val (hours, minutes) = iTimeDataService.getCurrentTime(timeFormat)
 
             val hourLeft: Int = if (hours < 10) 0 else hours.toString()[0].digitToInt()
             val hourRight: Int = if (hours < 10) hours else hours.toString()[1].digitToInt()
             val minuteLeft: Int = if (minutes < 10) 0 else minutes.toString()[0].digitToInt()
             val minuteRight: Int = if (minutes < 10) minutes else minutes.toString()[1].digitToInt()
-            val amOrPm = timeDataService.amOrPm()
+            val amOrPm = iTimeDataService.amOrPm()
 
             _timeUIState.value = TimeUIState(
                 hourLeft,
@@ -73,18 +73,18 @@ class TimeViewModel @Inject constructor(
     fun updateDate() {
         viewModelScope.launch(Dispatchers.IO) {
             val dateFormatPattern = dateFormatUIState.stateIn(this).value
-            _currentDateFlow.emit(timeDataService.getCurrentDate(dateFormatPattern))
+            _currentDateFlow.emit(iTimeDataService.getCurrentDate(dateFormatPattern))
         }
     }
 
     private fun updateDate(dateFormatPattern: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            _currentDateFlow.emit(timeDataService.getCurrentDate(dateFormatPattern))
+            _currentDateFlow.emit(iTimeDataService.getCurrentDate(dateFormatPattern))
         }
     }
 
     val dateUIStateFlow: Flow<DateUIState> =
-        _currentDateFlow.combine(timeFormatRecordService.dateFlow) { currentDate, showOrHide ->
+        _currentDateFlow.combine(iTimeFormatRecordService.dateFlow) { currentDate, showOrHide ->
             DateUIState(
                 showOrHide = showOrHide,
                 currentDate = currentDate,
@@ -94,11 +94,11 @@ class TimeViewModel @Inject constructor(
     fun updateDateDisplayOrNot() {
         viewModelScope.launch {
             val isDateDisplay = dateUIStateFlow.stateIn(this).value
-            timeFormatRecordService.updateDateRecord(isDateDisplay.showOrHide xor true)
+            iTimeFormatRecordService.updateDateRecord(isDateDisplay.showOrHide xor true)
         }
     }
 
-    val timeFormatRecordDataStoreFlow = timeFormatRecordService.timeFormatFlow.map {
+    val timeFormatRecordDataStoreFlow = iTimeFormatRecordService.timeFormatFlow.map {
         this.editTimeFormat(it)
         it
     }
@@ -106,17 +106,17 @@ class TimeViewModel @Inject constructor(
     fun updateTimeFormat() {
         viewModelScope.launch {
             val timeFormat = timeFormatRecordDataStoreFlow.stateIn(this).value
-            timeFormatRecordService.updateTimeFormat(timeFormat xor true)
+            iTimeFormatRecordService.updateTimeFormat(timeFormat xor true)
         }
     }
 
 
-    val dateFormatUIState: Flow<String> = dateFormatService.dateFormatFlow.map {
+    val dateFormatUIState: Flow<String> = iDateFormatService.dateFormatFlow.map {
         this.updateDate(it)
         it
     }
 
     fun updateDateFormat(dateFormat: String) = viewModelScope.launch {
-        dateFormatService.updateThemeRecord(dateFormat)
+        iDateFormatService.updateThemeRecord(dateFormat)
     }
 }

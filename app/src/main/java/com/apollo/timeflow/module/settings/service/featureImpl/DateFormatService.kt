@@ -1,4 +1,4 @@
-package com.apollo.timeflow.module.settings.service
+package com.apollo.timeflow.module.settings.service.featureImpl
 
 import android.content.Context
 import androidx.datastore.core.DataStore
@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.apollo.timeflow.module.settings.service.feature.IDateFormatService
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -18,12 +19,12 @@ private val Context.dateFormatDataStore: DataStore<Preferences> by preferencesDa
 class DateFormatService @Inject constructor(
     @ApplicationContext private val context: Context,
     private val coroutineScope: CoroutineScope,
-) {
-    val dateFormatFlow: Flow<String> = this.context.dateFormatDataStore.data.map { preferences ->
+): IDateFormatService {
+    override val dateFormatFlow: Flow<String> = this.context.dateFormatDataStore.data.map { preferences ->
         preferences[DATE_FORMAT_RECORD_DATA_STORE_KEY] ?: "MM.dd.yyyy"
     }
 
-    suspend fun updateThemeRecord(dateFormat: String): Unit =
+    override suspend fun updateThemeRecord(dateFormat: String): Unit =
         withContext(coroutineScope.coroutineContext) {
             context.dateFormatDataStore.edit { preferences ->
                 preferences[DATE_FORMAT_RECORD_DATA_STORE_KEY] = dateFormat
