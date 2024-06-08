@@ -3,6 +3,7 @@ package com.apollo.timeflow.module.homefeed.service.featureImpl
 import com.apollo.timeflow.R
 import com.apollo.timeflow.module.homefeed.service.dependency.IDateModule
 import com.apollo.timeflow.module.homefeed.service.feature.ITimeDataService
+import com.apollo.timeflow.module.homefeed.uistate.TimeUIState
 import com.apollo.timeflow.utils.TimeFormat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.withContext
@@ -15,8 +16,8 @@ import javax.inject.Inject
 class TimeDataService @Inject constructor(
     private val coroutineScope: CoroutineScope,
     private val iDateModule: IDateModule,
-): ITimeDataService {
-    override suspend fun getCurrentTime(timeFormat: TimeFormat): Pair<Int, Int> = withContext(coroutineScope.coroutineContext) {
+) : ITimeDataService {
+    override suspend fun getCurrentTime(timeFormat: TimeFormat): TimeUIState = withContext(coroutineScope.coroutineContext) {
         val calendar: Calendar = iDateModule.fetchCalendar()
         val hours = when {
             timeFormat == TimeFormat.Base24 -> calendar.get(Calendar.HOUR_OF_DAY)
@@ -24,7 +25,14 @@ class TimeDataService @Inject constructor(
             else -> calendar.get(Calendar.HOUR)
         }
         val minutes = calendar.get(Calendar.MINUTE)
-        hours to minutes
+
+        TimeUIState(
+            hoursLeft = hours / 10,
+            hoursRight = hours % 10,
+            minutesLeft = minutes / 10,
+            minutesRight = minutes % 10,
+            amOrPM = amOrPm()
+        )
     }
 
     override suspend fun amOrPm(): Int = withContext(coroutineScope.coroutineContext) {

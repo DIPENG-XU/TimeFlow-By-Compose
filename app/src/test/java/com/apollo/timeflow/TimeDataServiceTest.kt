@@ -2,6 +2,7 @@ package com.apollo.timeflow
 
 import com.apollo.timeflow.module.homefeed.service.featureImpl.TimeDataService
 import com.apollo.timeflow.module.homefeed.service.dependency.IDateModule
+import com.apollo.timeflow.module.homefeed.uistate.TimeUIState
 import com.apollo.timeflow.utils.TimeFormat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.runBlocking
@@ -61,14 +62,41 @@ class TimeDataServiceTest {
         val pmBase12 = pmService.getCurrentTime(TimeFormat.Base12)
         val pmBase24 = pmService.getCurrentTime(TimeFormat.Base24)
 
-        assertEquals(amBase12.first, 8)
-        assertEquals(amBase12.second, 30)
-        assertEquals(amBase24.first, 8)
-        assertEquals(amBase24.second, 30)
-        assertEquals(pmBase12.first, 8)
-        assertEquals(pmBase12.second, 30)
-        assertEquals(pmBase24.first, 20)
-        assertEquals(pmBase24.second, 30)
+        val predictedAmBase12 = TimeUIState(
+            hoursLeft = 0,
+            hoursRight = 8,
+            minutesLeft = 3,
+            minutesRight = 0,
+            amOrPM = R.string.am
+        )
+        assertEquals(predictedAmBase12, amBase12)
+
+        val predictedAmBase24 = TimeUIState(
+            hoursLeft = 0,
+            hoursRight = 8,
+            minutesLeft = 3,
+            minutesRight = 0,
+            amOrPM = R.string.am
+        )
+        assertEquals(predictedAmBase24, amBase24)
+
+        val predictedPmBase12 = TimeUIState(
+            hoursLeft = 0,
+            hoursRight = 8,
+            minutesLeft = 3,
+            minutesRight = 0,
+            amOrPM = R.string.pm
+        )
+        assertEquals(predictedPmBase12, pmBase12)
+
+        val predictedPmBase24 = TimeUIState(
+            hoursLeft = 2,
+            hoursRight = 0,
+            minutesLeft = 3,
+            minutesRight = 0,
+            amOrPM = R.string.pm
+        )
+        assertEquals(predictedPmBase24, pmBase24)
     }
 
     @Test
