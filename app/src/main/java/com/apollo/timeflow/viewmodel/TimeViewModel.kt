@@ -51,21 +51,7 @@ class TimeViewModel @Inject constructor(
     fun updateTime() {
         viewModelScope.launch(Dispatchers.IO) {
             val timeFormat = _timeFormat.value ?: TimeFormat.Base12
-            val (hours, minutes) = iTimeDataService.getCurrentTime(timeFormat)
-
-            val hourLeft: Int = if (hours < 10) 0 else hours.toString()[0].digitToInt()
-            val hourRight: Int = if (hours < 10) hours else hours.toString()[1].digitToInt()
-            val minuteLeft: Int = if (minutes < 10) 0 else minutes.toString()[0].digitToInt()
-            val minuteRight: Int = if (minutes < 10) minutes else minutes.toString()[1].digitToInt()
-            val amOrPm = iTimeDataService.amOrPm()
-
-            _timeUIState.value = TimeUIState(
-                hourLeft,
-                hourRight,
-                minuteLeft,
-                minuteRight,
-                amOrPm,
-            )
+            _timeUIState.value = iTimeDataService.getCurrentTime(timeFormat)
         }
     }
 
