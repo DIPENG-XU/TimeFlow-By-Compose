@@ -1,6 +1,7 @@
-package com.apollo.timeflow.module.settings.service
+package com.apollo.timeflow.module.settings.service.featureImpl
 
 import com.apollo.timeflow.R
+import com.apollo.timeflow.module.settings.service.feature.ISettingsService
 import com.apollo.timeflow.module.settings.uiState.SettingsUIState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.withContext
@@ -8,9 +9,8 @@ import javax.inject.Inject
 
 class SettingsService @Inject constructor(
     private val coroutineScope: CoroutineScope,
-) {
-
-    suspend fun fetchSettingsUIState(): List<SettingsUIState> =
+): ISettingsService {
+    override suspend fun fetchSettingsUIState(): List<SettingsUIState> =
         withContext(coroutineScope.coroutineContext) {
             val list = mutableListOf<SettingsUIState>()
 

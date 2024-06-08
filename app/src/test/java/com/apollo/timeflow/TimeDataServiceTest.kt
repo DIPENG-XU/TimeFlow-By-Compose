@@ -1,7 +1,7 @@
 package com.apollo.timeflow
 
-import com.apollo.timeflow.module.homefeed.service.IFetchTimeData
-import com.apollo.timeflow.module.homefeed.service.TimeDataService
+import com.apollo.timeflow.module.homefeed.service.featureImpl.TimeDataService
+import com.apollo.timeflow.module.homefeed.service.dependency.IDateModule
 import com.apollo.timeflow.utils.TimeFormat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.runBlocking
@@ -32,7 +32,7 @@ class TimeDataServiceTest {
         // 2024-01-09 20:30:00
         pmDate = Date(1704803400000L)
         amService = TimeDataService(
-            iFetchTimeData = object : IFetchTimeData {
+            iDateModule = object : IDateModule {
                 override fun fetchCalendar(): Calendar = Calendar.getInstance().apply {
                     this.time = amDate
                 }
@@ -43,7 +43,7 @@ class TimeDataServiceTest {
             coroutineScope = coroutineScope,
         )
         pmService = TimeDataService(
-            iFetchTimeData = object : IFetchTimeData {
+            iDateModule = object : IDateModule {
                 override fun fetchCalendar(): Calendar = Calendar.getInstance().apply {
                     this.time = pmDate
                 }
@@ -82,8 +82,8 @@ class TimeDataServiceTest {
 
     @Test
     fun getCurrentDate() = runBlocking(scheduler) {
-        val amCurrentDate = amService.getCurrentDate()
-        val pmCurrentDate = pmService.getCurrentDate()
+        val amCurrentDate = amService.getCurrentDate("MM.dd.yyyy")
+        val pmCurrentDate = pmService.getCurrentDate("MM.dd.yyyy")
 
         assertEquals(amCurrentDate, "01.10.2024")
         assertEquals(pmCurrentDate, "01.09.2024")
