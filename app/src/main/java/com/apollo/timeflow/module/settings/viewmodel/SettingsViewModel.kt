@@ -37,7 +37,7 @@ class SettingsViewModel @Inject constructor(
             application
                 .packageManager
                 .getPackageInfo(application.packageName, 0)
-                .versionName
+                .versionName ?: ""
         }
     }
 }

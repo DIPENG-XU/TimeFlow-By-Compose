@@ -186,7 +186,7 @@ fun ConfirmDialog(
                     NavHostRouteConfig.NAV_HOST_ROUTE_FOR_SETTINGS,
                     inclusive = true,
                 )
-                hostActivityViewModel.showSnackbar(successTips)
+                hostActivityViewModel.showSnackBar(successTips)
             }) {
                 DefaultText(
                     text = stringResource(id = R.string.confirm),
@@ -203,7 +203,7 @@ fun ConfirmDialog(
                     NavHostRouteConfig.NAV_HOST_ROUTE_FOR_SETTINGS,
                     inclusive = false,
                 )
-                hostActivityViewModel.showSnackbar(dismissTips)
+                hostActivityViewModel.showSnackBar(dismissTips)
             }) {
                 DefaultText(
                     text = stringResource(id = R.string.dismiss),

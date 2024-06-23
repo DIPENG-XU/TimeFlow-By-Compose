@@ -26,13 +26,7 @@
         </activity>
 
         <receiver
-            android:name=".broadcast.TimeBroadcast"
-            android:enabled="true"
-            android:exported="false"
-            tools:ignore="Instantiatable" />
-
-        <receiver
-            android:name=".broadcast.DateBroadcast"
+            android:name=".broadcast.TimeFlowBroadcastReceiver"
             android:enabled="true"
             android:exported="false"
             tools:ignore="Instantiatable" />

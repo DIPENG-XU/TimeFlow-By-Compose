@@ -6,28 +6,29 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.apollo.timeflow.theme.TimeFlowTheme
 import com.apollo.timeflow.module.moduleNavHost.TimeFlowNavHost
+import com.apollo.timeflow.theme.TimeFlowTheme
+import com.apollo.timeflow.viewmodel.HostActivityViewModel
 
 @Composable
 fun TimeHostComponent(
-    snackbarHostState: SnackbarHostState,
     onDestinationChangedListener: NavController.OnDestinationChangedListener,
     viewModelStoreOwner: ViewModelStoreOwner,
 ) {
+    val snackBarHostState = hiltViewModel<HostActivityViewModel>().snackBarHostState
     TimeFlowTheme {
         Scaffold(
             snackbarHost = {
                 Box(modifier = Modifier.fillMaxSize()) {
                     SnackbarHost(
-                        hostState = snackbarHostState,
+                        hostState = snackBarHostState,
                         modifier = Modifier.align(Alignment.TopCenter),
                     )
                 }

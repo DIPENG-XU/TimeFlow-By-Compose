@@ -17,12 +17,12 @@ class HostActivityViewModel @Inject constructor(
 ) : AndroidViewModel(
     application = application
 ) {
-    private val _snackbarHostState = SnackbarHostState()
-    val snackbarHostState = _snackbarHostState
+    private val _snackBarHostState = SnackbarHostState()
+    val snackBarHostState = _snackBarHostState
 
-    fun showSnackbar(snackTips: String) = viewModelScope.launch(coroutine) {
-        _snackbarHostState.currentSnackbarData?.dismiss()
-        _snackbarHostState.showSnackbar(
+    fun showSnackBar(snackTips: String) = viewModelScope.launch(coroutine) {
+        _snackBarHostState.currentSnackbarData?.dismiss()
+        _snackBarHostState.showSnackbar(
             snackTips,
             duration = SnackbarDuration.Short,
             withDismissAction = true
