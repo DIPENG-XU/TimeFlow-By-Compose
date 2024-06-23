@@ -1,6 +1,5 @@
 package com.apollo.timeflow.module.homefeed.ui.component
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -16,16 +15,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.apollo.timeflow.R
-import com.apollo.timeflow.utils.imageHash
 import com.apollo.timeflow.utils.DeviceUIState
 import com.apollo.timeflow.utils.getFontSizeInHomeFeed
 
@@ -34,7 +29,7 @@ import com.apollo.timeflow.utils.getFontSizeInHomeFeed
 @Composable
 fun TimeCard(
     deviceUIState: DeviceUIState = DeviceUIState.Phone(),
-    clickable: () -> Unit = {},
+    clickable: (() -> Unit)? = null,
     isTimeFormat: Boolean = true,
     amOrPm: String? = "AM",
     leftNumber: Int = 0,
@@ -45,7 +40,7 @@ fun TimeCard(
     Box(
         modifier = Modifier
             .clickable(
-                onClick = clickable,
+                onClick = clickable ?: {},
                 interactionSource = remember {
                     MutableInteractionSource()
                 },
@@ -61,32 +56,8 @@ fun TimeCard(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Absolute.Center,
         ) {
-            Image(
-                colorFilter = ColorFilter.tint(
-                    color = MaterialTheme.colorScheme.primary,
-                ),
-                painter = painterResource(
-                    id = imageHash[leftNumber] ?: R.drawable.ic_number0,
-                ),
-                contentDescription = null,
-                contentScale = ContentScale.FillWidth,
-                modifier = Modifier
-                    .weight(1f)
-                    .background(MaterialTheme.colorScheme.background),
-            )
-            Image(
-                colorFilter = ColorFilter.tint(
-                    color = MaterialTheme.colorScheme.primary,
-                ),
-                painter = painterResource(
-                    id = imageHash[rightNumber] ?: R.drawable.ic_number0,
-                ),
-                contentDescription = null,
-                contentScale = ContentScale.FillWidth,
-                modifier = Modifier
-                    .weight(1f)
-                    .background(MaterialTheme.colorScheme.background)
-            )
+            TimeCardImage(number = leftNumber)
+            TimeCardImage(number = rightNumber)
         }
         if (isTimeFormat) {
             Text(

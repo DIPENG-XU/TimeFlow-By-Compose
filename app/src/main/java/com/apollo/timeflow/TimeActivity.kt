@@ -11,17 +11,13 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavController
 import com.apollo.timeflow.basesupport.BaseActivity
-import com.apollo.timeflow.broadcast.DateBroadcast
-import com.apollo.timeflow.broadcast.TimeBroadcast
-import com.apollo.timeflow.viewmodel.HostActivityViewModel
+import com.apollo.timeflow.broadcast.TimeFlowBroadcastReceiver
 import com.apollo.timeflow.viewmodel.TimeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class TimeActivity : BaseActivity("TimeActivity") {
     private val timeViewModel: TimeViewModel by viewModels<TimeViewModel>()
-
-    private val hostViewModel: HostActivityViewModel by viewModels<HostActivityViewModel>()
 
     private val onDestinationChangedListener =
         NavController.OnDestinationChangedListener { _, _, _ ->
@@ -34,13 +30,11 @@ class TimeActivity : BaseActivity("TimeActivity") {
 
         if (savedInstanceState == null) {
             this.window.requestFeature(Window.FEATURE_NO_TITLE)
-            this.parseColorToStatusBarAndNavigation()
             this.addBroadcast()
         }
 
         setContent {
             TimeHostComponent(
-                snackbarHostState = hostViewModel.snackbarHostState,
                 onDestinationChangedListener = onDestinationChangedListener,
                 viewModelStoreOwner = this,
             )
@@ -54,13 +48,6 @@ class TimeActivity : BaseActivity("TimeActivity") {
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-        hideStatusAndNavigationBar()
-    }
-
-    private fun parseColorToStatusBarAndNavigation() {
-        val color = ContextCompat.getColor(this, R.color.black)
-        window.statusBarColor = color
-        window.navigationBarColor = color
         hideStatusAndNavigationBar()
     }
 
@@ -78,7 +65,7 @@ class TimeActivity : BaseActivity("TimeActivity") {
         intentFilterTimeChange.addAction(Intent.ACTION_TIMEZONE_CHANGED)
         intentFilterTimeChange.addAction(Intent.ACTION_LOCALE_CHANGED)
 
-        val timeChangeReceiver = TimeBroadcast {
+        val timeChangeReceiver = TimeFlowBroadcastReceiver {
             timeViewModel.updateTime()
         }
 
@@ -94,7 +81,7 @@ class TimeActivity : BaseActivity("TimeActivity") {
         intentFilterDateChange.addAction(Intent.ACTION_TIMEZONE_CHANGED)
         intentFilterDateChange.addAction(Intent.ACTION_LOCALE_CHANGED)
 
-        val dateChangeReceiver = DateBroadcast {
+        val dateChangeReceiver = TimeFlowBroadcastReceiver {
             timeViewModel.updateDate()
         }
 

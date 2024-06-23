@@ -14,10 +14,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.NavController
-import com.apollo.timeflow.module.moduleNavHost.NavHostRouteConfig
 import com.apollo.timeflow.module.homefeed.ui.component.DateText
 import com.apollo.timeflow.module.homefeed.ui.component.TimeCard
 import com.apollo.timeflow.module.homefeed.uistate.DateUIState
+import com.apollo.timeflow.module.moduleNavHost.NavHostRouteConfig
 import com.apollo.timeflow.utils.monitorRecombination
 import com.apollo.timeflow.viewmodel.TimeViewModel
 
@@ -58,6 +58,7 @@ fun CardLandScape(
                 TimeCard(
                     deviceUIState = deviceUIState,
                     isTimeFormat = false,
+                    clickable = null,
                     amOrPm = null,
                     leftNumber = timeUIState.minutesLeft,
                     rightNumber = timeUIState.minutesRight,
