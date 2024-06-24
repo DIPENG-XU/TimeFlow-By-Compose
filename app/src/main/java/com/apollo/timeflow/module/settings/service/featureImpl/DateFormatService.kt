@@ -17,16 +17,16 @@ import javax.inject.Inject
 private val Context.dateFormatDataStore: DataStore<Preferences> by preferencesDataStore(name = "Date Format Record DataStore")
 
 class DateFormatService @Inject constructor(
-    @ApplicationContext private val context: Context,
-    private val coroutineScope: CoroutineScope,
+    @ApplicationContext private val _context: Context,
+    private val _coroutineScope: CoroutineScope,
 ): IDateFormatService {
-    override val dateFormatFlow: Flow<String> = this.context.dateFormatDataStore.data.map { preferences ->
+    override val dateFormatFlow: Flow<String> = this._context.dateFormatDataStore.data.map { preferences ->
         preferences[DATE_FORMAT_RECORD_DATA_STORE_KEY] ?: "MM.dd.yyyy"
     }
 
     override suspend fun updateThemeRecord(dateFormat: String): Unit =
-        withContext(coroutineScope.coroutineContext) {
-            context.dateFormatDataStore.edit { preferences ->
+        withContext(_coroutineScope.coroutineContext) {
+            _context.dateFormatDataStore.edit { preferences ->
                 preferences[DATE_FORMAT_RECORD_DATA_STORE_KEY] = dateFormat
             }
         }

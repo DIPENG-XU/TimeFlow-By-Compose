@@ -13,15 +13,15 @@ import kotlin.coroutines.CoroutineContext
 
 @HiltViewModel
 class ThemeViewModel @Inject constructor(
-    private val iThemeService: IThemeService,
-    private val coroutine: CoroutineContext,
+    private val _iThemeService: IThemeService,
+    private val _coroutine: CoroutineContext,
     application: Application,
 ) : AndroidViewModel(application) {
 
-    val currentThemeFlow: Flow<Int> = iThemeService.themeFlow
+    val currentThemeFlow: Flow<Int> = _iThemeService.themeFlow
 
-    fun updateTheme() = viewModelScope.launch(coroutine) {
+    fun updateTheme() = viewModelScope.launch(_coroutine) {
         val last = currentThemeFlow.stateIn(this).value
-        iThemeService.updateThemeRecord(last xor 1)
+        _iThemeService.updateThemeRecord(last xor 1)
     }
 }

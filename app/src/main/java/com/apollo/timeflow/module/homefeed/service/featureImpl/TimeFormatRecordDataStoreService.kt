@@ -17,28 +17,28 @@ import javax.inject.Inject
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "Time Unit Record DataStore")
 
 class TimeFormatRecordDataStoreService @Inject constructor(
-    private val coroutineScope: CoroutineScope,
-    @ApplicationContext private val context: Context,
+    private val _coroutineScope: CoroutineScope,
+    @ApplicationContext private val _context: Context,
 ): ITimeFormatRecordDataStoreService {
 
-    override val dateFlow: Flow<Boolean> = this.context.dataStore.data.map { preferences ->
+    override val dateFlow: Flow<Boolean> = this._context.dataStore.data.map { preferences ->
         preferences[IS_DATE_DISPLAY] ?: true
     }
 
     override suspend fun updateDateRecord(isDateDisplay: Boolean): Unit =
-        withContext(coroutineScope.coroutineContext) {
-            context.dataStore.edit { preferences ->
+        withContext(_coroutineScope.coroutineContext) {
+            _context.dataStore.edit { preferences ->
                 preferences[IS_DATE_DISPLAY] = isDateDisplay
             }
         }
 
-    override val timeFormatFlow: Flow<Boolean> = this.context.dataStore.data.map { preferences ->
+    override val timeFormatFlow: Flow<Boolean> = this._context.dataStore.data.map { preferences ->
         preferences[TIME_FORMAT_RECORD_TAG] ?: true
     }
 
     override suspend fun updateTimeFormat(value: Boolean): Unit =
-        withContext(coroutineScope.coroutineContext) {
-            context.dataStore.edit { preferences ->
+        withContext(_coroutineScope.coroutineContext) {
+            _context.dataStore.edit { preferences ->
                 preferences[TIME_FORMAT_RECORD_TAG] = value
             }
         }

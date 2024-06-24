@@ -26,10 +26,10 @@ import kotlin.coroutines.CoroutineContext
 
 @HiltViewModel
 class TimeViewModel @Inject constructor(
-    private val iTimeFormatRecordService: ITimeFormatRecordDataStoreService,
-    private val iTimeDataService: ITimeDataService,
-    private val iDateFormatService: IDateFormatService,
-    private val coroutine: CoroutineContext,
+    private val _iTimeFormatRecordService: ITimeFormatRecordDataStoreService,
+    private val _iTimeDataService: ITimeDataService,
+    private val _iDateFormatService: IDateFormatService,
+    private val _coroutine: CoroutineContext,
     application: Application,
 ) : AndroidViewModel(application) {
 
@@ -38,7 +38,7 @@ class TimeViewModel @Inject constructor(
     val deviceUIState: State<DeviceUIState> = _deviceUIState
 
     private var _timeFormat: MutableStateFlow<TimeFormat> = MutableStateFlow(TimeFormat.Base12)
-    private fun editTimeFormat(it: Boolean) = viewModelScope.launch(coroutine) {
+    private fun editTimeFormat(it: Boolean) = viewModelScope.launch(_coroutine) {
         _timeFormat.value = (if (it) TimeFormat.Base12 else TimeFormat.Base24)
         this@TimeViewModel.updateTime()
     }
@@ -46,52 +46,52 @@ class TimeViewModel @Inject constructor(
     private val _timeUIState = mutableStateOf<TimeUIState?>(null)
     val timeUIState: State<TimeUIState?> = _timeUIState
 
-    fun updateTime() = viewModelScope.launch(coroutine) {
+    fun updateTime() = viewModelScope.launch(_coroutine) {
         val timeFormat = _timeFormat.value
-        _timeUIState.value = iTimeDataService.getCurrentTime(timeFormat)
+        _timeUIState.value = _iTimeDataService.getCurrentTime(timeFormat)
     }
 
     private val _currentDateFlow: MutableStateFlow<String> = MutableStateFlow("")
-    fun updateDate() = viewModelScope.launch(coroutine) {
+    fun updateDate() = viewModelScope.launch(_coroutine) {
         val dateFormatPattern = dateFormatUIState.stateIn(this).value
-        _currentDateFlow.emit(iTimeDataService.getCurrentDate(dateFormatPattern))
+        _currentDateFlow.emit(_iTimeDataService.getCurrentDate(dateFormatPattern))
     }
 
-    private fun updateDate(dateFormatPattern: String) = viewModelScope.launch(coroutine) {
-        _currentDateFlow.emit(iTimeDataService.getCurrentDate(dateFormatPattern))
+    private fun updateDate(dateFormatPattern: String) = viewModelScope.launch(_coroutine) {
+        _currentDateFlow.emit(_iTimeDataService.getCurrentDate(dateFormatPattern))
     }
 
     val dateUIStateFlow: Flow<DateUIState> =
-        _currentDateFlow.combine(iTimeFormatRecordService.dateFlow) { currentDate, showOrHide ->
+        _currentDateFlow.combine(_iTimeFormatRecordService.dateFlow) { currentDate, showOrHide ->
             DateUIState(
                 showOrHide = showOrHide,
                 currentDate = currentDate,
             )
         }
 
-    fun updateDateDisplayOrNot() = viewModelScope.launch(coroutine) {
+    fun updateDateDisplayOrNot() = viewModelScope.launch(_coroutine) {
         val isDateDisplay = dateUIStateFlow.stateIn(this).value
-        iTimeFormatRecordService.updateDateRecord(isDateDisplay.showOrHide xor true)
+        _iTimeFormatRecordService.updateDateRecord(isDateDisplay.showOrHide xor true)
     }
 
 
-    val timeFormatRecordDataStoreFlow = iTimeFormatRecordService.timeFormatFlow.map {
+    val timeFormatRecordDataStoreFlow = _iTimeFormatRecordService.timeFormatFlow.map {
         this.editTimeFormat(it)
         it
     }
 
-    fun updateTimeFormat() = viewModelScope.launch(coroutine) {
+    fun updateTimeFormat() = viewModelScope.launch(_coroutine) {
         val timeFormat = timeFormatRecordDataStoreFlow.stateIn(this).value
-        iTimeFormatRecordService.updateTimeFormat(timeFormat xor true)
+        _iTimeFormatRecordService.updateTimeFormat(timeFormat xor true)
     }
 
 
-    val dateFormatUIState: Flow<String> = iDateFormatService.dateFormatFlow.map {
+    val dateFormatUIState: Flow<String> = _iDateFormatService.dateFormatFlow.map {
         this.updateDate(it)
         it
     }
 
-    fun updateDateFormat(dateFormat: String) = viewModelScope.launch(coroutine) {
-        iDateFormatService.updateThemeRecord(dateFormat)
+    fun updateDateFormat(dateFormat: String) = viewModelScope.launch(_coroutine) {
+        _iDateFormatService.updateThemeRecord(dateFormat)
     }
 }

@@ -16,27 +16,27 @@ import kotlin.coroutines.CoroutineContext
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
-    private val iSettingsService: ISettingsService,
-    private val coroutine: CoroutineContext,
-    private val application: Application,
-) : AndroidViewModel(application) {
+    private val _iSettingsService: ISettingsService,
+    private val _coroutine: CoroutineContext,
+    private val _application: Application,
+) : AndroidViewModel(_application) {
     private val _settingsUIState = mutableStateOf<List<SettingsUIState>>(listOf())
     val settingsUIState: State<List<SettingsUIState>> = _settingsUIState
 
-    fun fetchSettings() = viewModelScope.launch(coroutine) {
+    fun fetchSettings() = viewModelScope.launch(_coroutine) {
         _settingsUIState.value = withContext(Dispatchers.Main) {
-            iSettingsService.fetchSettingsUIState()
+            _iSettingsService.fetchSettingsUIState()
         }
     }
 
     private val _packageVersionName = mutableStateOf("")
     val packageVersionName: State<String> = _packageVersionName
 
-    fun fetchVersion() = viewModelScope.launch(coroutine) {
+    fun fetchVersion() = viewModelScope.launch(_coroutine) {
         _packageVersionName.value = withContext(Dispatchers.Main) {
-            application
+            _application
                 .packageManager
-                .getPackageInfo(application.packageName, 0)
+                .getPackageInfo(_application.packageName, 0)
                 .versionName ?: ""
         }
     }

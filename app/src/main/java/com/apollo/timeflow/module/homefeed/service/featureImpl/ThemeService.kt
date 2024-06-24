@@ -17,16 +17,16 @@ import javax.inject.Inject
 private val Context.themeDataStore: DataStore<Preferences> by preferencesDataStore(name = "Theme Record DataStore")
 
 class ThemeService @Inject constructor(
-    private val coroutineScope: CoroutineScope,
-    @ApplicationContext private val context: Context,
+    private val _coroutineScope: CoroutineScope,
+    @ApplicationContext private val _context: Context,
 ) : IThemeService {
-    override val themeFlow: Flow<Int> = this.context.themeDataStore.data.map { preferences ->
+    override val themeFlow: Flow<Int> = this._context.themeDataStore.data.map { preferences ->
         preferences[THEME_DATA_STORE_KEY] ?: 1
     }
 
     override suspend fun updateThemeRecord(value: Int): Unit =
-        withContext(coroutineScope.coroutineContext) {
-            context.themeDataStore.edit { preferences ->
+        withContext(_coroutineScope.coroutineContext) {
+            _context.themeDataStore.edit { preferences ->
                 preferences[THEME_DATA_STORE_KEY] = value
             }
         }

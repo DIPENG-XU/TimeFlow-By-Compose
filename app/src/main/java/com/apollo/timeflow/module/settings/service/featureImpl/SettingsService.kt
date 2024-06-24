@@ -8,10 +8,10 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class SettingsService @Inject constructor(
-    private val coroutineScope: CoroutineScope,
+    private val _coroutineScope: CoroutineScope,
 ): ISettingsService {
     override suspend fun fetchSettingsUIState(): List<SettingsUIState> =
-        withContext(coroutineScope.coroutineContext) {
+        withContext(_coroutineScope.coroutineContext) {
             val list = mutableListOf<SettingsUIState>()
 
             val originResList = listOf(

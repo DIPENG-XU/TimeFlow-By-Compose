@@ -12,7 +12,7 @@ import kotlin.coroutines.CoroutineContext
 
 @HiltViewModel
 class HostActivityViewModel @Inject constructor(
-    private val coroutine: CoroutineContext,
+    private val _coroutine: CoroutineContext,
     application: Application,
 ) : AndroidViewModel(
     application = application
@@ -20,7 +20,7 @@ class HostActivityViewModel @Inject constructor(
     private val _snackBarHostState = SnackbarHostState()
     val snackBarHostState = _snackBarHostState
 
-    fun showSnackBar(snackTips: String) = viewModelScope.launch(coroutine) {
+    fun showSnackBar(snackTips: String) = viewModelScope.launch(_coroutine) {
         _snackBarHostState.currentSnackbarData?.dismiss()
         _snackBarHostState.showSnackbar(
             snackTips,

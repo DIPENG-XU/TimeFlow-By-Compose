@@ -7,18 +7,17 @@ import com.apollo.timeflow.module.homefeed.uistate.TimeUIState
 import com.apollo.timeflow.utils.TimeFormat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.withContext
-import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 import javax.inject.Inject
 
 class TimeDataService @Inject constructor(
-    private val coroutineScope: CoroutineScope,
-    private val iDateModule: IDateModule,
+    private val _coroutineScope: CoroutineScope,
+    private val _iDateModule: IDateModule,
 ) : ITimeDataService {
-    override suspend fun getCurrentTime(timeFormat: TimeFormat): TimeUIState = withContext(coroutineScope.coroutineContext) {
-        val calendar: Calendar = iDateModule.fetchCalendar()
+    override suspend fun getCurrentTime(timeFormat: TimeFormat): TimeUIState = withContext(_coroutineScope.coroutineContext) {
+        val calendar: Calendar = _iDateModule.fetchCalendar()
         val hours = when {
             timeFormat == TimeFormat.Base24 -> calendar.get(Calendar.HOUR_OF_DAY)
             (calendar.get(Calendar.HOUR_OF_DAY) == 12) -> 12
@@ -35,13 +34,13 @@ class TimeDataService @Inject constructor(
         )
     }
 
-    override suspend fun amOrPm(): Int = withContext(coroutineScope.coroutineContext) {
-        val calendar: Calendar = iDateModule.fetchCalendar()
+    override suspend fun amOrPm(): Int = withContext(_coroutineScope.coroutineContext) {
+        val calendar: Calendar = _iDateModule.fetchCalendar()
         if (calendar.get(Calendar.HOUR_OF_DAY) > 12) R.string.pm else R.string.am
     }
 
-    override suspend fun getCurrentDate(dateFormatPattern: String): String = withContext(coroutineScope.coroutineContext) {
-        val date = iDateModule.fetchDate()
+    override suspend fun getCurrentDate(dateFormatPattern: String): String = withContext(_coroutineScope.coroutineContext) {
+        val date = _iDateModule.fetchDate()
         try {
             SimpleDateFormat(dateFormatPattern, Locale.CHINA)
         } catch (e: Exception) {

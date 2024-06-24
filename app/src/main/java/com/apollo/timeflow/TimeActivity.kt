@@ -73,7 +73,7 @@ class TimeActivity : BaseActivity("TimeActivity") {
             applicationContext,
             timeChangeReceiver,
             intentFilterTimeChange,
-            ContextCompat.RECEIVER_NOT_EXPORTED
+            ContextCompat.RECEIVER_NOT_EXPORTED,
         )
 
         val intentFilterDateChange = IntentFilter()
@@ -89,7 +89,7 @@ class TimeActivity : BaseActivity("TimeActivity") {
             applicationContext,
             dateChangeReceiver,
             intentFilterDateChange,
-            ContextCompat.RECEIVER_NOT_EXPORTED
+            ContextCompat.RECEIVER_NOT_EXPORTED,
         )
     }
 }
