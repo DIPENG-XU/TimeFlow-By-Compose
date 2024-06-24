@@ -37,7 +37,7 @@ class TimeViewModel @Inject constructor(
         mutableStateOf(getDeviceType(application))
     val deviceUIState: State<DeviceUIState> = _deviceUIState
 
-    private var _timeFormat = MutableStateFlow(TimeFormat.Base12)
+    private var _timeFormat: MutableStateFlow<TimeFormat> = MutableStateFlow(TimeFormat.Base12)
     private fun editTimeFormat(it: Boolean) = viewModelScope.launch(coroutine) {
         _timeFormat.value = (if (it) TimeFormat.Base12 else TimeFormat.Base24)
         this@TimeViewModel.updateTime()

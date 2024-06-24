@@ -1,6 +1,6 @@
 package com.apollo.timeflow.utils
 
-enum class TimeFormat {
-    Base12,
-    Base24
+sealed class TimeFormat {
+    data object Base12 : TimeFormat()
+    data object Base24 : TimeFormat()
 }
