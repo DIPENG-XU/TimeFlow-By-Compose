@@ -39,4 +39,19 @@
     <string name="yyyyMMdd" translatable="false">yyyy.MM.dd</string>
     <string name="ddMMyyyy" translatable="false">dd.MM.yyyy</string>
     <string name="MMddyyyy" translatable="false">MM.dd.yyyy</string>
+    
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
+
+    <string name="morning">Relaxed Morning</string>
+    <string name="afternoon">Pleasant Afternoon</string>
+    <string name="nightfall">Romantic Nightfall</string>
+    <string name="midnight">Merry Midnight</string>
+
+    <string name="welcome_in_launch_page">Today is %s!\nWelcome to TimeFlow and hope you have a Good Moment\nin this %s!</string>
 </resources>

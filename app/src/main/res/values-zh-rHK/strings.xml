@@ -28,4 +28,19 @@
     <string name="system_language">系統語言</string>
 
     <string name="current_version">現時版本: %s</string>
+
+    <string name="monday">禮拜一</string>
+    <string name="tuesday">禮拜二</string>
+    <string name="wednesday">禮拜三</string>
+    <string name="thursday">禮拜四</string>
+    <string name="friday">禮拜五</string>
+    <string name="saturday">禮拜六</string>
+    <string name="sunday">禮拜日</string>
+
+    <string name="morning">舒適的朝早</string>
+    <string name="afternoon">愜意的晏晝</string>
+    <string name="nightfall">浪漫的日落時刻</string>
+    <string name="midnight">曼妙的深夜</string>
+
+    <string name="welcome_in_launch_page">今日系%s！欢迎黎到TimeFlow噶世界！\n希望你有一个愉悦的心情度过哩个%s！</string>
 </resources>

@@ -27,4 +27,19 @@
     <string name="system_language">系統語言</string>
 
     <string name="current_version">軟體版本: %s</string>
+
+    <string name="monday">週一</string>
+    <string name="tuesday">週二</string>
+    <string name="wednesday">週三</string>
+    <string name="thursday">週四</string>
+    <string name="friday">週五</string>
+    <string name="saturday">週六</string>
+    <string name="sunday">週日</string>
+
+    <string name="morning">早上</string>
+    <string name="afternoon">下午</string>
+    <string name="nightfall">傍晚</string>
+    <string name="midnight">深夜</string>
+
+    <string name="welcome_in_launch_page">今天是%s！欢迎来到TimeFlow的世界！\n希望你有一个美妙的心情度过这一个%s</string>
 </resources>

@@ -13,11 +13,12 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.apollo.timeflow.module.settings.ui.ConfirmDialog
-import com.apollo.timeflow.module.settings.ui.TimeFlowSettings
 import com.apollo.timeflow.module.homefeed.ui.card.CardHomeFeed
+import com.apollo.timeflow.module.launch.ui.LaunchPage
+import com.apollo.timeflow.module.settings.ui.ConfirmDialog
 import com.apollo.timeflow.module.settings.ui.DateFormatListDialog
 import com.apollo.timeflow.module.settings.ui.LanguageConfigurationListDialog
+import com.apollo.timeflow.module.settings.ui.TimeFlowSettings
 
 @Composable
 fun TimeFlowNavHost(
@@ -26,7 +27,7 @@ fun TimeFlowNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = NavHostRouteConfig.NAV_HOST_ROUTE_FOR_HOMEFEED,
+        startDestination = NavHostRouteConfig.NAV_HOST_LAUNCH_PAGE,
         modifier = Modifier.fillMaxSize(),
         enterTransition = {
             fadeIn(tween(0))
@@ -34,6 +35,13 @@ fun TimeFlowNavHost(
             fadeOut(tween(0))
         }
     ) {
+        composable(route = NavHostRouteConfig.NAV_HOST_LAUNCH_PAGE) {
+            LaunchPage(
+                viewModelStoreOwner,
+                navController,
+            )
+        }
+
         composable(route = NavHostRouteConfig.NAV_HOST_ROUTE_FOR_HOMEFEED) {
             CardHomeFeed(
                 viewModelStoreOwner,

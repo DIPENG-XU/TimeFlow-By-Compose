@@ -2,6 +2,8 @@ package com.apollo.timeflow.module.moduleNavHost
 
 object NavHostRouteConfig {
 
+    const val NAV_HOST_LAUNCH_PAGE = "navigation host route for launch page"
+
     const val NAV_HOST_ROUTE_FOR_HOMEFEED = "navigation host route for homefeed"
 
     const val NAV_HOST_ROUTE_FOR_SETTINGS = "navigation host route for settings"

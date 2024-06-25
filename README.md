@@ -55,6 +55,10 @@ TimeFlow, an APP you can use to show the time when you are focused on studying, 
     - **Close**
     - **Current Version**
 
+- Have Added a Launch Page in Version 2.2.4, I think it's more romantic when using such an tool app.
+  - It's the Previews
+  ![IMAGE_SNAPSHOT_LAUNCH_PAGE](show_img/launch_page_snapshot.png)
+
 ### Effect Pictures
 
 There are all the effect pictures.
@@ -97,6 +101,9 @@ There are all the effect pictures.
 - 2.2.0版本对用户交互做了修改，可以修改的内容放在了一个单独的页面里面去配置。
 ![IMAGE_SIMPLIFY_CHINESE_SETTING_PAGE](show_img/simplify_chinese_setting_page.png)
   - 当然如果你觉得这种用户交互方式很花里胡哨没必要，还是喜欢之前的那一套逻辑，用[旧版本](https://github.com/DIPENG-XU/TimeFlow-By-Compose/releases/tag/v-2.1.2)也是可以的。
+
+- 2.2.4版本增加了一个启动页，我觉得这个启动页加了之后，这个APP变得更浪漫了。
+  - ![预览图](show_img/launch_page_snapshot_simplify_chinese.png)
 
 - 如果你有更好的UX交互逻辑或者什么有意思的想法，随时issue联系我，在[这里](https://github.com/DIPENG-XU/TimeFlow-By-Compose/issues/new)提出来就可以了，我有空然后也觉得你的想法有意思而且我又会做的话，我随时会新增加你需要的功能。
 
