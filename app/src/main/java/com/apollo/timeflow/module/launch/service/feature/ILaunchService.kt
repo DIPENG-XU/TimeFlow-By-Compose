@@ -6,9 +6,7 @@ import com.apollo.timeflow.R
 sealed class TimeStage(
     @StringRes val stringResource: Int
 ) {
-    override fun hashCode(): Int {
-        return stringResource
-    }
+    override fun hashCode(): Int = stringResource
 
     override fun equals(other: Any?): Boolean {
         val timeStage = other as? TimeStage ?: return false
@@ -21,16 +19,16 @@ sealed class TimeStage(
     class Afternoon: TimeStage(R.string.afternoon)
     // 18:00 to 19:59
     class Nightfall: TimeStage(R.string.nightfall)
-    // 20:00 to 5:59
+    // 20:00 to 23:59
     class Midnight: TimeStage(R.string.midnight)
+    // 00:00 to 05:59
+    class Evening: TimeStage(R.string.evening)
 }
 
 sealed class DayOfWeek(
     @StringRes val stringResource: Int
 ) {
-    override fun hashCode(): Int {
-        return stringResource
-    }
+    override fun hashCode(): Int = stringResource
 
     override fun equals(other: Any?): Boolean {
         val timeStage = other as? DayOfWeek ?: return false

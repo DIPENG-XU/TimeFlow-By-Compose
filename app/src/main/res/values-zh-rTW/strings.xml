@@ -39,6 +39,7 @@
     <string name="morning">早上</string>
     <string name="afternoon">下午</string>
     <string name="nightfall">傍晚</string>
+    <string name="evening">靜謐的夜晚</string>
     <string name="midnight">深夜</string>
 
     <string name="welcome_in_launch_page">今天是%s！欢迎来到TimeFlow的世界！\n希望你有一个美妙的心情度过这一个%s</string>

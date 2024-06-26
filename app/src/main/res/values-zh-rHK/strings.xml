@@ -40,6 +40,7 @@
     <string name="morning">舒適的朝早</string>
     <string name="afternoon">愜意的晏晝</string>
     <string name="nightfall">浪漫的日落時刻</string>
+    <string name="evening">靜謐的夜晚</string>
     <string name="midnight">曼妙的深夜</string>
 
     <string name="welcome_in_launch_page">今日系%s！欢迎黎到TimeFlow噶世界！\n希望你有一个愉悦的心情度过哩个%s！</string>
