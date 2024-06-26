@@ -41,7 +41,7 @@ class LaunchServiceTest {
     @Test
     fun fetchTimeStage(): Unit = runBlocking(coroutineScope.coroutineContext) {
         val timeStage = launchService.fetchTimeStage()
-        assertEquals(timeStage, TimeStage.Midnight())
+        assertEquals(timeStage, TimeStage.Evening())
     }
 
     @Test

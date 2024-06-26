@@ -52,6 +52,7 @@
     <string name="afternoon">Pleasant Afternoon</string>
     <string name="nightfall">Romantic Nightfall</string>
     <string name="midnight">Merry Midnight</string>
+    <string name="evening">Tranquil Evening</string>
 
     <string name="welcome_in_launch_page">Today is %s!\nWelcome to TimeFlow and hope you have a Good Moment\nin this %s!</string>
 </resources>

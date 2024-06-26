@@ -21,7 +21,9 @@ class LaunchService @Inject constructor(
             in (12..17) -> TimeStage.Afternoon()
             // 18:00 to 19:59
             in (18..19) -> TimeStage.Nightfall()
-            // 20:00 to 5:59
+            // 20:00 to 23:59
+            in (20..23) -> TimeStage.Evening()
+            // 00:00 to 05:59
             else -> TimeStage.Midnight()
         }
     }
