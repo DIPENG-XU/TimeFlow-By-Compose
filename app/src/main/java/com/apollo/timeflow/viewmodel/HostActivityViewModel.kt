@@ -6,6 +6,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
@@ -27,5 +28,10 @@ class HostActivityViewModel @Inject constructor(
             duration = SnackbarDuration.Short,
             withDismissAction = true
         )
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelScope.cancel()
     }
 }

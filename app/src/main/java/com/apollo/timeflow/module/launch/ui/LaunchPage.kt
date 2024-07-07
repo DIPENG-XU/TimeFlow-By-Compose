@@ -53,9 +53,8 @@ fun LaunchPage(
         )
     }
 
-    launchViewModel.fetchWelcomeSlogan()
-
     LaunchedEffect(key1 = Lifecycle.State.CREATED) {
+        launchViewModel.fetchWelcomeSlogan()
         delay(5000L)
         navController.popBackStack()
         navController.navigate(NavHostRouteConfig.NAV_HOST_ROUTE_FOR_HOMEFEED)

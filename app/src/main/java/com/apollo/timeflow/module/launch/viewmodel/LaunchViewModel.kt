@@ -11,6 +11,7 @@ import com.apollo.timeflow.module.launch.service.feature.ILaunchService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -22,8 +23,6 @@ class LaunchViewModel @Inject constructor(
     private val _iLaunchService: ILaunchService,
     private val _application: Application,
 ): AndroidViewModel(_application) {
-
-
     private val _slogan: MutableState<String> = mutableStateOf("")
     val slogan: State<String> = _slogan
 
@@ -47,5 +46,10 @@ class LaunchViewModel @Inject constructor(
                 )
             )
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelScope.cancel()
     }
 }

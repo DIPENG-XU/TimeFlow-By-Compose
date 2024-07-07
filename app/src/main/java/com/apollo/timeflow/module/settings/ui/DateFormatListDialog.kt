@@ -48,6 +48,7 @@ fun DateFormatListDialog(
                 )
             }
         },
+
         text = {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -73,13 +74,20 @@ fun DateFormatListDialog(
                     }
             }
         },
+
         onDismissRequest = {
             navController.popBackStack(
                 NavHostRouteConfig.NAV_HOST_ROUTE_FOR_SETTINGS,
                 inclusive = false,
             )
         },
-        confirmButton = {},
-        dismissButton = {},
+
+        confirmButton = {
+            // ignored
+        },
+
+        dismissButton = {
+            // ignored
+        },
     )
 }

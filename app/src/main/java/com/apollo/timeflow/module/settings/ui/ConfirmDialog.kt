@@ -194,6 +194,7 @@ fun ConfirmDialog(
                 )
             }
         },
+
         dismissButton = {
             val dismissTips = String.format(
                 stringResource(id = R.string.dismiss_to_update),

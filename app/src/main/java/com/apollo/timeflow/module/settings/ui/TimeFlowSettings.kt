@@ -18,6 +18,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,6 +26,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.NavHostController
 import com.apollo.timeflow.R
@@ -43,9 +45,6 @@ fun TimeFlowSettings(
 ) {
     val timeViewModel: TimeViewModel = hiltViewModel(viewModelStoreOwner)
     val viewModel: SettingsViewModel = hiltViewModel(viewModelStoreOwner)
-
-    viewModel.fetchSettings()
-    viewModel.fetchVersion()
 
     val uiState = viewModel.settingsUIState.value
     val versionCode = viewModel.packageVersionName.value
@@ -85,6 +84,11 @@ fun TimeFlowSettings(
                 .align(Alignment.BottomCenter)
                 .padding(12.dp)
         )
+    }
+
+    LaunchedEffect(key1 = Lifecycle.State.CREATED) {
+        viewModel.fetchSettings()
+        viewModel.fetchVersion()
     }
 }
 
