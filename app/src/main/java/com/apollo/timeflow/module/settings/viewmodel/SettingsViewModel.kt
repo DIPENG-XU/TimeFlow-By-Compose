@@ -9,9 +9,7 @@ import com.apollo.timeflow.module.settings.service.feature.ISettingsService
 import com.apollo.timeflow.module.settings.uiState.SettingsUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
