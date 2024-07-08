@@ -13,8 +13,8 @@ android {
         applicationId = "com.apollo.timeflow"
         minSdk = 21
         targetSdk = 35
-        versionCode = 12
-        versionName = "2.2.4"
+        versionCode = 13
+        versionName = "2.2.4-hotfix3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
