@@ -9,6 +9,7 @@ import com.apollo.timeflow.module.settings.service.feature.ISettingsService
 import com.apollo.timeflow.module.settings.uiState.SettingsUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -39,5 +40,10 @@ class SettingsViewModel @Inject constructor(
                 .getPackageInfo(application.packageName, 0)
                 .versionName ?: ""
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelScope.cancel()
     }
 }

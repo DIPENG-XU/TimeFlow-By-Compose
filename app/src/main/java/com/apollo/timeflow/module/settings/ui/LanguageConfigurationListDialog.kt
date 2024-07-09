@@ -76,7 +76,11 @@ fun LanguageConfigurationListDialog(
                 inclusive = false,
             )
         },
-        confirmButton = {},
-        dismissButton = {},
+        confirmButton = {
+            // ignored
+        },
+        dismissButton = {
+            // ignored
+        },
     )
 }

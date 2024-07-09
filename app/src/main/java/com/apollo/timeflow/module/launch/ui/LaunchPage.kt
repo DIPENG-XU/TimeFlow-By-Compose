@@ -23,7 +23,9 @@ import com.apollo.timeflow.module.launch.viewmodel.LaunchViewModel
 import com.apollo.timeflow.module.moduleNavHost.NavHostRouteConfig
 import com.apollo.timeflow.utils.getFontSizeInHomeFeed
 import com.apollo.timeflow.viewmodel.TimeViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 
 @Composable
 fun LaunchPage(
@@ -53,11 +55,13 @@ fun LaunchPage(
         )
     }
 
-    launchViewModel.fetchWelcomeSlogan()
-
     LaunchedEffect(key1 = Lifecycle.State.CREATED) {
-        delay(5000L)
-        navController.popBackStack()
+        suspend fun fetchAndResideWelcomeSlogan() = withContext(Dispatchers.IO){
+            launchViewModel.fetchWelcomeSlogan()
+            delay(5000L)
+        }
+        fetchAndResideWelcomeSlogan()
+        navController.popBackStack(NavHostRouteConfig.NAV_HOST_LAUNCH_PAGE, true)
         navController.navigate(NavHostRouteConfig.NAV_HOST_ROUTE_FOR_HOMEFEED)
     }
 }
