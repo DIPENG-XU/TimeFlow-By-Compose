@@ -39,7 +39,7 @@
     <string name="yyyyMMdd" translatable="false">yyyy.MM.dd</string>
     <string name="ddMMyyyy" translatable="false">dd.MM.yyyy</string>
     <string name="MMddyyyy" translatable="false">MM.dd.yyyy</string>
-    
+
     <string name="monday">Monday</string>
     <string name="tuesday">Tuesday</string>
     <string name="wednesday">Wednesday</string>
@@ -55,4 +55,5 @@
     <string name="evening">Tranquil Evening</string>
 
     <string name="welcome_in_launch_page">Today is %s!\nWelcome to TimeFlow and hope you have a Good Moment\nin this %s!</string>
+    <string name="power_by_apollo" translatable="false">Power By DIPENG-XU</string>
 </resources>

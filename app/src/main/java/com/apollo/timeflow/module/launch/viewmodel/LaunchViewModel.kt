@@ -48,6 +48,13 @@ class LaunchViewModel @Inject constructor(
         }
     }
 
+    private val _powerBy: MutableState<String> = mutableStateOf("")
+    val powerBy: State<String> = _powerBy
+
+    fun fetchPowerBy() = viewModelScope.launch(_coroutine) {
+        _powerBy.value = _application.getString(_iLaunchService.fetchPowerByStringResource())
+    }
+
     override fun onCleared() {
         super.onCleared()
         viewModelScope.cancel()

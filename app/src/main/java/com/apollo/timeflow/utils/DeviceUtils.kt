@@ -27,6 +27,12 @@ fun getDeviceType(context: Context): DeviceUIState {
     }
 }
 
+fun getFontSizeInPowerBy(deviceType: DeviceUIState): TextUnit = when (deviceType) {
+    is DeviceUIState.Phone -> 18.sp
+    is DeviceUIState.Tablet -> 24.sp
+    is DeviceUIState.TV -> 24.sp
+}
+
 fun getFontSizeInHomeFeed(deviceType: DeviceUIState): TextUnit = when (deviceType) {
     is DeviceUIState.Phone -> 24.sp
     is DeviceUIState.Tablet -> 36.sp

@@ -1,5 +1,6 @@
 package com.apollo.timeflow.module.launch.service.featureImpl
 
+import com.apollo.timeflow.R
 import com.apollo.timeflow.module.homefeed.service.dependency.IDateModule
 import com.apollo.timeflow.module.launch.service.feature.DayOfWeek
 import com.apollo.timeflow.module.launch.service.feature.ILaunchService
@@ -40,4 +41,6 @@ class LaunchService @Inject constructor(
             else -> throw Exception("UNKNOWN TYPE")
         }
     }
+
+    override suspend fun fetchPowerByStringResource(): Int = R.string.power_by_apollo
 }

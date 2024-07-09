@@ -22,6 +22,7 @@ import com.apollo.timeflow.R
 import com.apollo.timeflow.module.launch.viewmodel.LaunchViewModel
 import com.apollo.timeflow.module.moduleNavHost.NavHostRouteConfig
 import com.apollo.timeflow.utils.getFontSizeInHomeFeed
+import com.apollo.timeflow.utils.getFontSizeInPowerBy
 import com.apollo.timeflow.viewmodel.TimeViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -53,11 +54,28 @@ fun LaunchPage(
                 .align(Alignment.Center)
                 .padding(12.dp),
         )
+
+        Text(
+            text = launchViewModel.powerBy.value,
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colorScheme.primary,
+            lineHeight = 48.sp,
+            fontFamily = FontFamily(
+                fonts = listOf(
+                    Font(R.font.poppins_bold, FontWeight.Light),
+                )
+            ),
+            fontSize = getFontSizeInPowerBy(deviceType),
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(20.dp),
+        )
     }
 
     LaunchedEffect(key1 = Lifecycle.State.CREATED) {
-        suspend fun fetchAndResideWelcomeSlogan() = withContext(Dispatchers.IO){
+        suspend fun fetchAndResideWelcomeSlogan() = withContext(Dispatchers.IO) {
             launchViewModel.fetchWelcomeSlogan()
+            launchViewModel.fetchPowerBy()
             delay(5000L)
         }
         fetchAndResideWelcomeSlogan()

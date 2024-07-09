@@ -48,4 +48,6 @@ interface ILaunchService {
     suspend fun fetchTimeStage(): TimeStage
 
     suspend fun fetchDayOfWeek(): DayOfWeek
+
+    suspend fun fetchPowerByStringResource(): Int
 }
