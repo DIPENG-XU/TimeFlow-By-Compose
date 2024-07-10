@@ -119,6 +119,22 @@ fun ConfirmDialog(
             )
         }
 
+        NavHostRouteConfig.POWER_BY_DIALOG_ROUTE -> {
+            val (current, next) = if (timeViewModel.powerByShowOrHideStoreFlow.collectAsState(initial = true).value) {
+                R.string.open to R.string.close
+            } else {
+                R.string.close to R.string.open
+            }
+            ConfirmDialogUIState(
+                pageName = R.string.config_power_by,
+                current = current,
+                next = next,
+                onClickEvent = {
+                    timeViewModel.updatePowerByShowOrHide()
+                }
+            )
+        }
+
 
         else -> throw Exception("Unknown Route, Please check it again!")
     }

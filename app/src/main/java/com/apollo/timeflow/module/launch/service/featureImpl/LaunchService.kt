@@ -1,18 +1,30 @@
 package com.apollo.timeflow.module.launch.service.featureImpl
 
+import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.preferencesDataStore
 import com.apollo.timeflow.R
 import com.apollo.timeflow.module.homefeed.service.dependency.IDateModule
 import com.apollo.timeflow.module.launch.service.feature.DayOfWeek
 import com.apollo.timeflow.module.launch.service.feature.ILaunchService
 import com.apollo.timeflow.module.launch.service.feature.TimeStage
+import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import java.util.Calendar
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
+private val Context.powerByShowOrHide: DataStore<Preferences> by preferencesDataStore(name = "PowerBy Show Or Hide DataStore")
+
 class LaunchService @Inject constructor(
     private val _coroutines: CoroutineContext,
     private val _iDateModule: IDateModule,
+    @ApplicationContext private val _context: Context,
 ) : ILaunchService {
     override suspend fun fetchTimeStage(): TimeStage = withContext(_coroutines) {
         when (_iDateModule.fetchCalendar().get(Calendar.HOUR_OF_DAY)) {
@@ -43,4 +55,19 @@ class LaunchService @Inject constructor(
     }
 
     override suspend fun fetchPowerByStringResource(): Int = R.string.power_by_apollo
+
+    override val powerByShowOrHideStateFlow: Flow<Boolean> =
+        _context.powerByShowOrHide.data.map { preferences ->
+            preferences[POWER_BY_SHOW_OR_HIDE_KEY] ?: true
+        }
+
+    override suspend fun updatePowerByShowOrHide(showOrHide: Boolean): Unit = withContext(_coroutines) {
+        _context.powerByShowOrHide.edit { preferences ->
+            preferences[POWER_BY_SHOW_OR_HIDE_KEY] = showOrHide
+        }
+    }
+
+    companion object {
+        private val POWER_BY_SHOW_OR_HIDE_KEY = booleanPreferencesKey("Power By show or hide key")
+    }
 }

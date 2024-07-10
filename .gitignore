@@ -33,5 +33,6 @@ google-services.json
 *.hprof
 
 app/release
+app/timeflow
 app/.DS_Store
 .DS_Store

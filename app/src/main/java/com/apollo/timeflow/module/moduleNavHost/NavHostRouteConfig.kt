@@ -21,6 +21,8 @@ object NavHostRouteConfig {
     const val DATE_FORMAT_SELECTOR_DIALOG_ROUTE = "date format selector route dialog"
 
     const val DATE_FORMAT_SELECTOR_CONFIRM_DIALOG_ROUTE = "date format selector confirm route dialog"
+
+    const val POWER_BY_DIALOG_ROUTE = "power by dialog route"
 }
 
 object NavHostLanguageConfigurationConfirmDialogArgument {

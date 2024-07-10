@@ -128,6 +128,16 @@ fun TimeFlowNavHost(
             )
         }
 
+        composable(
+            route = NavHostRouteConfig.POWER_BY_DIALOG_ROUTE,
+        ) {
+            ConfirmDialog(
+                navController = navController,
+                route = NavHostRouteConfig.POWER_BY_DIALOG_ROUTE,
+                viewModelStoreOwner = viewModelStoreOwner,
+            )
+        }
+
         composable(route = NavHostRouteConfig.DATE_FORMAT_SELECTOR_DIALOG_ROUTE) {
             DateFormatListDialog(
                 navController = navController,

@@ -2,6 +2,7 @@ package com.apollo.timeflow.module.launch.service.feature
 
 import androidx.annotation.StringRes
 import com.apollo.timeflow.R
+import kotlinx.coroutines.flow.Flow
 
 sealed class TimeStage(
     @StringRes val stringResource: Int
@@ -45,6 +46,10 @@ sealed class DayOfWeek(
 }
 
 interface ILaunchService {
+    val powerByShowOrHideStateFlow: Flow<Boolean>
+
+    suspend fun updatePowerByShowOrHide(showOrHide: Boolean)
+
     suspend fun fetchTimeStage(): TimeStage
 
     suspend fun fetchDayOfWeek(): DayOfWeek

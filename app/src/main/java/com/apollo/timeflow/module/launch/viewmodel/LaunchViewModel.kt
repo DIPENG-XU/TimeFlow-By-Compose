@@ -12,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -52,7 +53,9 @@ class LaunchViewModel @Inject constructor(
     val powerBy: State<String> = _powerBy
 
     fun fetchPowerBy() = viewModelScope.launch(_coroutine) {
-        _powerBy.value = _application.getString(_iLaunchService.fetchPowerByStringResource())
+        _powerBy.value = if (_iLaunchService.powerByShowOrHideStateFlow.stateIn(viewModelScope).value) {
+            _application.getString(_iLaunchService.fetchPowerByStringResource())
+        } else ""
     }
 
     override fun onCleared() {

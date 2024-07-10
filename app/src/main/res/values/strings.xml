@@ -7,6 +7,7 @@
     <string name="time_format">Update Time Format</string>
     <string name="update_the_date_display">Update The Date Display</string>
     <string name="update_date_format">Update Date Format</string>
+    <string name="config_power_by">PowerBy-LaunchPage</string>
     <string name="update_language" translatable="false">Language Configuration</string>
 
     <string name="title_confirm">%s</string>

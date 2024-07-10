@@ -10,11 +10,13 @@ import com.apollo.timeflow.module.homefeed.service.feature.ITimeDataService
 import com.apollo.timeflow.module.homefeed.service.feature.ITimeFormatRecordDataStoreService
 import com.apollo.timeflow.module.homefeed.uistate.DateUIState
 import com.apollo.timeflow.module.homefeed.uistate.TimeUIState
+import com.apollo.timeflow.module.launch.service.feature.ILaunchService
 import com.apollo.timeflow.module.settings.service.feature.IDateFormatService
 import com.apollo.timeflow.utils.DeviceUIState
 import com.apollo.timeflow.utils.TimeFormat
 import com.apollo.timeflow.utils.getDeviceType
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
@@ -29,6 +31,7 @@ class TimeViewModel @Inject constructor(
     private val iTimeFormatRecordService: ITimeFormatRecordDataStoreService,
     private val iTimeDataService: ITimeDataService,
     private val iDateFormatService: IDateFormatService,
+    private val iLaunchService: ILaunchService,
     private val coroutine: CoroutineContext,
     application: Application,
 ) : AndroidViewModel(application) {
@@ -93,5 +96,16 @@ class TimeViewModel @Inject constructor(
 
     fun updateDateFormat(dateFormat: String) = viewModelScope.launch(coroutine) {
         iDateFormatService.updateThemeRecord(dateFormat)
+    }
+
+    val powerByShowOrHideStoreFlow: Flow<Boolean> = iLaunchService.powerByShowOrHideStateFlow
+
+    fun updatePowerByShowOrHide() = viewModelScope.launch(coroutine) {
+        iLaunchService.updatePowerByShowOrHide(!powerByShowOrHideStoreFlow.stateIn(viewModelScope).value)
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelScope.cancel()
     }
 }

@@ -22,9 +22,27 @@ android {
         }
     }
 
+    flavorDimensions += setOf("version")
+    productFlavors {
+        create("timeflow") {
+            dimension = "version"
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs
+            .map { it as com.android.build.gradle.internal.api.ApkVariantOutputImpl }
+            .all { output ->
+                val customApkName =
+                    "${variant.productFlavors.first().name}-${variant.productFlavors.first().versionName}.apk"
+                output.outputFileName = customApkName
+                true
+            }
+    }
+
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"

@@ -109,6 +109,7 @@ private fun SettingsElementItem(
                     R.string.update_date_format -> NavHostRouteConfig.DATE_FORMAT_SELECTOR_DIALOG_ROUTE
                     R.string.time_format -> NavHostRouteConfig.TIME_FORMAT_DIALOG_ROUTE
                     R.string.update_language -> NavHostRouteConfig.LANGUAGE_CONFIGURATION_DIALOG_ROUTE
+                    R.string.config_power_by -> NavHostRouteConfig.POWER_BY_DIALOG_ROUTE
                     else -> NavHostRouteConfig.THEME_FORMAT_DIALOG_ROUTE
                 }
                 navHostController.navigate(navigateRoute)
