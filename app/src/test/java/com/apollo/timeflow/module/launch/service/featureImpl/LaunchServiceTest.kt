@@ -1,5 +1,6 @@
 package com.apollo.timeflow.module.launch.service.featureImpl
 
+import com.apollo.timeflow.R
 import com.apollo.timeflow.module.homefeed.service.dependency.IDateModule
 import com.apollo.timeflow.module.launch.service.feature.DayOfWeek
 import com.apollo.timeflow.module.launch.service.feature.TimeStage
@@ -39,14 +40,20 @@ class LaunchServiceTest {
     }
 
     @Test
-    fun fetchTimeStage(): Unit = runBlocking(coroutineScope.coroutineContext) {
+    fun test_fetchTimeStage(): Unit = runBlocking(coroutineScope.coroutineContext) {
         val timeStage = launchService.fetchTimeStage()
         assertEquals(timeStage, TimeStage.Evening())
     }
 
     @Test
-    fun fetchDayOfWeek() = runBlocking(coroutineScope.coroutineContext) {
+    fun test_fetchDayOfWeek() = runBlocking(coroutineScope.coroutineContext) {
         val dayOfWeek = launchService.fetchDayOfWeek()
         assertEquals(dayOfWeek, DayOfWeek.Tuesday())
+    }
+
+    @Test
+    fun test_fetchPowerByStringResource() = runBlocking(coroutineScope.coroutineContext) {
+        val powerByStringResource = launchService.fetchPowerByStringResource()
+        assertEquals(powerByStringResource, R.string.power_by_apollo)
     }
 }

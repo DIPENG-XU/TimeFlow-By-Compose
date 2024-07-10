@@ -7,6 +7,7 @@
     <string name="time_format">Update Time Format</string>
     <string name="update_the_date_display">Update The Date Display</string>
     <string name="update_date_format">Update Date Format</string>
+    <string name="config_power_by">PowerBy-LaunchPage</string>
     <string name="update_language" translatable="false">Language Configuration</string>
 
     <string name="title_confirm">%s</string>
@@ -39,7 +40,7 @@
     <string name="yyyyMMdd" translatable="false">yyyy.MM.dd</string>
     <string name="ddMMyyyy" translatable="false">dd.MM.yyyy</string>
     <string name="MMddyyyy" translatable="false">MM.dd.yyyy</string>
-    
+
     <string name="monday">Monday</string>
     <string name="tuesday">Tuesday</string>
     <string name="wednesday">Wednesday</string>
@@ -55,4 +56,5 @@
     <string name="evening">Tranquil Evening</string>
 
     <string name="welcome_in_launch_page">Today is %s!\nWelcome to TimeFlow and hope you have a Good Moment\nin this %s!</string>
+    <string name="power_by_apollo" translatable="false">Power By DIPENG-XU</string>
 </resources>

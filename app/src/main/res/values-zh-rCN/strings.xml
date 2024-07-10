@@ -4,6 +4,7 @@
     <string name="time_format">时间格式设置</string>
     <string name="update_the_date_display">日期显示设置</string>
     <string name="update_date_format">日期格式设置</string>
+    <string name="config_power_by">启动页PowerBy设置</string>
 
     <string name="title_confirm">%s</string>
     <string name="current_state_confirm">旧状态: <u>%s</u></string>
