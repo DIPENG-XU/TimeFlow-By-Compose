@@ -1,9 +1,11 @@
 package com.apollo.timeflow.module.launch.service.featureImpl
 
+import android.content.Context
 import com.apollo.timeflow.R
 import com.apollo.timeflow.module.homefeed.service.dependency.IDateModule
 import com.apollo.timeflow.module.launch.service.feature.DayOfWeek
 import com.apollo.timeflow.module.launch.service.feature.TimeStage
+import io.mockk.mockk
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestCoroutineScheduler
@@ -35,7 +37,8 @@ class LaunchServiceTest {
                 }
 
                 override fun fetchDate(): Date = date
-            }
+            },
+            mockk<Context>(relaxed = true)
         )
     }
 

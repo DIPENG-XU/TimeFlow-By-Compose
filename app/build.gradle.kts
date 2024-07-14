@@ -1,8 +1,9 @@
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    alias(libs.plugins.org.jetbrains.kotlin.android)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -49,6 +50,17 @@ android {
             )
         }
     }
+
+    android {
+        splits {
+            abi {
+                this.reset()
+                this.isUniversalApk = false
+                this.include("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
+            }
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
