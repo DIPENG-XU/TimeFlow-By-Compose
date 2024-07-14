@@ -46,12 +46,21 @@ fun getFontSizeInSetting(deviceType: DeviceUIState): TextUnit = when (deviceType
 }
 
 sealed class DeviceUIState {
-    abstract val width: Dp
-    abstract val height: Dp
+    abstract val timeCardWidth: Dp
+    abstract val timeCardHeight: Dp
 
-    class Phone(override val width: Dp = 120.dp, override val height: Dp = 300.dp) : DeviceUIState()
+    class Phone(
+        override val timeCardWidth: Dp = 120.dp,
+        override val timeCardHeight: Dp = 300.dp,
+    ) : DeviceUIState()
 
-    class Tablet(override val width: Dp = 160.dp, override val height: Dp = 400.dp) : DeviceUIState()
+    class Tablet(
+        override val timeCardWidth: Dp = 160.dp,
+        override val timeCardHeight: Dp = 400.dp,
+    ) : DeviceUIState()
 
-    class TV(override val width: Dp = 200.dp, override val height: Dp = 500.dp) : DeviceUIState()
+    class TV(
+        override val timeCardWidth: Dp = 200.dp,
+        override val timeCardHeight: Dp = 500.dp,
+    ) : DeviceUIState()
 }

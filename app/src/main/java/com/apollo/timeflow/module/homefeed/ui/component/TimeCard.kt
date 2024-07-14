@@ -15,13 +15,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.apollo.timeflow.R
 import com.apollo.timeflow.utils.DeviceUIState
+import com.apollo.timeflow.utils.defaultFontFamily
 import com.apollo.timeflow.utils.getFontSizeInHomeFeed
 
 
@@ -35,8 +32,8 @@ fun TimeCard(
     leftNumber: Int = 0,
     rightNumber: Int = 1,
 ) {
-    val width = deviceUIState.width
-    val height = deviceUIState.height
+    val width = deviceUIState.timeCardWidth
+    val height = deviceUIState.timeCardHeight
     Box(
         modifier = Modifier
             .clickable(
@@ -64,11 +61,7 @@ fun TimeCard(
                 amOrPm ?: "AM",
                 modifier = Modifier.align(Alignment.BottomEnd),
                 color = MaterialTheme.colorScheme.primary,
-                fontFamily = FontFamily(
-                    fonts = listOf(
-                        Font(R.font.poppins_bold, FontWeight.Light),
-                    )
-                ),
+                fontFamily = defaultFontFamily,
                 fontSize = getFontSizeInHomeFeed(deviceUIState),
             )
         }
