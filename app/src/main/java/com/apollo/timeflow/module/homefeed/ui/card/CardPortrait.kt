@@ -13,8 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModelStoreOwner
-import androidx.navigation.NavController
-import com.apollo.timeflow.module.moduleNavHost.NavHostRouteConfig
 import com.apollo.timeflow.module.homefeed.ui.component.DateText
 import com.apollo.timeflow.module.homefeed.ui.component.TimeCard
 import com.apollo.timeflow.module.homefeed.uistate.DateUIState
@@ -24,7 +22,7 @@ import com.apollo.timeflow.viewmodel.TimeViewModel
 @Composable
 fun CardPortrait(
     viewModelStoreOwner: ViewModelStoreOwner,
-    navController: NavController,
+    navigateClickable: (() -> Unit)? = null
 ) {
     "CardPortrait recombination".monitorRecombination()
     Box(
@@ -46,9 +44,7 @@ fun CardPortrait(
             Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
                 TimeCard(
                     deviceUIState = deviceUIState,
-                    clickable = {
-                        navController.navigate(NavHostRouteConfig.NAV_HOST_ROUTE_FOR_SETTINGS)
-                    },
+                    clickable = navigateClickable,
                     isTimeFormat = timeFormat.value,
                     amOrPm = stringResource(id = timeUIState.amOrPM),
                     leftNumber = timeUIState.hoursLeft,

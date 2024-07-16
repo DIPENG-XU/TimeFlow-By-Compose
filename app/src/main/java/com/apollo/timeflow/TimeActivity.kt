@@ -24,7 +24,6 @@ class TimeActivity : BaseActivity("TimeActivity") {
             this@TimeActivity.hideStatusAndNavigationBar()
         }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -35,8 +34,8 @@ class TimeActivity : BaseActivity("TimeActivity") {
 
         setContent {
             TimeHostComponent(
-                onDestinationChangedListener = onDestinationChangedListener,
                 viewModelStoreOwner = this,
+                onDestinationChangedListener = this.onDestinationChangedListener,
             )
         }
     }
@@ -48,7 +47,7 @@ class TimeActivity : BaseActivity("TimeActivity") {
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-        hideStatusAndNavigationBar()
+        this.hideStatusAndNavigationBar()
     }
 
     private fun hideStatusAndNavigationBar() {
@@ -59,14 +58,15 @@ class TimeActivity : BaseActivity("TimeActivity") {
     }
 
     private fun addBroadcast() {
-        val intentFilterTimeChange = IntentFilter()
-        intentFilterTimeChange.addAction(Intent.ACTION_TIME_TICK)
-        intentFilterTimeChange.addAction(Intent.ACTION_TIME_CHANGED)
-        intentFilterTimeChange.addAction(Intent.ACTION_TIMEZONE_CHANGED)
-        intentFilterTimeChange.addAction(Intent.ACTION_LOCALE_CHANGED)
+        val intentFilterTimeChange = IntentFilter().apply {
+            this.addAction(Intent.ACTION_TIME_TICK)
+            this.addAction(Intent.ACTION_TIME_CHANGED)
+            this.addAction(Intent.ACTION_TIMEZONE_CHANGED)
+            this.addAction(Intent.ACTION_LOCALE_CHANGED)
+        }
 
         val timeChangeReceiver = TimeFlowBroadcastReceiver {
-            timeViewModel.updateTime()
+            this.timeViewModel.updateTime()
         }
 
         ContextCompat.registerReceiver(
@@ -76,13 +76,14 @@ class TimeActivity : BaseActivity("TimeActivity") {
             ContextCompat.RECEIVER_NOT_EXPORTED
         )
 
-        val intentFilterDateChange = IntentFilter()
-        intentFilterDateChange.addAction(Intent.ACTION_DATE_CHANGED)
-        intentFilterDateChange.addAction(Intent.ACTION_TIMEZONE_CHANGED)
-        intentFilterDateChange.addAction(Intent.ACTION_LOCALE_CHANGED)
+        val intentFilterDateChange = IntentFilter().apply {
+            this.addAction(Intent.ACTION_DATE_CHANGED)
+            this.addAction(Intent.ACTION_TIMEZONE_CHANGED)
+            this.addAction(Intent.ACTION_LOCALE_CHANGED)
+        }
 
         val dateChangeReceiver = TimeFlowBroadcastReceiver {
-            timeViewModel.updateDate()
+            this.timeViewModel.updateDate()
         }
 
         ContextCompat.registerReceiver(

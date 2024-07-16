@@ -1,6 +1,7 @@
 package com.apollo.timeflow.module.settings.ui
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,6 +11,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -17,7 +19,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModelStoreOwner
-import androidx.navigation.NavController
 import com.apollo.timeflow.R
 import com.apollo.timeflow.component.DefaultText
 import com.apollo.timeflow.module.moduleNavHost.NavHostRouteConfig
@@ -27,8 +28,9 @@ import com.apollo.timeflow.viewmodel.TimeViewModel
 
 @Composable
 fun DateFormatListDialog(
-    navController: NavController,
     viewModelStoreOwner: ViewModelStoreOwner,
+    navigateClickable: ((String) -> Unit) = { },
+    navigatePopBackStack: (() -> Unit) = { },
 ) {
     val timeViewModel = hiltViewModel<TimeViewModel>(viewModelStoreOwner)
     AlertDialog(
@@ -66,8 +68,13 @@ fun DateFormatListDialog(
                             text = it.dateFormat,
                             fontSize = getFontSizeInSetting(timeViewModel.deviceUIState.value),
                             modifier = Modifier
-                                .clickable {
-                                    navController.navigate("${NavHostRouteConfig.DATE_FORMAT_SELECTOR_CONFIRM_DIALOG_ROUTE}/${it.dateFormat}")
+                                .clickable(
+                                    interactionSource = remember {
+                                        MutableInteractionSource()
+                                    },
+                                    indication = null,
+                                ) {
+                                    navigateClickable.invoke("${NavHostRouteConfig.DATE_FORMAT_SELECTOR_CONFIRM_DIALOG_ROUTE}/${it.dateFormat}")
                                 }
                                 .padding(12.dp),
                         )
@@ -75,12 +82,7 @@ fun DateFormatListDialog(
             }
         },
 
-        onDismissRequest = {
-            navController.popBackStack(
-                NavHostRouteConfig.NAV_HOST_ROUTE_FOR_SETTINGS,
-                inclusive = false,
-            )
-        },
+        onDismissRequest = navigatePopBackStack,
 
         confirmButton = {
             // ignored

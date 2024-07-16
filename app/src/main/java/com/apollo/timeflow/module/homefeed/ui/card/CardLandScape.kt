@@ -13,18 +13,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModelStoreOwner
-import androidx.navigation.NavController
 import com.apollo.timeflow.module.homefeed.ui.component.DateText
 import com.apollo.timeflow.module.homefeed.ui.component.TimeCard
 import com.apollo.timeflow.module.homefeed.uistate.DateUIState
-import com.apollo.timeflow.module.moduleNavHost.NavHostRouteConfig
 import com.apollo.timeflow.utils.monitorRecombination
 import com.apollo.timeflow.viewmodel.TimeViewModel
 
 @Composable
 fun CardLandScape(
     viewModelStoreOwner: ViewModelStoreOwner,
-    navController: NavController,
+    navigateClickable: (() -> Unit)? = null
 ) {
     "CardLandScape recombination".monitorRecombination()
     Box(
@@ -46,9 +44,7 @@ fun CardLandScape(
                 TimeCard(
                     deviceUIState = deviceUIState,
                     isTimeFormat = timeFormat.value,
-                    clickable = {
-                        navController.navigate(NavHostRouteConfig.NAV_HOST_ROUTE_FOR_SETTINGS)
-                    },
+                    clickable = navigateClickable,
                     amOrPm = stringResource(id = timeUIState.amOrPM),
                     leftNumber = timeUIState.hoursLeft,
                     rightNumber = timeUIState.hoursRight,
