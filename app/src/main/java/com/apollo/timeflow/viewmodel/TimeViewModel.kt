@@ -5,7 +5,6 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.viewModelScope
 import com.apollo.timeflow.module.homefeed.service.feature.ITimeDataService
 import com.apollo.timeflow.module.homefeed.service.feature.ITimeFormatRecordDataStoreService
 import com.apollo.timeflow.module.homefeed.uistate.DateUIState
@@ -16,6 +15,7 @@ import com.apollo.timeflow.utils.DeviceUIState
 import com.apollo.timeflow.utils.TimeFormat
 import com.apollo.timeflow.utils.getDeviceType
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,7 +24,6 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.coroutines.CoroutineContext
 
 @HiltViewModel
 class TimeViewModel @Inject constructor(
@@ -32,7 +31,7 @@ class TimeViewModel @Inject constructor(
     private val iTimeDataService: ITimeDataService,
     private val iDateFormatService: IDateFormatService,
     private val iLaunchService: ILaunchService,
-    private val coroutine: CoroutineContext,
+    private val _coroutineScope: CoroutineScope,
     application: Application,
 ) : AndroidViewModel(application) {
 
@@ -41,7 +40,7 @@ class TimeViewModel @Inject constructor(
     val deviceUIState: State<DeviceUIState> = _deviceUIState
 
     private var _timeFormat = MutableStateFlow(TimeFormat.Base12)
-    private fun editTimeFormat(it: Boolean) = viewModelScope.launch(coroutine) {
+    private fun editTimeFormat(it: Boolean) = _coroutineScope.launch {
         _timeFormat.value = (if (it) TimeFormat.Base12 else TimeFormat.Base24)
         this@TimeViewModel.updateTime()
     }
@@ -49,18 +48,18 @@ class TimeViewModel @Inject constructor(
     private val _timeUIState = mutableStateOf<TimeUIState?>(null)
     val timeUIState: State<TimeUIState?> = _timeUIState
 
-    fun updateTime() = viewModelScope.launch(coroutine) {
+    fun updateTime() = _coroutineScope.launch {
         val timeFormat = _timeFormat.value
         _timeUIState.value = iTimeDataService.getCurrentTime(timeFormat)
     }
 
     private val _currentDateFlow: MutableStateFlow<String> = MutableStateFlow("")
-    fun updateDate() = viewModelScope.launch(coroutine) {
+    fun updateDate() = _coroutineScope.launch {
         val dateFormatPattern = dateFormatUIState.stateIn(this).value
         _currentDateFlow.emit(iTimeDataService.getCurrentDate(dateFormatPattern))
     }
 
-    private fun updateDate(dateFormatPattern: String) = viewModelScope.launch(coroutine) {
+    private fun updateDate(dateFormatPattern: String) = _coroutineScope.launch {
         _currentDateFlow.emit(iTimeDataService.getCurrentDate(dateFormatPattern))
     }
 
@@ -72,7 +71,7 @@ class TimeViewModel @Inject constructor(
             )
         }
 
-    fun updateDateDisplayOrNot() = viewModelScope.launch(coroutine) {
+    fun updateDateDisplayOrNot() = _coroutineScope.launch {
         val isDateDisplay = dateUIStateFlow.stateIn(this).value
         iTimeFormatRecordService.updateDateRecord(isDateDisplay.showOrHide xor true)
     }
@@ -83,7 +82,7 @@ class TimeViewModel @Inject constructor(
         it
     }
 
-    fun updateTimeFormat() = viewModelScope.launch(coroutine) {
+    fun updateTimeFormat() = _coroutineScope.launch {
         val timeFormat = timeFormatRecordDataStoreFlow.stateIn(this).value
         iTimeFormatRecordService.updateTimeFormat(timeFormat xor true)
     }
@@ -94,18 +93,18 @@ class TimeViewModel @Inject constructor(
         it
     }
 
-    fun updateDateFormat(dateFormat: String) = viewModelScope.launch(coroutine) {
+    fun updateDateFormat(dateFormat: String) = _coroutineScope.launch {
         iDateFormatService.updateThemeRecord(dateFormat)
     }
 
     val powerByShowOrHideStoreFlow: Flow<Boolean> = iLaunchService.powerByShowOrHideStateFlow
 
-    fun updatePowerByShowOrHide() = viewModelScope.launch(coroutine) {
-        iLaunchService.updatePowerByShowOrHide(!powerByShowOrHideStoreFlow.stateIn(viewModelScope).value)
+    fun updatePowerByShowOrHide() = _coroutineScope.launch {
+        iLaunchService.updatePowerByShowOrHide(!powerByShowOrHideStoreFlow.stateIn(_coroutineScope).value)
     }
 
     override fun onCleared() {
         super.onCleared()
-        viewModelScope.cancel()
+        _coroutineScope.cancel()
     }
 }
