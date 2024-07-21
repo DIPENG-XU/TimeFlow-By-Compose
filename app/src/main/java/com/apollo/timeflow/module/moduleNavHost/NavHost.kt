@@ -8,10 +8,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModelStoreOwner
-import androidx.navigation.NavHostController
+import androidx.navigation.NavController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.apollo.timeflow.module.homefeed.ui.card.CardHomeFeed
 import com.apollo.timeflow.module.launch.ui.LaunchPage
@@ -22,59 +23,83 @@ import com.apollo.timeflow.module.settings.ui.TimeFlowSettings
 
 @Composable
 fun TimeFlowNavHost(
-    navController: NavHostController,
     viewModelStoreOwner: ViewModelStoreOwner,
+    onDestinationChangedListener: NavController.OnDestinationChangedListener,
 ) {
+    val navController = rememberNavController().apply {
+        this.removeOnDestinationChangedListener(onDestinationChangedListener)
+        this.addOnDestinationChangedListener(onDestinationChangedListener)
+    }
     NavHost(
         navController = navController,
         startDestination = NavHostRouteConfig.NAV_HOST_LAUNCH_PAGE,
         modifier = Modifier.fillMaxSize(),
         enterTransition = {
             fadeIn(tween(0))
-        }, exitTransition = {
+        },
+        exitTransition = {
             fadeOut(tween(0))
         }
     ) {
         composable(route = NavHostRouteConfig.NAV_HOST_LAUNCH_PAGE) {
             LaunchPage(
-                viewModelStoreOwner,
-                navController,
-            )
+                viewModelStoreOwner = viewModelStoreOwner,
+            ) {
+                navController.popBackStack(NavHostRouteConfig.NAV_HOST_LAUNCH_PAGE, true)
+                navController.navigate(NavHostRouteConfig.NAV_HOST_ROUTE_FOR_HOMEFEED)
+            }
         }
 
         composable(route = NavHostRouteConfig.NAV_HOST_ROUTE_FOR_HOMEFEED) {
             CardHomeFeed(
-                viewModelStoreOwner,
-                navController,
-            )
+                viewModelStoreOwner = viewModelStoreOwner,
+            ) {
+                navController.navigate(NavHostRouteConfig.NAV_HOST_ROUTE_FOR_SETTINGS)
+            }
         }
 
         composable(route = NavHostRouteConfig.NAV_HOST_ROUTE_FOR_SETTINGS) {
-            TimeFlowSettings(navController, viewModelStoreOwner)
+            TimeFlowSettings(
+                viewModelStoreOwner = viewModelStoreOwner,
+            ) {
+                navController.navigate(it)
+            }
         }
 
         composable(route = NavHostRouteConfig.DATE_FORMAT_DIALOG_ROUTE) {
             ConfirmDialog(
-                navController = navController,
                 route = NavHostRouteConfig.DATE_FORMAT_DIALOG_ROUTE,
                 viewModelStoreOwner = viewModelStoreOwner,
-            )
+            ) { route, inclusive ->
+                navController.popBackStack(
+                    route = route,
+                    inclusive = inclusive,
+                )
+            }
         }
 
         composable(route = NavHostRouteConfig.TIME_FORMAT_DIALOG_ROUTE) {
             ConfirmDialog(
-                navController = navController,
                 route = NavHostRouteConfig.TIME_FORMAT_DIALOG_ROUTE,
                 viewModelStoreOwner = viewModelStoreOwner,
-            )
+            ) { route, inclusive ->
+                navController.popBackStack(
+                    route = route,
+                    inclusive = inclusive,
+                )
+            }
         }
 
         composable(route = NavHostRouteConfig.THEME_FORMAT_DIALOG_ROUTE) {
             ConfirmDialog(
-                navController = navController,
                 route = NavHostRouteConfig.THEME_FORMAT_DIALOG_ROUTE,
                 viewModelStoreOwner = viewModelStoreOwner,
-            )
+            ) { route, inclusive ->
+                navController.popBackStack(
+                    route = route,
+                    inclusive = inclusive,
+                )
+            }
         }
 
         composable(
@@ -84,7 +109,6 @@ fun TimeFlowNavHost(
             })
         ) { backStackEntry ->
             ConfirmDialog(
-                navController = navController,
                 route = NavHostRouteConfig.LANGUAGE_CONFIGURATION_CONFIRM_DIALOG_ROUTE,
                 viewModelStoreOwner = viewModelStoreOwner,
                 bundle = Bundle().also {
@@ -96,24 +120,39 @@ fun TimeFlowNavHost(
                         selectedArea
                     )
                 }
-            )
+            ) { route, inclusive ->
+                navController.popBackStack(
+                    route = route,
+                    inclusive = inclusive,
+                )
+            }
         }
 
         composable(route = NavHostRouteConfig.LANGUAGE_CONFIGURATION_DIALOG_ROUTE) {
             LanguageConfigurationListDialog(
-                navController = navController,
                 viewModelStoreOwner = viewModelStoreOwner,
+                navigateClickable = {
+                    navController.navigate(it)
+                },
+                navigatePopBackStack = {
+                    navController.popBackStack(
+                        NavHostRouteConfig.NAV_HOST_ROUTE_FOR_SETTINGS,
+                        inclusive = false,
+                    )
+                }
             )
         }
 
         composable(
             route = "${NavHostRouteConfig.DATE_FORMAT_SELECTOR_CONFIRM_DIALOG_ROUTE}/{${NavHostDateFormatSelectorConfigurationConfirmDialogArgument.SELECTED_DATE_FORMAT}}",
-            arguments = listOf(navArgument(NavHostDateFormatSelectorConfigurationConfirmDialogArgument.SELECTED_DATE_FORMAT) {
-                type = NavType.StringType
-            })
+            arguments = listOf(
+                navArgument(
+                    NavHostDateFormatSelectorConfigurationConfirmDialogArgument.SELECTED_DATE_FORMAT
+                ) {
+                    type = NavType.StringType
+                })
         ) { backStackEntry ->
             ConfirmDialog(
-                navController = navController,
                 route = NavHostRouteConfig.DATE_FORMAT_SELECTOR_CONFIRM_DIALOG_ROUTE,
                 viewModelStoreOwner = viewModelStoreOwner,
                 bundle = Bundle().also {
@@ -125,23 +164,40 @@ fun TimeFlowNavHost(
                         selectedDateFormat
                     )
                 }
-            )
+            ) { route, inclusive ->
+                navController.popBackStack(
+                    route = route,
+                    inclusive = inclusive,
+                )
+            }
         }
 
         composable(
             route = NavHostRouteConfig.POWER_BY_DIALOG_ROUTE,
         ) {
             ConfirmDialog(
-                navController = navController,
                 route = NavHostRouteConfig.POWER_BY_DIALOG_ROUTE,
                 viewModelStoreOwner = viewModelStoreOwner,
-            )
+            ) { route, inclusive ->
+                navController.popBackStack(
+                    route = route,
+                    inclusive = inclusive,
+                )
+            }
         }
 
         composable(route = NavHostRouteConfig.DATE_FORMAT_SELECTOR_DIALOG_ROUTE) {
             DateFormatListDialog(
-                navController = navController,
                 viewModelStoreOwner = viewModelStoreOwner,
+                navigateClickable = {
+                    navController.navigate(it)
+                },
+                navigatePopBackStack = {
+                    navController.popBackStack(
+                        NavHostRouteConfig.NAV_HOST_ROUTE_FOR_SETTINGS,
+                        inclusive = false,
+                    )
+                }
             )
         }
     }

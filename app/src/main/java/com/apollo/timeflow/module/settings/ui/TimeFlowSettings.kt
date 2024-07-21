@@ -28,7 +28,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelStoreOwner
-import androidx.navigation.NavHostController
 import com.apollo.timeflow.R
 import com.apollo.timeflow.component.DefaultText
 import com.apollo.timeflow.module.moduleNavHost.NavHostRouteConfig
@@ -40,8 +39,8 @@ import com.apollo.timeflow.viewmodel.TimeViewModel
 
 @Composable
 fun TimeFlowSettings(
-    navHostController: NavHostController,
     viewModelStoreOwner: ViewModelStoreOwner,
+    navigateEvent: ((String) -> Unit)? = null,
 ) {
     val timeViewModel: TimeViewModel = hiltViewModel(viewModelStoreOwner)
     val viewModel: SettingsViewModel = hiltViewModel(viewModelStoreOwner)
@@ -69,8 +68,8 @@ fun TimeFlowSettings(
 
                     is SettingsUIState.SettingsElementUIState -> SettingsElementItem(
                         settingsElementUIState = item,
-                        navHostController = navHostController,
                         fontSize = fontSize,
+                        navigateEvent = navigateEvent,
                     )
                 }
             }
@@ -95,8 +94,8 @@ fun TimeFlowSettings(
 @Composable
 private fun SettingsElementItem(
     settingsElementUIState: SettingsUIState.SettingsElementUIState,
-    navHostController: NavHostController,
     fontSize: TextUnit,
+    navigateEvent: ((String) -> Unit)? = null,
 ) {
     Box(
         modifier = Modifier
@@ -112,7 +111,7 @@ private fun SettingsElementItem(
                     R.string.config_power_by -> NavHostRouteConfig.POWER_BY_DIALOG_ROUTE
                     else -> NavHostRouteConfig.THEME_FORMAT_DIALOG_ROUTE
                 }
-                navHostController.navigate(navigateRoute)
+                navigateEvent?.invoke(navigateRoute)
             })
             .fillMaxWidth()
             .wrapContentHeight()

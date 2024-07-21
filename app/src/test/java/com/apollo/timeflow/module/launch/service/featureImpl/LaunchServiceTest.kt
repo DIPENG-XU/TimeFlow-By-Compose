@@ -30,7 +30,7 @@ class LaunchServiceTest {
         date = Date(1704803400000L)
 
         launchService = LaunchService(
-            coroutineScope.coroutineContext,
+            coroutineScope,
             object : IDateModule {
                 override fun fetchCalendar(): Calendar = Calendar.getInstance().apply {
                     this.time = date

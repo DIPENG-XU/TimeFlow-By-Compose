@@ -16,7 +16,6 @@ import androidx.compose.ui.unit.dp
 import androidx.core.os.LocaleListCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModelStoreOwner
-import androidx.navigation.NavController
 import com.apollo.timeflow.R
 import com.apollo.timeflow.component.DefaultText
 import com.apollo.timeflow.module.homefeed.uistate.DateUIState
@@ -24,6 +23,7 @@ import com.apollo.timeflow.module.moduleNavHost.NavHostDateFormatSelectorConfigu
 import com.apollo.timeflow.module.moduleNavHost.NavHostLanguageConfigurationConfirmDialogArgument
 import com.apollo.timeflow.module.moduleNavHost.NavHostRouteConfig
 import com.apollo.timeflow.module.settings.uiState.ConfirmDialogUIState
+import com.apollo.timeflow.module.settings.utils.LanguageType
 import com.apollo.timeflow.module.settings.utils.mappedToAStringResByName
 import com.apollo.timeflow.utils.getFontSizeInSetting
 import com.apollo.timeflow.viewmodel.HostActivityViewModel
@@ -32,10 +32,10 @@ import com.apollo.timeflow.viewmodel.TimeViewModel
 
 @Composable
 fun ConfirmDialog(
-    navController: NavController,
     route: String,
     viewModelStoreOwner: ViewModelStoreOwner,
     bundle: Bundle = Bundle(),
+    navigatePopBack: ((String, Boolean) -> Unit) = { _, _ -> }
 ) {
     val timeViewModel = hiltViewModel<TimeViewModel>(viewModelStoreOwner)
     val confirmDialogUIState = when (route) {
@@ -89,7 +89,8 @@ fun ConfirmDialog(
         NavHostRouteConfig.LANGUAGE_CONFIGURATION_CONFIRM_DIALOG_ROUTE -> {
             val currentLanguage = AppCompatDelegate.getApplicationLocales().toLanguageTags()
             val nextLanguage = bundle.getString(
-                NavHostLanguageConfigurationConfirmDialogArgument.SELECTED_AREA, "zh-CN"
+                NavHostLanguageConfigurationConfirmDialogArgument.SELECTED_AREA,
+                LanguageType.English.name,
             )
             val (current, next) = currentLanguage.mappedToAStringResByName() to nextLanguage.mappedToAStringResByName()
 
@@ -120,7 +121,10 @@ fun ConfirmDialog(
         }
 
         NavHostRouteConfig.POWER_BY_DIALOG_ROUTE -> {
-            val (current, next) = if (timeViewModel.powerByShowOrHideStoreFlow.collectAsState(initial = true).value) {
+            val (current, next) = if (timeViewModel.powerByShowOrHideStoreFlow.collectAsState(
+                    initial = true
+                ).value
+            ) {
                 R.string.open to R.string.close
             } else {
                 R.string.close to R.string.open
@@ -183,9 +187,9 @@ fun ConfirmDialog(
         },
 
         onDismissRequest = {
-            navController.popBackStack(
+            navigatePopBack.invoke(
                 NavHostRouteConfig.NAV_HOST_ROUTE_FOR_SETTINGS,
-                inclusive = false,
+                false,
             )
         },
 
@@ -198,9 +202,9 @@ fun ConfirmDialog(
             )
             TextButton(onClick = {
                 confirmDialogUIState.onClickEvent.invoke()
-                navController.popBackStack(
+                navigatePopBack.invoke(
                     NavHostRouteConfig.NAV_HOST_ROUTE_FOR_SETTINGS,
-                    inclusive = true,
+                     true,
                 )
                 hostActivityViewModel.showSnackBar(successTips)
             }) {
@@ -216,9 +220,9 @@ fun ConfirmDialog(
                 stringResource(id = R.string.dismiss_to_update),
             )
             TextButton(onClick = {
-                navController.popBackStack(
+                navigatePopBack.invoke(
                     NavHostRouteConfig.NAV_HOST_ROUTE_FOR_SETTINGS,
-                    inclusive = false,
+                    false,
                 )
                 hostActivityViewModel.showSnackBar(dismissTips)
             }) {

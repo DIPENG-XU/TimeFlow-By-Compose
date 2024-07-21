@@ -13,24 +13,22 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.apollo.timeflow.module.moduleNavHost.TimeFlowNavHost
 import com.apollo.timeflow.theme.TimeFlowTheme
 import com.apollo.timeflow.viewmodel.HostActivityViewModel
 
 @Composable
 fun TimeHostComponent(
-    onDestinationChangedListener: NavController.OnDestinationChangedListener,
     viewModelStoreOwner: ViewModelStoreOwner,
+    onDestinationChangedListener: NavController.OnDestinationChangedListener,
 ) {
-    val snackBarHostState = hiltViewModel<HostActivityViewModel>().snackBarHostState
     TimeFlowTheme {
         Scaffold(
             snackbarHost = {
                 Box(modifier = Modifier.fillMaxSize()) {
                     SnackbarHost(
-                        hostState = snackBarHostState,
-                        modifier = Modifier.align(Alignment.TopCenter),
+                        hostState = hiltViewModel<HostActivityViewModel>().snackBarHostState,
+                        modifier = Modifier.align(Alignment.Center),
                     )
                 }
             }
@@ -41,14 +39,9 @@ fun TimeHostComponent(
                     .background(MaterialTheme.colorScheme.background)
                     .fillMaxSize()
             ) {
-                val navController = rememberNavController().also {
-                    it.removeOnDestinationChangedListener(onDestinationChangedListener)
-                    it.addOnDestinationChangedListener(onDestinationChangedListener)
-                }
-
                 TimeFlowNavHost(
                     viewModelStoreOwner = viewModelStoreOwner,
-                    navController = navController,
+                    onDestinationChangedListener = onDestinationChangedListener,
                 )
             }
         }

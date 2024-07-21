@@ -17,7 +17,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModelStoreOwner
-import androidx.navigation.NavController
 import com.apollo.timeflow.R
 import com.apollo.timeflow.component.DefaultText
 import com.apollo.timeflow.module.moduleNavHost.NavHostRouteConfig
@@ -27,8 +26,9 @@ import com.apollo.timeflow.viewmodel.TimeViewModel
 
 @Composable
 fun LanguageConfigurationListDialog(
-    navController: NavController,
     viewModelStoreOwner: ViewModelStoreOwner,
+    navigateClickable: ((String) -> Unit) = { },
+    navigatePopBackStack: (() -> Unit) = { },
 ) {
     val timeViewModel = hiltViewModel<TimeViewModel>(viewModelStoreOwner)
     AlertDialog(
@@ -55,27 +55,20 @@ fun LanguageConfigurationListDialog(
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 val currentLanguage = AppCompatDelegate.getApplicationLocales().toLanguageTags()
-                LANGUAGE_LIST
-                    .filter { it.name != currentLanguage }
-                    .forEach {
-                        DefaultText(
-                            text = stringResource(id = it.stringRes),
-                            fontSize = getFontSizeInSetting(timeViewModel.deviceUIState.value),
-                            modifier = Modifier
-                                .clickable {
-                                    navController.navigate("${NavHostRouteConfig.LANGUAGE_CONFIGURATION_CONFIRM_DIALOG_ROUTE}/${it.name}")
-                                }
-                                .padding(12.dp),
-                        )
-                    }
+                LANGUAGE_LIST.filter { it.name != currentLanguage }.forEach {
+                    DefaultText(
+                        text = stringResource(id = it.stringRes),
+                        fontSize = getFontSizeInSetting(timeViewModel.deviceUIState.value),
+                        modifier = Modifier
+                            .clickable {
+                                navigateClickable.invoke("${NavHostRouteConfig.LANGUAGE_CONFIGURATION_CONFIRM_DIALOG_ROUTE}/${it.name}")
+                            }
+                            .padding(12.dp),
+                    )
+                }
             }
         },
-        onDismissRequest = {
-            navController.popBackStack(
-                NavHostRouteConfig.NAV_HOST_ROUTE_FOR_SETTINGS,
-                inclusive = false,
-            )
-        },
+        onDismissRequest = navigatePopBackStack,
         confirmButton = {
             // ignored
         },
