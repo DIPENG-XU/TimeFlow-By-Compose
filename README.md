@@ -1,6 +1,6 @@
 TimeFlow, an APP you can use to show the time when you are focused on studying, work, etc.
 
-跳转到[简体中文README.md](README_CN.md)
+跳转到[简体中文介绍内容](README_CN.md)
 
 ### Project
 

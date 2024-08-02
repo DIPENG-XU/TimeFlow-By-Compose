@@ -12,7 +12,7 @@ import kotlin.math.sqrt
 
 
 @Suppress("DEPRECATION")
-fun getDeviceType(context: Context): DeviceUIState {
+internal fun getDeviceType(context: Context): DeviceUIState {
     val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
     val display = wm.defaultDisplay
     val dm = DisplayMetrics()
@@ -27,19 +27,19 @@ fun getDeviceType(context: Context): DeviceUIState {
     }
 }
 
-fun getFontSizeInPowerBy(deviceType: DeviceUIState): TextUnit = when (deviceType) {
+internal fun getFontSizeInPowerBy(deviceType: DeviceUIState): TextUnit = when (deviceType) {
     is DeviceUIState.Phone -> 18.sp
     is DeviceUIState.Tablet -> 24.sp
     is DeviceUIState.TV -> 24.sp
 }
 
-fun getFontSizeInHomeFeed(deviceType: DeviceUIState): TextUnit = when (deviceType) {
+internal fun getFontSizeInHomeFeed(deviceType: DeviceUIState): TextUnit = when (deviceType) {
     is DeviceUIState.Phone -> 24.sp
     is DeviceUIState.Tablet -> 36.sp
     is DeviceUIState.TV -> 36.sp
 }
 
-fun getFontSizeInSetting(deviceType: DeviceUIState): TextUnit = when (deviceType) {
+internal fun getFontSizeInSetting(deviceType: DeviceUIState): TextUnit = when (deviceType) {
     is DeviceUIState.Phone -> 18.sp
     is DeviceUIState.Tablet -> 24.sp
     is DeviceUIState.TV -> 24.sp
