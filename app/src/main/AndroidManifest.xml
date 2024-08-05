@@ -13,7 +13,8 @@
         android:roundIcon="@drawable/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.TimeFlow"
-        tools:targetApi="34">
+        tools:targetApi="35">
+
         <activity
             android:name=".TimeActivity"
             android:exported="true"

@@ -8,14 +8,14 @@ plugins {
 
 android {
     namespace = "com.apollo.timeflow"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.apollo.timeflow"
         minSdk = 21
         targetSdk = 35
-        versionCode = 15
-        versionName = "2.2.5-hotfix1"
+        versionCode = 16
+        versionName = "2.2.6"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

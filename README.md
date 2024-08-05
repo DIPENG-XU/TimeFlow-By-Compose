@@ -61,8 +61,13 @@ TimeFlow, an APP you can use to show the time when you are focused on studying, 
   - It's the Previews
   ![IMAGE_SNAPSHOT_LAUNCH_PAGE](show_img/launch_page_snapshot.png)
 
-### Effect Pictures
+### Others
+- In Version 2.2.6
+  - Fixed the possible risk of burning the screen, everytime updating the time, the color will change slightly.
+  - Background: As you know, when the color of the content is black, the screen of the device does not glow and this does not affect the quality of the screen. 
+    However, when the content is white, it is easy to burn the screen phenomenon. A long time ago I had a Huawei tablet, it had visions of burning screens.
 
+### Effect Pictures
 There are all the effect pictures.
 
 - Tablet: Time format Base on 12
