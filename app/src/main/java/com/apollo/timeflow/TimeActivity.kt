@@ -12,12 +12,14 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavController
 import com.apollo.timeflow.basesupport.BaseActivity
 import com.apollo.timeflow.broadcast.TimeFlowBroadcastReceiver
+import com.apollo.timeflow.viewmodel.ThemeViewModel
 import com.apollo.timeflow.viewmodel.TimeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class TimeActivity : BaseActivity("TimeActivity") {
     private val timeViewModel: TimeViewModel by viewModels<TimeViewModel>()
+    private val themeViewModel: ThemeViewModel by viewModels<ThemeViewModel>()
 
     private val onDestinationChangedListener =
         NavController.OnDestinationChangedListener { _, _, _ ->
@@ -67,6 +69,7 @@ class TimeActivity : BaseActivity("TimeActivity") {
 
         val timeChangeReceiver = TimeFlowBroadcastReceiver {
             this.timeViewModel.updateTime()
+            this.themeViewModel.autoUpdateThemeCauseProtected()
         }
 
         ContextCompat.registerReceiver(
