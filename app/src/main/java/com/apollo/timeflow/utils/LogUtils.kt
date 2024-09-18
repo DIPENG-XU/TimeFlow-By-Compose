@@ -2,7 +2,7 @@ package com.apollo.timeflow.utils
 
 import android.util.Log
 
-internal fun String.logd(tag: String = "TimeFlowLog") {
+internal fun String.logD(tag: String = "TimeFlowLog") {
     Log.d(tag, this)
 }
 

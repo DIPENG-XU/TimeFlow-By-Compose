@@ -4,6 +4,7 @@ import android.content.res.Configuration
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.lifecycle.ViewModelStoreOwner
+import com.apollo.timeflow.component.HiddenBarEffect
 
 @Composable
 fun CardHomeFeed(
@@ -16,4 +17,6 @@ fun CardHomeFeed(
     } else {
         CardLandScape(viewModelStoreOwner, navigateClickable)
     }
+
+    HiddenBarEffect()
 }

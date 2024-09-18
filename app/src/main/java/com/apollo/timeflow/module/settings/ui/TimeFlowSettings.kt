@@ -30,6 +30,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelStoreOwner
 import com.apollo.timeflow.R
 import com.apollo.timeflow.component.DefaultText
+import com.apollo.timeflow.component.HiddenBarEffect
 import com.apollo.timeflow.module.moduleNavHost.NavHostRouteConfig
 import com.apollo.timeflow.module.settings.uiState.SettingsUIState
 import com.apollo.timeflow.module.settings.viewmodel.SettingsViewModel
@@ -89,6 +90,8 @@ fun TimeFlowSettings(
         viewModel.fetchSettings()
         viewModel.fetchVersion()
     }
+
+    HiddenBarEffect()
 }
 
 @Composable
