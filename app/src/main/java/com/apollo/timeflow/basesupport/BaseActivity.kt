@@ -2,7 +2,7 @@ package com.apollo.timeflow.basesupport
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.apollo.timeflow.utils.logd
+import com.apollo.timeflow.utils.logD
 
 open class BaseActivity(
     private val selfName: String,
@@ -10,36 +10,36 @@ open class BaseActivity(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        "onCreate-->$selfName".logd("MonitorLifecycle")
+        "onCreate-->$selfName".logD("MonitorLifecycle")
     }
 
     override fun onStart() {
         super.onStart()
-        "onStart-->$selfName".logd("MonitorLifecycle")
+        "onStart-->$selfName".logD("MonitorLifecycle")
     }
 
     override fun onRestart() {
         super.onRestart()
-        "onRestart-->$selfName".logd("MonitorLifecycle")
+        "onRestart-->$selfName".logD("MonitorLifecycle")
     }
 
     override fun onResume() {
         super.onResume()
-        "onResume-->$selfName".logd("MonitorLifecycle")
+        "onResume-->$selfName".logD("MonitorLifecycle")
     }
 
     override fun onPause() {
         super.onPause()
-        "onPause-->$selfName".logd("MonitorLifecycle")
+        "onPause-->$selfName".logD("MonitorLifecycle")
     }
 
     override fun onStop() {
         super.onStop()
-        "onStop-->$selfName".logd("MonitorLifecycle")
+        "onStop-->$selfName".logD("MonitorLifecycle")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        "onDestroy-->$selfName".logd("MonitorLifecycle")
+        "onDestroy-->$selfName".logD("MonitorLifecycle")
     }
 }

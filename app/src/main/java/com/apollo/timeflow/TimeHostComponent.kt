@@ -12,7 +12,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModelStoreOwner
-import androidx.navigation.NavController
 import com.apollo.timeflow.module.moduleNavHost.TimeFlowNavHost
 import com.apollo.timeflow.theme.TimeFlowTheme
 import com.apollo.timeflow.viewmodel.HostActivityViewModel
@@ -20,14 +19,13 @@ import com.apollo.timeflow.viewmodel.HostActivityViewModel
 @Composable
 fun TimeHostComponent(
     viewModelStoreOwner: ViewModelStoreOwner,
-    onDestinationChangedListener: NavController.OnDestinationChangedListener,
 ) {
     TimeFlowTheme {
         Scaffold(
             snackbarHost = {
                 Box(modifier = Modifier.fillMaxSize()) {
                     SnackbarHost(
-                        hostState = hiltViewModel<HostActivityViewModel>().snackBarHostState,
+                        hostState = hiltViewModel<HostActivityViewModel>(viewModelStoreOwner).snackBarHostState,
                         modifier = Modifier.align(Alignment.Center),
                     )
                 }
@@ -41,7 +39,6 @@ fun TimeHostComponent(
             ) {
                 TimeFlowNavHost(
                     viewModelStoreOwner = viewModelStoreOwner,
-                    onDestinationChangedListener = onDestinationChangedListener,
                 )
             }
         }

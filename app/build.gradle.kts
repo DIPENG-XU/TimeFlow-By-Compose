@@ -14,8 +14,8 @@ android {
         applicationId = "com.apollo.timeflow"
         minSdk = 21
         targetSdk = 35
-        versionCode = 16
-        versionName = "2.2.6"
+        versionCode = 17
+        versionName = "2.2.7"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -100,6 +100,7 @@ dependencies {
     debugImplementation(libs.leakcanary.android)
     implementation(libs.androidx.navigation)
     implementation(libs.androidx.appcompat)
+    implementation(libs.google.accompanist.systemuicontroller)
 
     testImplementation(libs.mockk)
     testImplementation(libs.kotlinx.coroutines.test)

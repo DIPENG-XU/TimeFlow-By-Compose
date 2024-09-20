@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModelStoreOwner
-import androidx.navigation.NavController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -24,12 +23,8 @@ import com.apollo.timeflow.module.settings.ui.TimeFlowSettings
 @Composable
 fun TimeFlowNavHost(
     viewModelStoreOwner: ViewModelStoreOwner,
-    onDestinationChangedListener: NavController.OnDestinationChangedListener,
 ) {
-    val navController = rememberNavController().apply {
-        this.removeOnDestinationChangedListener(onDestinationChangedListener)
-        this.addOnDestinationChangedListener(onDestinationChangedListener)
-    }
+    val navController = rememberNavController()
     NavHost(
         navController = navController,
         startDestination = NavHostRouteConfig.NAV_HOST_LAUNCH_PAGE,

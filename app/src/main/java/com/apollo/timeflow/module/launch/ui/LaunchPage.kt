@@ -18,6 +18,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelStoreOwner
 import com.apollo.timeflow.R
+import com.apollo.timeflow.component.HiddenBarEffect
 import com.apollo.timeflow.module.launch.viewmodel.LaunchViewModel
 import com.apollo.timeflow.utils.getFontSizeInHomeFeed
 import com.apollo.timeflow.utils.getFontSizeInPowerBy
@@ -79,5 +80,7 @@ fun LaunchPage(
         fetchAndResideWelcomeSlogan()
         launchEvent()
     }
+
+    HiddenBarEffect()
 }
 

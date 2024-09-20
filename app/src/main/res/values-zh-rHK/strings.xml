@@ -23,7 +23,6 @@
     <string name="success_to_update">好噶，現時經已成功幫你將%s为%s</string>
     <string name="dismiss_to_update">好，噉你再諗下先</string>
 
-    <string name="english">英文</string>
     <string name="update_language_confirm_title">語言變更</string>
     <string name="unknown_language">未知語言</string>
     <string name="system_language">系統語言</string>
