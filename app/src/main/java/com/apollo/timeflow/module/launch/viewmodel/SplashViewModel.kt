@@ -6,7 +6,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import com.apollo.timeflow.R
-import com.apollo.timeflow.module.launch.service.feature.ILaunchService
+import com.apollo.timeflow.module.launch.service.feature.ISplashService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -18,9 +18,9 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class LaunchViewModel @Inject constructor(
+class SplashViewModel @Inject constructor(
     private val _coroutineScope: CoroutineScope,
-    private val _iLaunchService: ILaunchService,
+    private val _iLaunchService: ISplashService,
     private val _application: Application,
 ): AndroidViewModel(_application) {
     private val _slogan: MutableState<String> = mutableStateOf("")

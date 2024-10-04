@@ -9,7 +9,7 @@ import com.apollo.timeflow.module.homefeed.service.feature.ITimeDataService
 import com.apollo.timeflow.module.homefeed.service.feature.ITimeFormatRecordDataStoreService
 import com.apollo.timeflow.module.homefeed.uistate.DateUIState
 import com.apollo.timeflow.module.homefeed.uistate.TimeUIState
-import com.apollo.timeflow.module.launch.service.feature.ILaunchService
+import com.apollo.timeflow.module.launch.service.feature.ISplashService
 import com.apollo.timeflow.module.settings.service.feature.IDateFormatService
 import com.apollo.timeflow.utils.DeviceUIState
 import com.apollo.timeflow.utils.TimeFormat
@@ -30,7 +30,7 @@ class TimeViewModel @Inject constructor(
     private val iTimeFormatRecordService: ITimeFormatRecordDataStoreService,
     private val iTimeDataService: ITimeDataService,
     private val iDateFormatService: IDateFormatService,
-    private val iLaunchService: ILaunchService,
+    private val iLaunchService: ISplashService,
     private val _coroutineScope: CoroutineScope,
     application: Application,
 ) : AndroidViewModel(application) {

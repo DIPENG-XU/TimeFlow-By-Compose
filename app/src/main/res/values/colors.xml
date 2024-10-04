@@ -4,4 +4,6 @@
     <color name="grey900">#FF212121</color>
     <color name="white">#FFFFFFFF</color>
     <color name="black">#FF000000</color>
+
+    <color name="mc_donald_background">#E01FD7</color>
 </resources>

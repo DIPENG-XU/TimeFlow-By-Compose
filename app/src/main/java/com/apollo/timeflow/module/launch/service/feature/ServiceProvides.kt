@@ -1,6 +1,6 @@
 package com.apollo.timeflow.module.launch.service.feature
 
-import com.apollo.timeflow.module.launch.service.featureImpl.LaunchService
+import com.apollo.timeflow.module.launch.service.featureImpl.SplashService
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -12,5 +12,5 @@ import javax.inject.Singleton
 interface ServiceProvides {
     @Singleton
     @Binds
-    fun providesILaunchService(impl: LaunchService): ILaunchService
+    fun providesISplashService(impl: SplashService): ISplashService
 }
