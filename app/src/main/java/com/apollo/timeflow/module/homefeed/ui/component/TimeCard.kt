@@ -25,7 +25,7 @@ import com.apollo.timeflow.utils.getFontSizeInHomeFeed
 @Preview(showBackground = true)
 @Composable
 fun TimeCard(
-    deviceUIState: DeviceUIState = DeviceUIState.Phone(),
+    deviceUIState: DeviceUIState = DeviceUIState.Phone,
     clickable: (() -> Unit)? = null,
     isTimeFormat: Boolean = true,
     amOrPm: String? = "AM",

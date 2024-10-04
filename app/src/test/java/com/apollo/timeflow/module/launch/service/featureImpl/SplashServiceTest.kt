@@ -15,10 +15,10 @@ import org.junit.Test
 import java.util.Calendar
 import java.util.Date
 
-class LaunchServiceTest {
+class SplashServiceTest {
     private lateinit var date: Date
 
-    private lateinit var launchService: LaunchService
+    private lateinit var launchService: SplashService
 
     private val scheduler = TestCoroutineScheduler()
     private val coroutineScope = CoroutineScope(scheduler)
@@ -29,7 +29,7 @@ class LaunchServiceTest {
         // 2024-01-09 20:30:00 Tuesday
         date = Date(1704803400000L)
 
-        launchService = LaunchService(
+        launchService = SplashService(
             coroutineScope,
             object : IDateModule {
                 override fun fetchCalendar(): Calendar = Calendar.getInstance().apply {

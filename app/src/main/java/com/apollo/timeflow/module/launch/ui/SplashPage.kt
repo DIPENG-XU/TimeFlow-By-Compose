@@ -19,7 +19,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelStoreOwner
 import com.apollo.timeflow.R
 import com.apollo.timeflow.component.HiddenBarEffect
-import com.apollo.timeflow.module.launch.viewmodel.LaunchViewModel
+import com.apollo.timeflow.module.launch.viewmodel.SplashViewModel
 import com.apollo.timeflow.utils.getFontSizeInHomeFeed
 import com.apollo.timeflow.utils.getFontSizeInPowerBy
 import com.apollo.timeflow.viewmodel.TimeViewModel
@@ -35,7 +35,7 @@ fun LaunchPage(
     val timeViewModel = hiltViewModel<TimeViewModel>(viewModelStoreOwner)
     val deviceType = timeViewModel.deviceUIState.value
 
-    val launchViewModel = hiltViewModel<LaunchViewModel>(viewModelStoreOwner)
+    val launchViewModel = hiltViewModel<SplashViewModel>(viewModelStoreOwner)
 
     Box {
         Text(

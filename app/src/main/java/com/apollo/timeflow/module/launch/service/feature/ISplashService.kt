@@ -45,7 +45,7 @@ sealed class DayOfWeek(
     class Sunday: DayOfWeek(R.string.sunday)
 }
 
-interface ILaunchService {
+interface ISplashService {
     val powerByShowOrHideStateFlow: Flow<Boolean>
 
     suspend fun updatePowerByShowOrHide(showOrHide: Boolean)

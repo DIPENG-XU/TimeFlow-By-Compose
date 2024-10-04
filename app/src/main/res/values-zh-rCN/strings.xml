@@ -36,11 +36,11 @@
     <string name="saturday">周六</string>
     <string name="sunday">周日</string>
 
-    <string name="morning">愉悦的早上</string>
-    <string name="afternoon">惬意的下午</string>
-    <string name="nightfall">浪漫的黄昏</string>
-    <string name="evening">静谧的夜晚</string>
-    <string name="midnight">曼妙的深夜</string>
+    <string name="morning">开启这愉悦的上午</string>
+    <string name="afternoon">开启惬意的下午</string>
+    <string name="nightfall">享受这浪漫的黄昏</string>
+    <string name="evening">享受静谧的夜晚</string>
+    <string name="midnight">享受这曼妙的深夜</string>
 
-    <string name="welcome_in_launch_page">今天是%s！欢迎使用TimeFlow！\n希望你以愉悦的心情度过这%s！</string>
+    <string name="welcome_in_launch_page">今天是%s！欢迎使用TimeFlow！\n希望你以愉悦的心情%s！</string>
 </resources>

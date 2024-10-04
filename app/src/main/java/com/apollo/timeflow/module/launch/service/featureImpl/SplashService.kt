@@ -9,7 +9,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import com.apollo.timeflow.R
 import com.apollo.timeflow.module.homefeed.service.dependency.IDateModule
 import com.apollo.timeflow.module.launch.service.feature.DayOfWeek
-import com.apollo.timeflow.module.launch.service.feature.ILaunchService
+import com.apollo.timeflow.module.launch.service.feature.ISplashService
 import com.apollo.timeflow.module.launch.service.feature.TimeStage
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
@@ -21,11 +21,11 @@ import javax.inject.Inject
 
 private val Context.powerByShowOrHide: DataStore<Preferences> by preferencesDataStore(name = "PowerBy Show Or Hide DataStore")
 
-class LaunchService @Inject constructor(
+class SplashService @Inject constructor(
     private val _coroutineScope: CoroutineScope,
     private val _iDateModule: IDateModule,
     @ApplicationContext private val _context: Context,
-) : ILaunchService {
+) : ISplashService {
     override suspend fun fetchTimeStage(): TimeStage =
         withContext(_coroutineScope.coroutineContext) {
             when (_iDateModule.fetchCalendar().get(Calendar.HOUR_OF_DAY)) {

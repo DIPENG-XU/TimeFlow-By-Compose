@@ -21,9 +21,9 @@ internal fun getDeviceType(context: Context): DeviceUIState {
     val y = ((dm.heightPixels / dm.ydpi)).toDouble().pow(2.0)
     val screenInches = sqrt(x + y)
     return when {
-        (screenInches < 7.0f) -> DeviceUIState.Phone()
-        (screenInches >= 7.0f && screenInches < 15.0f) -> DeviceUIState.Tablet()
-        else -> DeviceUIState.TV()
+        (screenInches < 7.0f) -> DeviceUIState.Phone
+        (screenInches >= 7.0f && screenInches < 15.0f) -> DeviceUIState.Tablet
+        else -> DeviceUIState.TV
     }
 }
 
@@ -45,22 +45,22 @@ internal fun getFontSizeInSetting(deviceType: DeviceUIState): TextUnit = when (d
     is DeviceUIState.TV -> 24.sp
 }
 
-sealed class DeviceUIState {
-    abstract val timeCardWidth: Dp
-    abstract val timeCardHeight: Dp
+sealed class DeviceUIState(
+    val timeCardWidth: Dp,
+    val timeCardHeight: Dp,
+) {
+    data object Phone : DeviceUIState(
+        timeCardWidth = 120.dp,
+        timeCardHeight = 300.dp,
+    )
 
-    class Phone(
-        override val timeCardWidth: Dp = 120.dp,
-        override val timeCardHeight: Dp = 300.dp,
-    ) : DeviceUIState()
+    data object Tablet : DeviceUIState(
+        timeCardWidth = 160.dp,
+        timeCardHeight = 400.dp,
+    )
 
-    class Tablet(
-        override val timeCardWidth: Dp = 160.dp,
-        override val timeCardHeight: Dp = 400.dp,
-    ) : DeviceUIState()
-
-    class TV(
-        override val timeCardWidth: Dp = 200.dp,
-        override val timeCardHeight: Dp = 500.dp,
-    ) : DeviceUIState()
+    data object TV : DeviceUIState(
+        timeCardWidth = 200.dp,
+        timeCardHeight = 500.dp,
+    )
 }
