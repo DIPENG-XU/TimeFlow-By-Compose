@@ -4,7 +4,7 @@ import com.apollo.timeflow.R
 import com.apollo.timeflow.module.homefeed.service.dependency.IDateModule
 import com.apollo.timeflow.module.homefeed.service.feature.ITimeDataService
 import com.apollo.timeflow.module.homefeed.uistate.TimeUIState
-import com.apollo.timeflow.utils.TimeFormat
+import com.apollo.timeflow.utils.BASE24
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.withContext
 import java.lang.Exception
@@ -17,10 +17,10 @@ class TimeDataService @Inject constructor(
     private val coroutineScope: CoroutineScope,
     private val iDateModule: IDateModule,
 ) : ITimeDataService {
-    override suspend fun getCurrentTime(timeFormat: TimeFormat): TimeUIState = withContext(coroutineScope.coroutineContext) {
+    override suspend fun getCurrentTime(timeFormat: Int): TimeUIState = withContext(coroutineScope.coroutineContext) {
         val calendar: Calendar = iDateModule.fetchCalendar()
         val hours = when {
-            timeFormat == TimeFormat.Base24 -> calendar.get(Calendar.HOUR_OF_DAY)
+            timeFormat == BASE24 -> calendar.get(Calendar.HOUR_OF_DAY)
             (calendar.get(Calendar.HOUR_OF_DAY) == 12) -> 12
             else -> calendar.get(Calendar.HOUR)
         }

@@ -42,36 +42,27 @@ class TimeActivity : BaseActivity("TimeActivity") {
         val intentFilterTimeChange = IntentFilter().apply {
             this.addAction(Intent.ACTION_TIME_TICK)
             this.addAction(Intent.ACTION_TIME_CHANGED)
+
+            this.addAction(Intent.ACTION_DATE_CHANGED)
+
             this.addAction(Intent.ACTION_TIMEZONE_CHANGED)
             this.addAction(Intent.ACTION_LOCALE_CHANGED)
         }
 
-        val timeChangeReceiver = TimeFlowBroadcastReceiver {
-            this.timeViewModel.updateTime()
-            this.themeViewModel.autoUpdateThemeCauseProtected()
-        }
+        val timeChangeReceiver = TimeFlowBroadcastReceiver(
+            updateTime = {
+                this.timeViewModel.updateTime()
+                this.themeViewModel.autoUpdateThemeCauseProtected()
+            },
+            updateDate = {
+                this.timeViewModel.updateDate()
+            }
+        )
 
         ContextCompat.registerReceiver(
             applicationContext,
             timeChangeReceiver,
             intentFilterTimeChange,
-            ContextCompat.RECEIVER_NOT_EXPORTED
-        )
-
-        val intentFilterDateChange = IntentFilter().apply {
-            this.addAction(Intent.ACTION_DATE_CHANGED)
-            this.addAction(Intent.ACTION_TIMEZONE_CHANGED)
-            this.addAction(Intent.ACTION_LOCALE_CHANGED)
-        }
-
-        val dateChangeReceiver = TimeFlowBroadcastReceiver {
-            this.timeViewModel.updateDate()
-        }
-
-        ContextCompat.registerReceiver(
-            applicationContext,
-            dateChangeReceiver,
-            intentFilterDateChange,
             ContextCompat.RECEIVER_NOT_EXPORTED
         )
     }

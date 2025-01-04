@@ -26,12 +26,6 @@
             </intent-filter>
         </activity>
 
-        <receiver
-            android:name=".broadcast.TimeFlowBroadcastReceiver"
-            android:enabled="true"
-            android:exported="false"
-            tools:ignore="Instantiatable" />
-
         <service
             android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"
             android:enabled="false"

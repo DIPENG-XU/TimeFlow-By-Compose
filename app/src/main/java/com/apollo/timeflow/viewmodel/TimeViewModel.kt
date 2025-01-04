@@ -11,8 +11,9 @@ import com.apollo.timeflow.module.homefeed.uistate.DateUIState
 import com.apollo.timeflow.module.homefeed.uistate.TimeUIState
 import com.apollo.timeflow.module.launch.service.feature.ISplashService
 import com.apollo.timeflow.module.settings.service.feature.IDateFormatService
+import com.apollo.timeflow.utils.BASE12
+import com.apollo.timeflow.utils.BASE24
 import com.apollo.timeflow.utils.DeviceUIState
-import com.apollo.timeflow.utils.TimeFormat
 import com.apollo.timeflow.utils.getDeviceType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -39,9 +40,9 @@ class TimeViewModel @Inject constructor(
         mutableStateOf(getDeviceType(application))
     val deviceUIState: State<DeviceUIState> = _deviceUIState
 
-    private var _timeFormat = MutableStateFlow(TimeFormat.Base12)
+    private var _timeFormat = MutableStateFlow(BASE12)
     private fun editTimeFormat(it: Boolean) = _coroutineScope.launch {
-        _timeFormat.value = (if (it) TimeFormat.Base12 else TimeFormat.Base24)
+        _timeFormat.value = (if (it) BASE12 else BASE24)
         this@TimeViewModel.updateTime()
     }
 

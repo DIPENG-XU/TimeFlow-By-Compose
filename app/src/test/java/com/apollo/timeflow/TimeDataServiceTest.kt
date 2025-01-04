@@ -3,7 +3,8 @@ package com.apollo.timeflow
 import com.apollo.timeflow.module.homefeed.service.featureImpl.TimeDataService
 import com.apollo.timeflow.module.homefeed.service.dependency.IDateModule
 import com.apollo.timeflow.module.homefeed.uistate.TimeUIState
-import com.apollo.timeflow.utils.TimeFormat
+import com.apollo.timeflow.utils.BASE12
+import com.apollo.timeflow.utils.BASE24
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestCoroutineScheduler
@@ -57,10 +58,10 @@ class TimeDataServiceTest {
 
     @Test
     fun getCurrentTime() = runBlocking(scheduler) {
-        val amBase12 = amService.getCurrentTime(TimeFormat.Base12)
-        val amBase24 = amService.getCurrentTime(TimeFormat.Base24)
-        val pmBase12 = pmService.getCurrentTime(TimeFormat.Base12)
-        val pmBase24 = pmService.getCurrentTime(TimeFormat.Base24)
+        val amBase12 = amService.getCurrentTime(BASE12)
+        val amBase24 = amService.getCurrentTime(BASE24)
+        val pmBase12 = pmService.getCurrentTime(BASE12)
+        val pmBase24 = pmService.getCurrentTime(BASE24)
 
         val predictedAmBase12 = TimeUIState(
             hoursLeft = 0,

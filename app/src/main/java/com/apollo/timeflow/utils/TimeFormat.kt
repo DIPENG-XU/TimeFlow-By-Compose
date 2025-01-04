@@ -1,6 +1,4 @@
 package com.apollo.timeflow.utils
 
-enum class TimeFormat {
-    Base12,
-    Base24
-}
+const val BASE12 = 1 shl 12
+const val BASE24 = 1 shl 13
