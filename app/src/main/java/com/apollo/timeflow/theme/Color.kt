@@ -2,7 +2,6 @@ package com.apollo.timeflow.theme
 
 import androidx.compose.ui.graphics.Color
 
-
 val m3_grey50 = Color(0xFFB4AFAF)
 val m3_grey_900 = Color(0xFF212121)
 
