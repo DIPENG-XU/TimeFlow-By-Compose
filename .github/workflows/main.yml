@@ -1,24 +1,24 @@
-name: Auto Merge Branch-A to Branch-B
+name: Auto Merge main into Branch-B
 
 on:
   push:
     branches:
-      - main  # 当main分支发生变化时触发
+      - main  # 触发该工作流，当main分支发生推送时
 
 permissions:
-  contents: write  # 允许操作仓库内容
-  issues: write    # 允许创建GitHub Issue
+  contents: write  # 允许写入仓库内容
+  issues: write    # 允许创建和修改GitHub Issues
 
 jobs:
   merge-and-notify:
-    runs-on: ubuntu-latest  # 使用最新的Ubuntu环境来执行
+    runs-on: ubuntu-latest  # 使用最新的Ubuntu运行环境
 
     steps:
-    # 1. Checkout 仓库代码
+    # 1. 检出仓库代码
     - name: Checkout the repository
       uses: actions/checkout@v4
 
-    # 2. 配置 Git 用户信息
+    # 2. 配置Git用户信息
     - name: Configure Git user
       run: |
         git config user.name "Github-CI-rotbot"
@@ -28,23 +28,23 @@ jobs:
     - name: Fetch all branches
       run: git fetch --all
 
-    # 4. 切换到 Branch-B
+    # 4. 切换到Branch-B
     - name: Checkout Branch-B
       run: git checkout Branch-B
 
-    # 5. 合并 main 到 Branch-B
+    # 5. 合并 main 到 Branch-B（允许不相关的历史合并）
     - name: Merge main into Branch-B
       id: merge
       run: |
         {
-          if git merge origin/main -m "Auto-merge main into Branch-B"; then
+          if git merge origin/main --allow-unrelated-histories -m "Auto-merge main into Branch-B"; then
             echo "MERGE_SUCCESS=true" >> $GITHUB_ENV
           else
             echo "MERGE_SUCCESS=false" >> $GITHUB_ENV
           fi
         } 2>&1 | tee merge_log.txt
 
-    # 6. 如果合并成功，推送更新到远程仓库
+    # 6. 如果合并成功，推送更新到Branch-B
     - name: Push changes if merge succeeded
       if: env.MERGE_SUCCESS == 'true'
       run: |
@@ -52,7 +52,7 @@ jobs:
         git commit -m "Auto-merge main into Branch-B"
         git push origin Branch-B
 
-    # 7. 如果合并失败，记录错误日志
+    # 7. 读取合并日志（用于错误报告）
     - name: Read merge log
       id: readlog
       run: |
@@ -60,7 +60,7 @@ jobs:
         cat merge_log.txt >> $GITHUB_ENV
         echo "EOF" >> $GITHUB_ENV
 
-    # 8. 如果合并失败，创建 GitHub Issue 以报告失败
+    # 8. 如果合并失败，创建 GitHub Issue 来报告失败
     - name: Create GitHub Issue on Merge Failure
       if: env.MERGE_SUCCESS == 'false'
       uses: actions/github-script@v7
