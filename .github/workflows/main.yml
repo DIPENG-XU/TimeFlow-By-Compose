@@ -19,8 +19,8 @@ jobs:
 
     - name: Configure Git user
       run: |
-        git config user.name "github-actions[bot]"
-        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git config user.name "Github-CI-rotbot"
+        git config user.email "dipengxu@163.com"
 
     - name: Fetch all branches
       run: git fetch --all
@@ -28,11 +28,11 @@ jobs:
     - name: Checkout Branch-B
       run: git checkout Branch-B
 
-    - name: Merge Branch-A into Branch-B
+    - name: Merge main into Branch-B
       id: merge
       run: |
         {
-          if git merge origin/Branch-A -m "Auto-merge Branch-A into Branch-B"; then
+          if git merge origin/main -m "Auto-merge main into Branch-B"; then
             echo "MERGE_SUCCESS=true" >> $GITHUB_ENV
           else
             echo "MERGE_SUCCESS=false" >> $GITHUB_ENV
@@ -57,9 +57,9 @@ jobs:
           const { data: issue } = await github.rest.issues.create({
             owner: context.repo.owner,
             repo: context.repo.repo,
-            title: "⚠️ Branch-A 自动合并 Branch-B 失败了",
+            title: "⚠️ main 自动合并 Branch-B 失败了",
             body: `
-              自动合并 Branch-A 到 Branch-B 失败了，请手动处理冲突！
+              自动合并 main 到 Branch-B 失败了，请手动处理冲突！
 
               合并日志：
               ----------------
