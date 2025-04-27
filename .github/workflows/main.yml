@@ -1,0 +1,99 @@
+name: Auto Merge Branch-A to Branch-B and Notify
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  merge-and-notify:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout the repository
+      uses: actions/checkout@v4
+
+    - name: Configure Git user
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+
+    - name: Fetch all branches
+      run: git fetch --all
+
+    - name: Checkout Branch-B
+      run: git checkout Branch-B
+
+    - name: Merge Branch-A into Branch-B
+      id: merge
+      run: |
+        {
+          if git merge origin/Branch-A -m "Auto-merge Branch-A into Branch-B"; then
+            echo "MERGE_SUCCESS=true" >> $GITHUB_ENV
+          else
+            echo "MERGE_SUCCESS=false" >> $GITHUB_ENV
+          fi
+        } 2>&1 | tee merge_log.txt
+
+    - name: Push changes if merge succeeded
+      if: env.MERGE_SUCCESS == 'true'
+      run: git push origin Branch-B
+
+    - name: Read merge log
+      id: readlog
+      run: |
+        LOG_CONTENT=$(cat merge_log.txt | base64)
+        echo "LOG_CONTENT=$LOG_CONTENT" >> $GITHUB_ENV
+
+    - name: Send email - Success
+      if: env.MERGE_SUCCESS == 'true'
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.163.com
+        server_port: 465
+        username: dipengxu@163.com
+        password: ${{ secrets.EMAIL_PASSWORD }}
+        subject: "Branch-A 自动合并到 Branch-B 成功"
+        to: dipengxu@163.com
+        from: dipengxu@163.com
+        body: |
+          ✅ 已经成功自动更新 Branch-B 了！
+
+          ---合并日志---
+          ${{ env.LOG_CONTENT }}
+
+    - name: Send email - Failure
+      if: env.MERGE_SUCCESS == 'false'
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.163.com
+        server_port: 465
+        username: dipengxu@163.com
+        password: ${{ secrets.EMAIL_PASSWORD }}
+        subject: "Branch-A 自动合并到 Branch-B 失败"
+        to: dipengxu@163.com
+        from: dipengxu@163.com
+        body: |
+          ❌ 自动更新分支 Branch-B 失败！
+
+          ---合并日志---
+          ${{ env.LOG_CONTENT }}
+
+    - name: Create GitHub Issue on Merge Failure
+      if: env.MERGE_SUCCESS == 'false'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const { data: issue } = await github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: "⚠️ Branch-A 自动合并 Branch-B 失败了",
+            body: `
+              自动合并 Branch-A 到 Branch-B 失败了，请手动处理冲突！
+
+              合并日志：
+              ----------------
+              ${{ env.LOG_CONTENT }}
+            `,
+            labels: ["merge-failed"]
+          });
