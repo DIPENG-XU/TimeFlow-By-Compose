@@ -1,33 +1,38 @@
-name: Auto Merge Branch-A to Branch-B and Notify
+name: Auto Merge Branch-A to Branch-B
 
 on:
   push:
     branches:
-      - main
+      - main  # 当main分支发生变化时触发
 
 permissions:
-  contents: write
-  issues: write
+  contents: write  # 允许操作仓库内容
+  issues: write    # 允许创建GitHub Issue
 
 jobs:
   merge-and-notify:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # 使用最新的Ubuntu环境来执行
 
     steps:
+    # 1. Checkout 仓库代码
     - name: Checkout the repository
       uses: actions/checkout@v4
 
+    # 2. 配置 Git 用户信息
     - name: Configure Git user
       run: |
         git config user.name "Github-CI-rotbot"
         git config user.email "dipengxu@163.com"
 
+    # 3. 拉取所有分支
     - name: Fetch all branches
       run: git fetch --all
 
+    # 4. 切换到 Branch-B
     - name: Checkout Branch-B
       run: git checkout Branch-B
 
+    # 5. 合并 main 到 Branch-B
     - name: Merge main into Branch-B
       id: merge
       run: |
@@ -39,16 +44,23 @@ jobs:
           fi
         } 2>&1 | tee merge_log.txt
 
+    # 6. 如果合并成功，推送更新到远程仓库
     - name: Push changes if merge succeeded
       if: env.MERGE_SUCCESS == 'true'
-      run: git push origin Branch-B
+      run: |
+        git add .
+        git commit -m "Auto-merge main into Branch-B"
+        git push origin Branch-B
 
+    # 7. 如果合并失败，记录错误日志
     - name: Read merge log
       id: readlog
       run: |
-        LOG_CONTENT=$(cat merge_log.txt | base64)
-        echo "LOG_CONTENT=$LOG_CONTENT" >> $GITHUB_ENV
+        echo "LOG_CONTENT<<EOF" >> $GITHUB_ENV
+        cat merge_log.txt >> $GITHUB_ENV
+        echo "EOF" >> $GITHUB_ENV
 
+    # 8. 如果合并失败，创建 GitHub Issue 以报告失败
     - name: Create GitHub Issue on Merge Failure
       if: env.MERGE_SUCCESS == 'false'
       uses: actions/github-script@v7
