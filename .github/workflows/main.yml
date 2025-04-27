@@ -19,7 +19,6 @@ jobs:
       uses: actions/checkout@v4
 
     # 2. 配置Git用户信息
-    - name: Configure Git user
       run: |
         git config user.name "Github-CI-rotbot"
         git config user.email "dipengxu@163.com"
@@ -35,7 +34,7 @@ jobs:
     # 5. 强制拉取最新的 main 分支，确保没有历史差异
     - name: Pull the latest main to sync with Branch-B
       run: |
-        git pull origin main --allow-unrelated-histories
+        git pull origin main --no-rebase --allow-unrelated-histories
 
     # 6. 合并 main 到 Branch-B
     - name: Merge main into Branch-B
