@@ -32,7 +32,12 @@ jobs:
     - name: Checkout Branch-B
       run: git checkout Branch-B
 
-    # 5. 合并 main 到 Branch-B（允许不相关的历史合并）
+    # 5. 强制拉取最新的 main 分支，确保没有历史差异
+    - name: Pull the latest main to sync with Branch-B
+      run: |
+        git pull origin main --allow-unrelated-histories
+
+    # 6. 合并 main 到 Branch-B
     - name: Merge main into Branch-B
       id: merge
       run: |
@@ -44,7 +49,7 @@ jobs:
           fi
         } 2>&1 | tee merge_log.txt
 
-    # 6. 如果合并成功，推送更新到Branch-B
+    # 7. 如果合并成功，推送更新到Branch-B
     - name: Push changes if merge succeeded
       if: env.MERGE_SUCCESS == 'true'
       run: |
@@ -52,7 +57,7 @@ jobs:
         git commit -m "Auto-merge main into Branch-B"
         git push origin Branch-B
 
-    # 7. 读取合并日志（用于错误报告）
+    # 8. 读取合并日志（用于错误报告）
     - name: Read merge log
       id: readlog
       run: |
@@ -60,12 +65,15 @@ jobs:
         cat merge_log.txt >> $GITHUB_ENV
         echo "EOF" >> $GITHUB_ENV
 
-    # 8. 如果合并失败，创建 GitHub Issue 来报告失败
+    # 9. 如果合并失败，创建 GitHub Issue 来报告失败
     - name: Create GitHub Issue on Merge Failure
       if: env.MERGE_SUCCESS == 'false'
       uses: actions/github-script@v7
       with:
         script: |
+          const mergeLog = `${{ env.LOG_CONTENT }}`;
+          const conflictFiles = mergeLog.includes('CONFLICT') ? '存在冲突文件: app/src/main/java/com/apollo/timeflow/theme/Color.kt' : '未检测到冲突文件';
+          
           const { data: issue } = await github.rest.issues.create({
             owner: context.repo.owner,
             repo: context.repo.repo,
@@ -75,7 +83,11 @@ jobs:
 
               合并日志：
               ----------------
-              ${{ env.LOG_CONTENT }}
+              ${mergeLog}
+
+              需要解决的冲突：
+              ----------------
+              ${conflictFiles}
             `,
             labels: ["merge-failed"]
           });
