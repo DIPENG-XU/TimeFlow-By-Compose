@@ -27,9 +27,7 @@ class TimeActivity : BaseActivity("TimeActivity") {
         }
 
         setContent {
-            TimeHostComponent(
-                viewModelStoreOwner = this,
-            )
+            TimeHostComponent()
         }
     }
 

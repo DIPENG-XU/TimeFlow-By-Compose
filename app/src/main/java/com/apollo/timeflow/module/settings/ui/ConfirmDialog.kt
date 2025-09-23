@@ -15,7 +15,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.os.LocaleListCompat
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.ViewModelStoreOwner
 import com.apollo.timeflow.R
 import com.apollo.timeflow.component.DefaultText
 import com.apollo.timeflow.module.homefeed.uistate.DateUIState
@@ -33,14 +32,13 @@ import com.apollo.timeflow.viewmodel.TimeViewModel
 @Composable
 fun ConfirmDialog(
     route: String,
-    viewModelStoreOwner: ViewModelStoreOwner,
     bundle: Bundle = Bundle(),
     navigatePopBack: ((String, Boolean) -> Unit) = { _, _ -> }
 ) {
-    val timeViewModel = hiltViewModel<TimeViewModel>(viewModelStoreOwner)
+    val timeViewModel = hiltViewModel<TimeViewModel>()
     val confirmDialogUIState = when (route) {
         NavHostRouteConfig.THEME_FORMAT_DIALOG_ROUTE -> {
-            val themeViewModel = hiltViewModel<ThemeViewModel>(viewModelStoreOwner)
+            val themeViewModel = hiltViewModel<ThemeViewModel>()
             val (current, next) = if (themeViewModel.currentThemeFlow.collectAsState(initial = 0).value == 0) {
                 R.string.light_mode to R.string.dark_mode
             } else {
@@ -145,7 +143,7 @@ fun ConfirmDialog(
 
     val fontSize = getFontSizeInSetting(timeViewModel.deviceUIState.value)
 
-    val hostActivityViewModel = hiltViewModel<HostActivityViewModel>(viewModelStoreOwner)
+    val hostActivityViewModel = hiltViewModel<HostActivityViewModel>()
     AlertDialog(
         containerColor = Color.White,
         shape = RoundedCornerShape(size = 8.dp),

@@ -7,7 +7,6 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -21,9 +20,7 @@ import com.apollo.timeflow.module.settings.ui.LanguageConfigurationListDialog
 import com.apollo.timeflow.module.settings.ui.TimeFlowSettings
 
 @Composable
-fun TimeFlowNavHost(
-    viewModelStoreOwner: ViewModelStoreOwner,
-) {
+fun TimeFlowNavHost() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
@@ -37,26 +34,20 @@ fun TimeFlowNavHost(
         }
     ) {
         composable(route = NavHostRouteConfig.NAV_HOST_LAUNCH_PAGE) {
-            LaunchPage(
-                viewModelStoreOwner = viewModelStoreOwner,
-            ) {
+            LaunchPage {
                 navController.popBackStack(NavHostRouteConfig.NAV_HOST_LAUNCH_PAGE, true)
                 navController.navigate(NavHostRouteConfig.NAV_HOST_ROUTE_FOR_HOMEFEED)
             }
         }
 
         composable(route = NavHostRouteConfig.NAV_HOST_ROUTE_FOR_HOMEFEED) {
-            CardHomeFeed(
-                viewModelStoreOwner = viewModelStoreOwner,
-            ) {
+            CardHomeFeed {
                 navController.navigate(NavHostRouteConfig.NAV_HOST_ROUTE_FOR_SETTINGS)
             }
         }
 
         composable(route = NavHostRouteConfig.NAV_HOST_ROUTE_FOR_SETTINGS) {
-            TimeFlowSettings(
-                viewModelStoreOwner = viewModelStoreOwner,
-            ) {
+            TimeFlowSettings {
                 navController.navigate(it)
             }
         }
@@ -64,7 +55,6 @@ fun TimeFlowNavHost(
         composable(route = NavHostRouteConfig.DATE_FORMAT_DIALOG_ROUTE) {
             ConfirmDialog(
                 route = NavHostRouteConfig.DATE_FORMAT_DIALOG_ROUTE,
-                viewModelStoreOwner = viewModelStoreOwner,
             ) { route, inclusive ->
                 navController.popBackStack(
                     route = route,
@@ -76,7 +66,6 @@ fun TimeFlowNavHost(
         composable(route = NavHostRouteConfig.TIME_FORMAT_DIALOG_ROUTE) {
             ConfirmDialog(
                 route = NavHostRouteConfig.TIME_FORMAT_DIALOG_ROUTE,
-                viewModelStoreOwner = viewModelStoreOwner,
             ) { route, inclusive ->
                 navController.popBackStack(
                     route = route,
@@ -88,7 +77,6 @@ fun TimeFlowNavHost(
         composable(route = NavHostRouteConfig.THEME_FORMAT_DIALOG_ROUTE) {
             ConfirmDialog(
                 route = NavHostRouteConfig.THEME_FORMAT_DIALOG_ROUTE,
-                viewModelStoreOwner = viewModelStoreOwner,
             ) { route, inclusive ->
                 navController.popBackStack(
                     route = route,
@@ -105,7 +93,6 @@ fun TimeFlowNavHost(
         ) { backStackEntry ->
             ConfirmDialog(
                 route = NavHostRouteConfig.LANGUAGE_CONFIGURATION_CONFIRM_DIALOG_ROUTE,
-                viewModelStoreOwner = viewModelStoreOwner,
                 bundle = Bundle().also {
                     val selectedArea = backStackEntry.arguments?.getString(
                         NavHostLanguageConfigurationConfirmDialogArgument.SELECTED_AREA
@@ -125,7 +112,6 @@ fun TimeFlowNavHost(
 
         composable(route = NavHostRouteConfig.LANGUAGE_CONFIGURATION_DIALOG_ROUTE) {
             LanguageConfigurationListDialog(
-                viewModelStoreOwner = viewModelStoreOwner,
                 navigateClickable = {
                     navController.navigate(it)
                 },
@@ -149,7 +135,6 @@ fun TimeFlowNavHost(
         ) { backStackEntry ->
             ConfirmDialog(
                 route = NavHostRouteConfig.DATE_FORMAT_SELECTOR_CONFIRM_DIALOG_ROUTE,
-                viewModelStoreOwner = viewModelStoreOwner,
                 bundle = Bundle().also {
                     val selectedDateFormat = backStackEntry.arguments?.getString(
                         NavHostDateFormatSelectorConfigurationConfirmDialogArgument.SELECTED_DATE_FORMAT
@@ -172,7 +157,6 @@ fun TimeFlowNavHost(
         ) {
             ConfirmDialog(
                 route = NavHostRouteConfig.POWER_BY_DIALOG_ROUTE,
-                viewModelStoreOwner = viewModelStoreOwner,
             ) { route, inclusive ->
                 navController.popBackStack(
                     route = route,
@@ -183,7 +167,6 @@ fun TimeFlowNavHost(
 
         composable(route = NavHostRouteConfig.DATE_FORMAT_SELECTOR_DIALOG_ROUTE) {
             DateFormatListDialog(
-                viewModelStoreOwner = viewModelStoreOwner,
                 navigateClickable = {
                     navController.navigate(it)
                 },
