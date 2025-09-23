@@ -5,7 +5,7 @@ import com.apollo.timeflow.module.homefeed.service.dependency.IDateModule
 import com.apollo.timeflow.module.homefeed.service.feature.ITimeDataService
 import com.apollo.timeflow.module.homefeed.uistate.TimeUIState
 import com.apollo.timeflow.utils.BASE24
-import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.lang.Exception
 import java.text.SimpleDateFormat
@@ -14,10 +14,9 @@ import java.util.Locale
 import javax.inject.Inject
 
 class TimeDataService @Inject constructor(
-    private val coroutineScope: CoroutineScope,
     private val iDateModule: IDateModule,
 ) : ITimeDataService {
-    override suspend fun getCurrentTime(timeFormat: Int): TimeUIState = withContext(coroutineScope.coroutineContext) {
+    override suspend fun getCurrentTime(timeFormat: Int): TimeUIState = withContext(Dispatchers.IO) {
         val calendar: Calendar = iDateModule.fetchCalendar()
         val hours = when {
             timeFormat == BASE24 -> calendar.get(Calendar.HOUR_OF_DAY)
@@ -35,12 +34,12 @@ class TimeDataService @Inject constructor(
         )
     }
 
-    override suspend fun amOrPm(): Int = withContext(coroutineScope.coroutineContext) {
+    override suspend fun amOrPm(): Int = withContext(Dispatchers.IO) {
         val calendar: Calendar = iDateModule.fetchCalendar()
         if (calendar.get(Calendar.HOUR_OF_DAY) > 12) R.string.pm else R.string.am
     }
 
-    override suspend fun getCurrentDate(dateFormatPattern: String): String = withContext(coroutineScope.coroutineContext) {
+    override suspend fun getCurrentDate(dateFormatPattern: String): String = withContext(Dispatchers.IO) {
         val date = iDateModule.fetchDate()
         try {
             SimpleDateFormat(dateFormatPattern, Locale.CHINA)
