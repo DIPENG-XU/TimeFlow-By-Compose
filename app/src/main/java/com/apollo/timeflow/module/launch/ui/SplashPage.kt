@@ -7,7 +7,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.SideEffect
+import com.apollo.timeflow.component.HiddenBarEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,7 +19,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.apollo.timeflow.R
-import com.apollo.timeflow.component.HiddenBarEffect
 import com.apollo.timeflow.module.launch.viewmodel.SplashViewModel
 import com.apollo.timeflow.utils.DeviceUIState
 import com.apollo.timeflow.utils.getFontSizeInHomeFeed
@@ -46,7 +45,6 @@ fun LaunchPage(
     }
 
     LaunchInitUI(launchEvent)
-    }
 
     HiddenBarEffect()
 }
@@ -67,8 +65,6 @@ private fun BoxScope.SloganText(
             .align(Alignment.Center)
             .padding(12.dp),
     )
-
-    }
 }
 
 @Composable
