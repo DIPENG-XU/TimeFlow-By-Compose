@@ -74,7 +74,7 @@ fun DateFormatListDialog(
                                     },
                                     indication = null,
                                 ) {
-                                    navigateClickable.invoke("${NavHostRouteConfig.DATE_FORMAT_SELECTOR_CONFIRM_DIALOG_ROUTE}/${it.dateFormat}")
+                                    navigateClickable.invoke("${NavHostRouteConfig.Dialog.DateFormatSelector.CONFIRM}/${it.dateFormat}")
                                 }
                                 .padding(12.dp),
                         )

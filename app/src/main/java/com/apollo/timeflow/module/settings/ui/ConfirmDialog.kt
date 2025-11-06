@@ -39,7 +39,7 @@ fun ConfirmDialog(
 ) {
     val timeViewModel = hiltViewModel<TimeViewModel>(viewModelStoreOwner)
     val confirmDialogUIState = when (route) {
-        NavHostRouteConfig.THEME_FORMAT_DIALOG_ROUTE -> {
+        NavHostRouteConfig.Dialog.THEME_FORMAT -> {
             val themeViewModel = hiltViewModel<ThemeViewModel>(viewModelStoreOwner)
             val (current, next) = if (themeViewModel.currentThemeFlow.collectAsState(initial = 0).value == 0) {
                 R.string.light_mode to R.string.dark_mode
@@ -55,7 +55,7 @@ fun ConfirmDialog(
                 })
         }
 
-        NavHostRouteConfig.TIME_FORMAT_DIALOG_ROUTE -> {
+        NavHostRouteConfig.Dialog.TIME_FORMAT -> {
             val (current, next) = if (timeViewModel.timeFormatRecordDataStoreFlow.collectAsState(
                     initial = false
                 ).value
@@ -72,7 +72,7 @@ fun ConfirmDialog(
                 })
         }
 
-        NavHostRouteConfig.DATE_FORMAT_DIALOG_ROUTE -> {
+        NavHostRouteConfig.Dialog.DATE_FORMAT -> {
             val (current, next) = if (timeViewModel.dateUIStateFlow.collectAsState(initial = DateUIState()).value.showOrHide) {
                 R.string.open to R.string.close
             } else {
@@ -86,7 +86,7 @@ fun ConfirmDialog(
                 })
         }
 
-        NavHostRouteConfig.LANGUAGE_CONFIGURATION_CONFIRM_DIALOG_ROUTE -> {
+        NavHostRouteConfig.Dialog.LanguageConfig.CONFIRM -> {
             val currentLanguage = AppCompatDelegate.getApplicationLocales().toLanguageTags()
             val nextLanguage = bundle.getString(
                 NavHostLanguageConfigurationConfirmDialogArgument.SELECTED_AREA,
@@ -104,7 +104,7 @@ fun ConfirmDialog(
                 })
         }
 
-        NavHostRouteConfig.DATE_FORMAT_SELECTOR_CONFIRM_DIALOG_ROUTE -> {
+        NavHostRouteConfig.Dialog.DateFormatSelector.CONFIRM -> {
             val current = timeViewModel.dateFormatUIState.collectAsState(initial = "")
             val next = bundle.getString(
                 NavHostDateFormatSelectorConfigurationConfirmDialogArgument.SELECTED_DATE_FORMAT
@@ -120,7 +120,7 @@ fun ConfirmDialog(
             )
         }
 
-        NavHostRouteConfig.POWER_BY_DIALOG_ROUTE -> {
+        NavHostRouteConfig.Dialog.POWER_BY -> {
             val (current, next) = if (timeViewModel.powerByShowOrHideStoreFlow.collectAsState(
                     initial = true
                 ).value
@@ -188,7 +188,7 @@ fun ConfirmDialog(
 
         onDismissRequest = {
             navigatePopBack.invoke(
-                NavHostRouteConfig.NAV_HOST_ROUTE_FOR_SETTINGS,
+                NavHostRouteConfig.Settings.ROUTE,
                 false,
             )
         },
@@ -203,7 +203,7 @@ fun ConfirmDialog(
             TextButton(onClick = {
                 confirmDialogUIState.onClickEvent.invoke()
                 navigatePopBack.invoke(
-                    NavHostRouteConfig.NAV_HOST_ROUTE_FOR_SETTINGS,
+                    NavHostRouteConfig.Settings.ROUTE,
                      true,
                 )
                 hostActivityViewModel.showSnackBar(successTips)
@@ -221,7 +221,7 @@ fun ConfirmDialog(
             )
             TextButton(onClick = {
                 navigatePopBack.invoke(
-                    NavHostRouteConfig.NAV_HOST_ROUTE_FOR_SETTINGS,
+                    NavHostRouteConfig.Settings.ROUTE,
                     false,
                 )
                 hostActivityViewModel.showSnackBar(dismissTips)

@@ -61,7 +61,7 @@ fun LanguageConfigurationListDialog(
                         fontSize = getFontSizeInSetting(timeViewModel.deviceUIState.value),
                         modifier = Modifier
                             .clickable {
-                                navigateClickable.invoke("${NavHostRouteConfig.LANGUAGE_CONFIGURATION_CONFIRM_DIALOG_ROUTE}/${it.name}")
+                                navigateClickable.invoke("${NavHostRouteConfig.Dialog.LanguageConfig.CONFIRM}/${it.name}")
                             }
                             .padding(12.dp),
                     )
