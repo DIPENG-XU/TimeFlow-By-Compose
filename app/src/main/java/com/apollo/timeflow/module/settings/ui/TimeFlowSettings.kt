@@ -106,13 +106,13 @@ private fun SettingsElementItem(
                 MutableInteractionSource()
             }, indication = null, onClick = {
                 val navigateRoute = when (settingsElementUIState.nameRes) {
-                    R.string.theme_mode -> NavHostRouteConfig.THEME_FORMAT_DIALOG_ROUTE
-                    R.string.update_the_date_display -> NavHostRouteConfig.DATE_FORMAT_DIALOG_ROUTE
-                    R.string.update_date_format -> NavHostRouteConfig.DATE_FORMAT_SELECTOR_DIALOG_ROUTE
-                    R.string.time_format -> NavHostRouteConfig.TIME_FORMAT_DIALOG_ROUTE
-                    R.string.update_language -> NavHostRouteConfig.LANGUAGE_CONFIGURATION_DIALOG_ROUTE
-                    R.string.config_power_by -> NavHostRouteConfig.POWER_BY_DIALOG_ROUTE
-                    else -> NavHostRouteConfig.THEME_FORMAT_DIALOG_ROUTE
+                    R.string.theme_mode -> NavHostRouteConfig.Dialog.THEME_FORMAT
+                    R.string.update_the_date_display -> NavHostRouteConfig.Dialog.DATE_FORMAT
+                    R.string.update_date_format -> NavHostRouteConfig.Dialog.DateFormatSelector.ROUTE
+                    R.string.time_format -> NavHostRouteConfig.Dialog.TIME_FORMAT
+                    R.string.update_language -> NavHostRouteConfig.Dialog.LanguageConfig.ROUTE
+                    R.string.config_power_by -> NavHostRouteConfig.Dialog.POWER_BY
+                    else -> NavHostRouteConfig.Dialog.THEME_FORMAT
                 }
                 navigateEvent?.invoke(navigateRoute)
             })

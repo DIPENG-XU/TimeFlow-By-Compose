@@ -1,34 +1,43 @@
 package com.apollo.timeflow.module.moduleNavHost
 
-object NavHostRouteConfig {
-
-    const val NAV_HOST_LAUNCH_PAGE = "navigation host route for launch page"
-
-    const val NAV_HOST_ROUTE_FOR_HOMEFEED = "navigation host route for homefeed"
-
-    const val NAV_HOST_ROUTE_FOR_SETTINGS = "navigation host route for settings"
-
-    const val TIME_FORMAT_DIALOG_ROUTE = "time format dialog route"
-
-    const val DATE_FORMAT_DIALOG_ROUTE = "date format dialog route"
-
-    const val THEME_FORMAT_DIALOG_ROUTE = "theme format dialog route"
-
-    const val LANGUAGE_CONFIGURATION_DIALOG_ROUTE = "language configuration dialog route"
-
-    const val LANGUAGE_CONFIGURATION_CONFIRM_DIALOG_ROUTE = "language configuration confirm dialog route"
-
-    const val DATE_FORMAT_SELECTOR_DIALOG_ROUTE = "date format selector route dialog"
-
-    const val DATE_FORMAT_SELECTOR_CONFIRM_DIALOG_ROUTE = "date format selector confirm route dialog"
-
-    const val POWER_BY_DIALOG_ROUTE = "power by dialog route"
-}
-
 object NavHostLanguageConfigurationConfirmDialogArgument {
-    const val SELECTED_AREA = "selected area"
+    const val SELECTED_AREA = "selected_area"
 }
 
 object NavHostDateFormatSelectorConfigurationConfirmDialogArgument {
-    const val SELECTED_DATE_FORMAT = "selected date format"
+    const val SELECTED_DATE_FORMAT = "selected_date_format"
+}
+
+object NavHostRouteConfig {
+
+    object Launch {
+        const val ROUTE = "launch"
+    }
+
+    object HomeFeed {
+        const val ROUTE = "homefeed"
+    }
+
+    object Settings {
+        const val ROUTE = "settings"
+    }
+
+    object Dialog {
+        const val TIME_FORMAT = "dialog_time_format"
+        const val DATE_FORMAT = "dialog_date_format"
+        const val THEME_FORMAT = "dialog_theme_format"
+        const val POWER_BY = "dialog_power_by"
+
+        object LanguageConfig {
+            const val ROUTE = "dialog_language_config"
+            const val CONFIRM = "dialog_language_config_confirm"
+            const val ARG_SELECTED_AREA = "selected_area"
+        }
+
+        object DateFormatSelector {
+            const val ROUTE = "dialog_date_format_selector"
+            const val CONFIRM = "dialog_date_format_selector_confirm"
+            const val ARG_SELECTED_FORMAT = "selected_date_format"
+        }
+    }
 }
