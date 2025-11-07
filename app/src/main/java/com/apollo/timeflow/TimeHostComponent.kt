@@ -10,7 +10,7 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.ViewModelStoreOwner
 import com.apollo.timeflow.module.moduleNavHost.TimeFlowNavHost
 import com.apollo.timeflow.theme.TimeFlowTheme
