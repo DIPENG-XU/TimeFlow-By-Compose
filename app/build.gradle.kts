@@ -14,8 +14,8 @@ android {
         applicationId = "com.apollo.timeflow"
         minSdk = 26
         targetSdk = 36
-        versionCode = 19
-        versionName = "2.2.9"
+        versionCode = 20
+        versionName = "2.2.10"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

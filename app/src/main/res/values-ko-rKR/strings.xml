@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">TimeFlow</string>
+    <string name="am" translatable="false">AM</string>
+    <string name="pm" translatable="false">PM</string>
+
+    <string name="theme_mode">테마 모드 업데이트</string>
+    <string name="time_format">시간 형식 업데이트</string>
+    <string name="update_the_date_display">날짜 표시 업데이트</string>
+    <string name="update_date_format">날짜 형식 업데이트</string>
+    <string name="config_power_by">PowerBy-시작 페이지</string>
+    <string name="update_language" translatable="false">언어 설정</string>
+
+    <string name="title_confirm">%s</string>
+    <string name="current_state_confirm">현재 상태: <u>%s</u></string>
+    <string name="new_state_confirm">새로운 상태: <u>%s</u></string>
+    <string name="confirm">확인</string>
+    <string name="dismiss">취소</string>
+
+    <string name="base12">12시간제</string>
+    <string name="base24">24시간제</string>
+    <string name="light_mode">라이트 모드</string>
+    <string name="dark_mode">다크 모드</string>
+    <string name="open">열기</string>
+    <string name="close">닫기</string>
+
+    <string name="success_to_update">%s에서 %s(으)로 성공적으로 변경되었습니다</string>
+    <string name="dismiss_to_update">변경이 취소되었습니다</string>
+
+    <string name="current_version">현재 버전: %s</string>
+
+    <string name="update_language_confirm_title">언어 업데이트</string>
+    <string name="english" translatable="false">English</string>
+    <string name="chinese_zh_cn" translatable="false">简体中文</string>
+    <string name="chinese_zh_hk" translatable="false">繁體中文(香港지역)</string>
+    <string name="chinese_zh_tw" translatable="false">繁體中文(대만지역)</string>
+    <string name="language" translatable="false">언어를 선택하세요</string>
+    <string name="unknown_language">알 수 없는 언어</string>
+    <string name="system_language">시스템 언어</string>
+
+    <string name="yyyyMMdd" translatable="false">yyyy.MM.dd</string>
+    <string name="ddMMyyyy" translatable="false">dd.MM.yyyy</string>
+    <string name="MMddyyyy" translatable="false">MM.dd.yyyy</string>
+
+    <string name="monday">월요일</string>
+    <string name="tuesday">화요일</string>
+    <string name="wednesday">수요일</string>
+    <string name="thursday">목요일</string>
+    <string name="friday">금요일</string>
+    <string name="saturday">토요일</string>
+    <string name="sunday">일요일</string>
+
+    <string name="morning">평온한 아침</string>
+    <string name="afternoon">기분 좋은 오후</string>
+    <string name="nightfall">로맨틱한 황혼</string>
+    <string name="midnight">즐거운 자정</string>
+    <string name="evening">고요한 저녁</string>
+
+    <string name="welcome_in_launch_page">오늘은 %s입니다!\nTimeFlow에 오신 것을 환영합니다. 멋진 %s 보내세요!</string>
+    <string name="power_by_apollo" translatable="false">Power By DIPENG-XU</string>
+</resources>
