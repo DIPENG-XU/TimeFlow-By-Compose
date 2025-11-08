@@ -33,6 +33,8 @@
     <string name="chinese_zh_cn" translatable="false">简体中文</string>
     <string name="chinese_zh_hk" translatable="false">繁體中文(香港地區)</string>
     <string name="chinese_zh_tw" translatable="false">繁體中文(臺灣地區)</string>
+    <string name="chinese_zh_jp" translatable="false">日本語</string>
+    <string name="chinese_zh_ko" translatable="false">한국어</string>
     <string name="language" translatable="false">Please select your language</string>
     <string name="unknown_language">Unknown Language</string>
     <string name="system_language">System Language</string>
