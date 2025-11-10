@@ -3,10 +3,10 @@ package com.apollo.timeflow.module.settings.ui
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.runtime.Composable
@@ -49,23 +49,28 @@ fun LanguageConfigurationListDialog(
             }
         },
         text = {
-            Column(
+            LazyColumn(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 val currentLanguage = AppCompatDelegate.getApplicationLocales().toLanguageTags()
-                LANGUAGE_LIST.filter { it.name != currentLanguage }.forEach {
+
+                val operateLanguage = LANGUAGE_LIST.filter { it.name != currentLanguage }
+                items(operateLanguage.size) { index ->
+                    val language = operateLanguage.getOrNull(index) ?: return@items
+
                     DefaultText(
-                        text = stringResource(id = it.stringRes),
+                        text = stringResource(id = language.stringRes),
                         fontSize = getFontSizeInSetting(timeViewModel.deviceUIState.value),
                         modifier = Modifier
                             .clickable {
-                                navigateClickable.invoke("${NavHostRouteConfig.Dialog.LanguageConfig.CONFIRM}/${it.name}")
+                                navigateClickable.invoke("${NavHostRouteConfig.Dialog.LanguageConfig.CONFIRM}/${language.name}")
                             }
                             .padding(12.dp),
                     )
                 }
+
             }
         },
         onDismissRequest = navigatePopBackStack,

@@ -15,9 +15,13 @@ sealed class LanguageType(
 
     data object TraditionalChineseForTW : LanguageType("zh-TW", R.string.chinese_zh_tw)
 
-    data object Japanese: LanguageType("ja", R.string.chinese_zh_jp)
+    data object Japanese : LanguageType("ja", R.string.chinese_zh_jp)
 
-    data object SouthKorea: LanguageType("ko", R.string.chinese_zh_ko)
+    data object SouthKorea : LanguageType("ko", R.string.chinese_zh_ko)
+
+    data object France : LanguageType("fr", R.string.france)
+
+    data object Germany : LanguageType("de", R.string.germany)
 }
 
 val LANGUAGE_LIST = listOf(
@@ -27,6 +31,8 @@ val LANGUAGE_LIST = listOf(
     LanguageType.TraditionalChineseForTW,
     LanguageType.Japanese,
     LanguageType.SouthKorea,
+    LanguageType.France,
+    LanguageType.Germany,
 )
 
 @StringRes
