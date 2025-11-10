@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="theme_mode">Mettre à jour le mode de thème</string>
+    <string name="time_format">Mettre à jour le format de l’heure</string>
+    <string name="update_the_date_display">Mettre à jour l’affichage de la date</string>
+    <string name="update_date_format">Mettre à jour le format de date</string>
+    <string name="config_power_by">PowerBy-Page de démarrage</string>
+
+    <string name="title_confirm">%s</string>
+    <string name="current_state_confirm">État actuel : <u>%s</u></string>
+    <string name="new_state_confirm">Nouvel état : <u>%s</u></string>
+    <string name="confirm">Confirmer</string>
+    <string name="dismiss">Annuler</string>
+
+    <string name="base12">Format 12 heures</string>
+    <string name="base24">Format 24 heures</string>
+    <string name="light_mode">Mode clair</string>
+    <string name="dark_mode">Mode sombre</string>
+    <string name="open">Ouvrir</string>
+    <string name="close">Fermer</string>
+
+    <string name="success_to_update">%s a été modifié avec succès en %s</string>
+    <string name="dismiss_to_update">La modification a été annulée</string>
+
+    <string name="current_version">Version actuelle : %s</string>
+
+    <string name="update_language_confirm_title">Mettre à jour la langue</string>
+    <string name="unknown_language">Langue inconnue</string>
+    <string name="system_language">Langue du système</string>
+
+    <string name="monday">Lundi</string>
+    <string name="tuesday">Mardi</string>
+    <string name="wednesday">Mercredi</string>
+    <string name="thursday">Jeudi</string>
+    <string name="friday">Vendredi</string>
+    <string name="saturday">Samedi</string>
+    <string name="sunday">Dimanche</string>
+
+    <string name="morning">Matin détendu</string>
+    <string name="afternoon">Après-midi agréable</string>
+    <string name="nightfall">Soirée romantique</string>
+    <string name="midnight">Minuit joyeux</string>
+    <string name="evening">Soir tranquille</string>
+
+    <string name="welcome_in_launch_page">Aujourd’hui, c’est %s !\nBienvenue dans TimeFlow et passez un excellent moment\npendant ce %s !</string>
+</resources>

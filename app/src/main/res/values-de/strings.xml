@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="theme_mode">Designmodus aktualisieren</string>
+    <string name="time_format">Zeitformat aktualisieren</string>
+    <string name="update_the_date_display">Datumsanzeige aktualisieren</string>
+    <string name="update_date_format">Datumsformat aktualisieren</string>
+    <string name="config_power_by">PowerBy-Startseite</string>
+
+    <string name="title_confirm">%s</string>
+    <string name="current_state_confirm">Aktueller Status: <u>%s</u></string>
+    <string name="new_state_confirm">Neuer Status: <u>%s</u></string>
+    <string name="confirm">Bestätigen</string>
+    <string name="dismiss">Abbrechen</string>
+
+    <string name="base12">12-Stunden-Format</string>
+    <string name="base24">24-Stunden-Format</string>
+    <string name="light_mode">Heller Modus</string>
+    <string name="dark_mode">Dunkler Modus</string>
+    <string name="open">Öffnen</string>
+    <string name="close">Schließen</string>
+
+    <string name="success_to_update">%s wurde erfolgreich in %s geändert</string>
+    <string name="dismiss_to_update">Die Änderung wurde abgebrochen</string>
+
+    <string name="current_version">Aktuelle Version: %s</string>
+
+    <string name="update_language_confirm_title">Sprache aktualisieren</string>
+    <string name="unknown_language">Unbekannte Sprache</string>
+    <string name="system_language">Systemsprache</string>
+
+    <string name="monday">Montag</string>
+    <string name="tuesday">Dienstag</string>
+    <string name="wednesday">Mittwoch</string>
+    <string name="thursday">Donnerstag</string>
+    <string name="friday">Freitag</string>
+    <string name="saturday">Samstag</string>
+    <string name="sunday">Sonntag</string>
+
+    <string name="morning">Entspannter Morgen</string>
+    <string name="afternoon">Angenehmer Nachmittag</string>
+    <string name="nightfall">Romantischer Abend</string>
+    <string name="midnight">Fröhliche Mitternacht</string>
+    <string name="evening">Ruhiger Abend</string>
+
+    <string name="welcome_in_launch_page">Heute ist %s!\nWillkommen bei TimeFlow – wir wünschen Ihnen eine schöne Zeit\nan diesem %s!</string>
+</resources>

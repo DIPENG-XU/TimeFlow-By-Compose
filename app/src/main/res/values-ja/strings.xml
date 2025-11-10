@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">TimeFlow</string>
-    <string name="am" translatable="false">AM</string>
-    <string name="pm" translatable="false">PM</string>
 
     <string name="theme_mode">テーマモードを更新</string>
     <string name="time_format">時間形式を更新</string>
     <string name="update_the_date_display">日付表示を更新</string>
     <string name="update_date_format">日付フォーマットを更新</string>
     <string name="config_power_by">PowerBy-ランチページ</string>
-    <string name="update_language" translatable="false">言語設定</string>
 
     <string name="title_confirm">%s</string>
     <string name="current_state_confirm">現在の状態：<u>%s</u></string>
@@ -30,13 +26,9 @@
     <string name="current_version">現在のバージョン：%s</string>
 
     <string name="update_language_confirm_title">言語を更新</string>
-    <string name="language" translatable="false">言語を選択してください</string>
     <string name="unknown_language">不明な言語</string>
     <string name="system_language">システム言語</string>
 
-    <string name="yyyyMMdd" translatable="false">yyyy.MM.dd</string>
-    <string name="ddMMyyyy" translatable="false">dd.MM.yyyy</string>
-    <string name="MMddyyyy" translatable="false">MM.dd.yyyy</string>
 
     <string name="monday">月曜日</string>
     <string name="tuesday">火曜日</string>
