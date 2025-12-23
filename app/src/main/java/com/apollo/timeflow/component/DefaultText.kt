@@ -14,6 +14,7 @@ fun DefaultText(
     fontSize: TextUnit,
     color: Color = Color.Black,
 ) {
+
     Text(
         text = text,
         fontSize = fontSize,

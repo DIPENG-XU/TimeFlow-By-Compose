@@ -11,6 +11,7 @@ import com.apollo.timeflow.module.homefeed.ui.card.CardHomeFeed
 import com.apollo.timeflow.module.launch.ui.LaunchPage
 import com.apollo.timeflow.module.settings.ui.ConfirmDialog
 import com.apollo.timeflow.module.settings.ui.DateFormatListDialog
+import com.apollo.timeflow.module.settings.ui.FontConfigurationListDialog
 import com.apollo.timeflow.module.settings.ui.LanguageConfigurationListDialog
 import com.apollo.timeflow.module.settings.ui.TimeFlowSettings
 
@@ -90,6 +91,23 @@ object ModuleGraph {
         confirmDialog(
             routePattern = "${NavHostRouteConfig.Dialog.LanguageConfig.CONFIRM}/{${NavHostLanguageConfigurationConfirmDialogArgument.SELECTED_AREA}}",
             argName = NavHostLanguageConfigurationConfirmDialogArgument.SELECTED_AREA,
+            viewModelStoreOwner = viewModelStoreOwner,
+            navController = navController
+        )
+
+        // Font Configuration List
+        composable(NavHostRouteConfig.Dialog.FontConfig.ROUTE) {
+            FontConfigurationListDialog(
+                viewModelStoreOwner = viewModelStoreOwner,
+                navigateClickable = { navController.navigate(it) },
+                navigatePopBackStack = { navController.popBackStack(NavHostRouteConfig.Settings.ROUTE, false) }
+            )
+        }
+
+        // Font Confirm Dialog With parameter
+        confirmDialog(
+            routePattern = "${NavHostRouteConfig.Dialog.FontConfig.CONFIRM}/{${NavHostFontConfigurationConfirmDialogArgs.SELECT_FONT}}",
+            argName = NavHostFontConfigurationConfirmDialogArgs.SELECT_FONT,
             viewModelStoreOwner = viewModelStoreOwner,
             navController = navController
         )

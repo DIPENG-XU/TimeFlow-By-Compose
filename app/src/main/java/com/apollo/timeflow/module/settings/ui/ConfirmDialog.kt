@@ -18,11 +18,14 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.ViewModelStoreOwner
 import com.apollo.timeflow.R
 import com.apollo.timeflow.component.DefaultText
+import com.apollo.timeflow.module.homefeed.service.feature.IThemeService
 import com.apollo.timeflow.module.homefeed.uistate.DateUIState
 import com.apollo.timeflow.module.moduleNavHost.NavHostDateFormatSelectorConfigurationConfirmDialogArgument
+import com.apollo.timeflow.module.moduleNavHost.NavHostFontConfigurationConfirmDialogArgs
 import com.apollo.timeflow.module.moduleNavHost.NavHostLanguageConfigurationConfirmDialogArgument
 import com.apollo.timeflow.module.moduleNavHost.NavHostRouteConfig
 import com.apollo.timeflow.module.settings.uiState.ConfirmDialogUIState
+import com.apollo.timeflow.module.settings.utils.FontMappingType
 import com.apollo.timeflow.module.settings.utils.LanguageType
 import com.apollo.timeflow.module.settings.utils.mappedToAStringResByName
 import com.apollo.timeflow.utils.getFontSizeInSetting
@@ -38,9 +41,12 @@ fun ConfirmDialog(
     navigatePopBack: ((String, Boolean) -> Unit) = { _, _ -> }
 ) {
     val timeViewModel = hiltViewModel<TimeViewModel>(viewModelStoreOwner)
+
+    val themeViewModel = hiltViewModel<ThemeViewModel>(viewModelStoreOwner)
+
+    // To Huge and need to move some code
     val confirmDialogUIState = when (route) {
         NavHostRouteConfig.Dialog.THEME_FORMAT -> {
-            val themeViewModel = hiltViewModel<ThemeViewModel>(viewModelStoreOwner)
             val (current, next) = if (themeViewModel.currentThemeFlow.collectAsState(initial = 0).value == 0) {
                 R.string.light_mode to R.string.dark_mode
             } else {
@@ -137,6 +143,25 @@ fun ConfirmDialog(
                     timeViewModel.updatePowerByShowOrHide()
                 }
             )
+        }
+
+        NavHostRouteConfig.Dialog.FontConfig.CONFIRM -> {
+            val currentFontName = themeViewModel.fontFlow.collectAsState(FontMappingType.PoppinsBold.name).value
+
+            val nextFontName = bundle.getString(
+                NavHostFontConfigurationConfirmDialogArgs.SELECT_FONT,
+                FontMappingType.PoppinsBold.name,
+            )
+
+            val currentFontNameRes = FontMappingType.getFontMappingTypeByName(currentFontName).nameRes
+            val nextFontNameRes = FontMappingType.getFontMappingTypeByName(nextFontName).nameRes
+
+            ConfirmDialogUIState(pageName = R.string.update_language_confirm_title,
+                current = currentFontNameRes,
+                next = nextFontNameRes,
+                onClickEvent = {
+                    themeViewModel.updateFont(nextFontName)
+                })
         }
 
 

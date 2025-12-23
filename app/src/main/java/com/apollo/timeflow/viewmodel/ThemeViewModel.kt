@@ -45,6 +45,12 @@ class ThemeViewModel @Inject constructor(
         iThemeService.updateThemeRecord(next)
     }
 
+    val fontFlow: Flow<String> get() = iThemeService.fontFlow
+
+    fun updateFont(name: String) = _coroutineScope.launch {
+        iThemeService.updateFont(name)
+    }
+
     override fun onCleared() {
         super.onCleared()
         _coroutineScope.cancel()

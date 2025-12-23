@@ -20,6 +20,7 @@ class SettingsService @Inject constructor(
                 R.string.update_the_date_display,
                 R.string.update_date_format,
                 R.string.config_power_by,
+                R.string.update_font,
                 R.string.update_language,
             )
 

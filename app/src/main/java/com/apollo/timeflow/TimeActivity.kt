@@ -7,11 +7,18 @@ import android.view.Window
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.apollo.timeflow.basesupport.BaseActivity
 import com.apollo.timeflow.broadcast.TimeFlowBroadcastReceiver
+import com.apollo.timeflow.module.settings.utils.FontMappingType
+import com.apollo.timeflow.utils.globalFontId
 import com.apollo.timeflow.viewmodel.ThemeViewModel
 import com.apollo.timeflow.viewmodel.TimeViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class TimeActivity : BaseActivity("TimeActivity") {
@@ -24,6 +31,14 @@ class TimeActivity : BaseActivity("TimeActivity") {
         if (savedInstanceState == null) {
             this.window.requestFeature(Window.FEATURE_NO_TITLE)
             this.addBroadcast()
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                themeViewModel.fontFlow.collectLatest {
+                    globalFontId = FontMappingType.getFontMappingTypeByName(it).fontRes
+                }
+            }
         }
 
         setContent {

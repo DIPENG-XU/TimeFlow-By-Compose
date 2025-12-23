@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelStoreOwner
 import com.apollo.timeflow.R
 import com.apollo.timeflow.component.HiddenBarEffect
 import com.apollo.timeflow.module.launch.viewmodel.SplashViewModel
+import com.apollo.timeflow.utils.defaultFontFamily
 import com.apollo.timeflow.utils.getFontSizeInHomeFeed
 import com.apollo.timeflow.utils.getFontSizeInPowerBy
 import com.apollo.timeflow.viewmodel.TimeViewModel
@@ -43,11 +44,7 @@ fun LaunchPage(
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.primary,
             lineHeight = 48.sp,
-            fontFamily = FontFamily(
-                fonts = listOf(
-                    Font(R.font.poppins_bold, FontWeight.Light),
-                )
-            ),
+            fontFamily = defaultFontFamily,
             fontSize = getFontSizeInHomeFeed(deviceType),
             modifier = Modifier
                 .align(Alignment.Center)
@@ -59,11 +56,7 @@ fun LaunchPage(
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.primary,
             lineHeight = 48.sp,
-            fontFamily = FontFamily(
-                fonts = listOf(
-                    Font(R.font.poppins_bold, FontWeight.Light),
-                )
-            ),
+            fontFamily = defaultFontFamily,
             fontSize = getFontSizeInPowerBy(deviceType),
             modifier = Modifier
                 .align(Alignment.BottomCenter)

@@ -18,6 +18,22 @@ internal val imageHash = HashMap<Int, Int>().apply {
     put(9, R.drawable.ic_number9)
 }
 
-internal val defaultFontFamily = FontFamily(
-    fonts = listOf(Font(R.font.poppins_bold, FontWeight.Light))
+/**
+ * need to Fix it later
+ * the issue:
+ * 1. break thread safety
+ * 2. break single source rule
+ */
+@Deprecated("Need to fix later")
+var globalFontId: Int = R.font.poppins_bold
+
+/**
+ * need to Fix it later
+ * the issue:
+ * 1. break thread safety
+ * 2. break single source rule
+ */
+@Deprecated("Need to fix later")
+internal val defaultFontFamily get() = FontFamily(
+    fonts = listOf(Font(globalFontId, FontWeight.Light))
 )
