@@ -8,19 +8,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelStoreOwner
-import com.apollo.timeflow.R
 import com.apollo.timeflow.component.HiddenBarEffect
 import com.apollo.timeflow.module.launch.viewmodel.SplashViewModel
-import com.apollo.timeflow.utils.defaultFontFamily
+import com.apollo.timeflow.utils.currentFontRes
 import com.apollo.timeflow.utils.getFontSizeInHomeFeed
 import com.apollo.timeflow.utils.getFontSizeInPowerBy
 import com.apollo.timeflow.viewmodel.TimeViewModel
@@ -44,7 +40,7 @@ fun LaunchPage(
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.primary,
             lineHeight = 48.sp,
-            fontFamily = defaultFontFamily,
+            fontFamily = currentFontRes,
             fontSize = getFontSizeInHomeFeed(deviceType),
             modifier = Modifier
                 .align(Alignment.Center)
@@ -56,7 +52,7 @@ fun LaunchPage(
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.primary,
             lineHeight = 48.sp,
-            fontFamily = defaultFontFamily,
+            fontFamily = currentFontRes,
             fontSize = getFontSizeInPowerBy(deviceType),
             modifier = Modifier
                 .align(Alignment.BottomCenter)

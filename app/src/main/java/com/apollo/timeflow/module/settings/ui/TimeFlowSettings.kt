@@ -39,7 +39,7 @@ import com.apollo.timeflow.module.moduleNavHost.NavHostRouteConfig
 import com.apollo.timeflow.module.settings.uiState.SettingsUIState
 import com.apollo.timeflow.module.settings.viewmodel.SettingsViewModel
 import com.apollo.timeflow.utils.DeviceUIState
-import com.apollo.timeflow.utils.defaultFontFamily
+import com.apollo.timeflow.utils.currentFontRes
 import com.apollo.timeflow.utils.getFontSizeInSetting
 import com.apollo.timeflow.viewmodel.TimeViewModel
 
@@ -180,7 +180,7 @@ private fun SettingsElementItem(
                 text = stringResource(id = settingsElementUIState.nameRes),
                 color = MaterialTheme.colorScheme.primary,
                 fontSize = fontSize,
-                fontFamily = defaultFontFamily,
+                fontFamily = currentFontRes,
                 maxLines = 1,
                 modifier = Modifier
                     .wrapContentWidth()

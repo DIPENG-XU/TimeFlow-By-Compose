@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.TextUnit
-import com.apollo.timeflow.utils.defaultFontFamily
+import com.apollo.timeflow.utils.currentFontRes
 
 @Composable
 fun DefaultText(
@@ -18,7 +18,7 @@ fun DefaultText(
     Text(
         text = text,
         fontSize = fontSize,
-        fontFamily = defaultFontFamily,
+        fontFamily = currentFontRes,
         color = color,
         modifier = modifier
     )

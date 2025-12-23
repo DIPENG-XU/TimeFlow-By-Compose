@@ -9,7 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.apollo.timeflow.utils.DeviceUIState
-import com.apollo.timeflow.utils.defaultFontFamily
+import com.apollo.timeflow.utils.currentFontRes
 import com.apollo.timeflow.utils.getFontSizeInHomeFeed
 
 @Composable
@@ -21,7 +21,7 @@ fun BoxScope.DateText(
         text = currentDate,
         color = MaterialTheme.colorScheme.primary,
         fontSize = getFontSizeInHomeFeed(deviceUIState),
-        fontFamily = defaultFontFamily,
+        fontFamily = currentFontRes,
         modifier = Modifier
             .padding(bottom = 10.dp)
             .align(Alignment.BottomCenter),

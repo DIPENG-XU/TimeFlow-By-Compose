@@ -6,19 +6,14 @@ import android.os.Bundle
 import android.view.Window
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.apollo.timeflow.basesupport.BaseActivity
 import com.apollo.timeflow.broadcast.TimeFlowBroadcastReceiver
-import com.apollo.timeflow.module.settings.utils.FontMappingType
-import com.apollo.timeflow.utils.globalFontId
 import com.apollo.timeflow.viewmodel.ThemeViewModel
 import com.apollo.timeflow.viewmodel.TimeViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class TimeActivity : BaseActivity("TimeActivity") {
@@ -33,18 +28,19 @@ class TimeActivity : BaseActivity("TimeActivity") {
             this.addBroadcast()
         }
 
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                themeViewModel.fontFlow.collectLatest {
-                    globalFontId = FontMappingType.getFontMappingTypeByName(it).fontRes
-                }
-            }
-        }
-
         setContent {
-            TimeHostComponent(
-                viewModelStoreOwner = this,
-            )
+            val fontName = themeViewModel.fontFlow.collectAsStateWithLifecycle(
+                initialValue = RootConfig.DEFAULT_FONT_NAME
+            ).value
+
+            CompositionLocalProvider(
+                RootConfig.LocalFontNameConfig provides fontName
+            ) {
+                TimeHostComponent(
+                    viewModelStoreOwner = this,
+                )
+
+            }
         }
     }
 
