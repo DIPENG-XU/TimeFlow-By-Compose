@@ -26,10 +26,6 @@ sealed class FontMappingType(
         "Night Pump Kind", R.font.night_pump_kind, R.string.font_night_pump_kind
     )
 
-    data object LikeStyle : FontMappingType(
-        "Like Style", R.font.like_style, R.string.font_like_style
-    )
-
     data object DearyBook : FontMappingType(
         "Deary Book", R.font.deary_book, R.string.font_deary_book
     )
@@ -46,6 +42,5 @@ val FONT_LIST = listOf(
     FontMappingType.RainDay,
     FontMappingType.StreetCulture,
     FontMappingType.NightPumpKind,
-    FontMappingType.LikeStyle,
     FontMappingType.DearyBook,
 )
