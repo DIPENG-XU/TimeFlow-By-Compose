@@ -9,8 +9,10 @@ import androidx.activity.viewModels
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.compose.rememberNavController
 import com.apollo.timeflow.basesupport.BaseActivity
 import com.apollo.timeflow.broadcast.TimeFlowBroadcastReceiver
+import com.apollo.timeflow.module.settings.utils.FontMappingType
 import com.apollo.timeflow.viewmodel.ThemeViewModel
 import com.apollo.timeflow.viewmodel.TimeViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,16 +32,16 @@ class TimeActivity : BaseActivity("TimeActivity") {
 
         setContent {
             val fontName = themeViewModel.fontFlow.collectAsStateWithLifecycle(
-                initialValue = RootConfig.DEFAULT_FONT_NAME
+                initialValue = FontMappingType.PoppinsBold.name
             ).value
 
-            CompositionLocalProvider(
-                RootConfig.LocalFontNameConfig provides fontName
-            ) {
-                TimeHostComponent(
-                    viewModelStoreOwner = this,
-                )
+            val navController = rememberNavController()
 
+            CompositionLocalProvider(
+                RootConfig.LocalFontNameConfig provides fontName,
+                RootConfig.LocalActivityViewModelStoreOwner provides this@TimeActivity
+            ) {
+                TimeHostComponent(navController)
             }
         }
     }

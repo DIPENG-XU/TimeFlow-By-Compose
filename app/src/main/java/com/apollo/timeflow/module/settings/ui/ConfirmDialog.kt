@@ -15,10 +15,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.os.LocaleListCompat
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.lifecycle.ViewModelStoreOwner
 import com.apollo.timeflow.R
+import com.apollo.timeflow.RootConfig
 import com.apollo.timeflow.component.DefaultText
-import com.apollo.timeflow.module.homefeed.service.feature.IThemeService
 import com.apollo.timeflow.module.homefeed.uistate.DateUIState
 import com.apollo.timeflow.module.moduleNavHost.NavHostDateFormatSelectorConfigurationConfirmDialogArgument
 import com.apollo.timeflow.module.moduleNavHost.NavHostFontConfigurationConfirmDialogArgs
@@ -36,13 +35,11 @@ import com.apollo.timeflow.viewmodel.TimeViewModel
 @Composable
 fun ConfirmDialog(
     route: String,
-    viewModelStoreOwner: ViewModelStoreOwner,
     bundle: Bundle = Bundle(),
     navigatePopBack: ((String, Boolean) -> Unit) = { _, _ -> }
 ) {
-    val timeViewModel = hiltViewModel<TimeViewModel>(viewModelStoreOwner)
-
-    val themeViewModel = hiltViewModel<ThemeViewModel>(viewModelStoreOwner)
+    val timeViewModel = hiltViewModel<TimeViewModel>(RootConfig.LocalActivityViewModelStoreOwner.current)
+    val themeViewModel = hiltViewModel<ThemeViewModel>(RootConfig.LocalActivityViewModelStoreOwner.current)
 
     // To Huge and need to move some code
     val confirmDialogUIState = when (route) {
@@ -170,7 +167,7 @@ fun ConfirmDialog(
 
     val fontSize = getFontSizeInSetting(timeViewModel.deviceUIState.value)
 
-    val hostActivityViewModel = hiltViewModel<HostActivityViewModel>(viewModelStoreOwner)
+    val hostActivityViewModel = hiltViewModel<HostActivityViewModel>()
     AlertDialog(
         containerColor = Color.White,
         shape = RoundedCornerShape(size = 8.dp),

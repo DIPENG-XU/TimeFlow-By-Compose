@@ -31,10 +31,9 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelStoreOwner
 import com.apollo.timeflow.R
+import com.apollo.timeflow.RootConfig
 import com.apollo.timeflow.component.DefaultText
-import com.apollo.timeflow.component.HiddenBarEffect
 import com.apollo.timeflow.module.moduleNavHost.NavHostRouteConfig
 import com.apollo.timeflow.module.settings.uiState.SettingsUIState
 import com.apollo.timeflow.module.settings.viewmodel.SettingsViewModel
@@ -45,11 +44,10 @@ import com.apollo.timeflow.viewmodel.TimeViewModel
 
 @Composable
 fun TimeFlowSettings(
-    viewModelStoreOwner: ViewModelStoreOwner,
     navigateEvent: ((String) -> Unit)? = null,
 ) {
-    val timeViewModel: TimeViewModel = hiltViewModel(viewModelStoreOwner)
-    val viewModel: SettingsViewModel = hiltViewModel(viewModelStoreOwner)
+    val timeViewModel: TimeViewModel = hiltViewModel(RootConfig.LocalActivityViewModelStoreOwner.current)
+    val viewModel: SettingsViewModel = hiltViewModel(RootConfig.LocalActivityViewModelStoreOwner.current)
 
     val uiState = viewModel.settingsUIState.value
     val versionCode = viewModel.packageVersionName.value
@@ -113,8 +111,6 @@ fun TimeFlowSettings(
         viewModel.fetchSettings()
         viewModel.fetchVersion()
     }
-
-    HiddenBarEffect()
 }
 
 @Composable

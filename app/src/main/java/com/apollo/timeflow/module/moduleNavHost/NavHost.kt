@@ -6,13 +6,12 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.ViewModelStoreOwner
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.rememberNavController
+import com.apollo.timeflow.component.HiddenBarEffect
 
 @Composable
-fun TimeFlowNavHost(viewModelStoreOwner: ViewModelStoreOwner) {
-    val navController = rememberNavController()
+fun TimeFlowNavHost(navController: NavHostController) {
     NavHost(
         navController = navController,
         startDestination = NavHostRouteConfig.Launch.ROUTE,
@@ -21,9 +20,10 @@ fun TimeFlowNavHost(viewModelStoreOwner: ViewModelStoreOwner) {
         exitTransition = { fadeOut(tween(0)) }
     ) {
         with(ModuleGraph) {
-            launchGraph(navController, viewModelStoreOwner)
-            homeGraph(navController, viewModelStoreOwner)
-            settingsGraph(navController, viewModelStoreOwner)
+            launchGraph(navController)
+            homeGraph(navController)
+            settingsGraph(navController)
         }
     }
+    HiddenBarEffect()
 }

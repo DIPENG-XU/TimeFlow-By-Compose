@@ -8,8 +8,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.lifecycle.ViewModelStoreOwner
 import com.apollo.timeflow.R
+import com.apollo.timeflow.RootConfig
 import com.apollo.timeflow.component.DefaultText
 import com.apollo.timeflow.module.moduleNavHost.NavHostRouteConfig
 import com.apollo.timeflow.module.settings.component_ui.SettingDialogListUIComponent
@@ -21,16 +21,15 @@ import com.apollo.timeflow.viewmodel.TimeViewModel
 
 @Composable
 fun FontConfigurationListDialog(
-    viewModelStoreOwner: ViewModelStoreOwner,
     navigateClickable: ((String) -> Unit) = { },
     navigatePopBackStack: (() -> Unit) = { },
 ) {
 
-    val deviceUIState = hiltViewModel<TimeViewModel>(viewModelStoreOwner)
+    val deviceUIState = hiltViewModel<TimeViewModel>(RootConfig.LocalActivityViewModelStoreOwner.current)
         .deviceUIState
         .value
 
-    val currentFontName = hiltViewModel<ThemeViewModel>(viewModelStoreOwner)
+    val currentFontName = hiltViewModel<ThemeViewModel>(RootConfig.LocalActivityViewModelStoreOwner.current)
         .fontFlow
         .collectAsState(FontMappingType.PoppinsBold.name)
         .value

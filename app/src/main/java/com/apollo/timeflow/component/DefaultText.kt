@@ -4,6 +4,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import com.apollo.timeflow.utils.currentFontRes
 
@@ -12,14 +13,17 @@ fun DefaultText(
     modifier: Modifier = Modifier,
     text: String,
     fontSize: TextUnit,
+    lineHeight: TextUnit = TextUnit.Unspecified,
+    textAlign: TextAlign? = null,
     color: Color = Color.Black,
 ) {
-
     Text(
         text = text,
         fontSize = fontSize,
         fontFamily = currentFontRes,
         color = color,
-        modifier = modifier
+        lineHeight = lineHeight,
+        textAlign = textAlign,
+        modifier = modifier,
     )
 }

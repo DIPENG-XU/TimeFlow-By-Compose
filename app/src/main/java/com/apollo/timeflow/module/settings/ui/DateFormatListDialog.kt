@@ -18,8 +18,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.lifecycle.ViewModelStoreOwner
 import com.apollo.timeflow.R
+import com.apollo.timeflow.RootConfig
 import com.apollo.timeflow.component.DefaultText
 import com.apollo.timeflow.module.moduleNavHost.NavHostRouteConfig
 import com.apollo.timeflow.module.settings.utils.DATE_FORMAT_LIST
@@ -28,11 +28,10 @@ import com.apollo.timeflow.viewmodel.TimeViewModel
 
 @Composable
 fun DateFormatListDialog(
-    viewModelStoreOwner: ViewModelStoreOwner,
     navigateClickable: ((String) -> Unit) = { },
     navigatePopBackStack: (() -> Unit) = { },
 ) {
-    val timeViewModel = hiltViewModel<TimeViewModel>(viewModelStoreOwner)
+    val timeViewModel = hiltViewModel<TimeViewModel>(RootConfig.LocalActivityViewModelStoreOwner.current)
     AlertDialog(
         containerColor = Color.White,
         shape = RoundedCornerShape(size = 8.dp),

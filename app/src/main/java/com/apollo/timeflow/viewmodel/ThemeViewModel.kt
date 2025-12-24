@@ -49,16 +49,6 @@ class ThemeViewModel @Inject constructor(
         iThemeService.updateThemeRecord(next)
     }
 
-    val localAppGlobalConfig = compositionLocalOf<String> {
-        FontMappingType.PoppinsBold.name
-    }
-
-    @FontRes
-    @Composable
-    fun getCurrentFontRes(): Int {
-        return FontMappingType.getFontMappingTypeByName(localAppGlobalConfig.current).fontRes
-    }
-
     val fontFlow: Flow<String> get() = iThemeService.fontFlow
 
     fun updateFont(name: String) = _coroutineScope.launch {

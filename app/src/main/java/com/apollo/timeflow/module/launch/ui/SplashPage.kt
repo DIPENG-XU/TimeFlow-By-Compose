@@ -13,8 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelStoreOwner
-import com.apollo.timeflow.component.HiddenBarEffect
+import com.apollo.timeflow.RootConfig
 import com.apollo.timeflow.module.launch.viewmodel.SplashViewModel
 import com.apollo.timeflow.utils.currentFontRes
 import com.apollo.timeflow.utils.getFontSizeInHomeFeed
@@ -26,13 +25,14 @@ import kotlinx.coroutines.withContext
 
 @Composable
 fun LaunchPage(
-    viewModelStoreOwner: ViewModelStoreOwner,
     launchEvent: (() -> Unit) = { }
 ) {
-    val timeViewModel = hiltViewModel<TimeViewModel>(viewModelStoreOwner)
+    val timeViewModel =
+        hiltViewModel<TimeViewModel>(RootConfig.LocalActivityViewModelStoreOwner.current)
     val deviceType = timeViewModel.deviceUIState.value
 
-    val launchViewModel = hiltViewModel<SplashViewModel>(viewModelStoreOwner)
+    val launchViewModel =
+        hiltViewModel<SplashViewModel>(RootConfig.LocalActivityViewModelStoreOwner.current)
 
     Box {
         Text(
@@ -69,7 +69,5 @@ fun LaunchPage(
         fetchAndResideWelcomeSlogan()
         launchEvent()
     }
-
-    HiddenBarEffect()
 }
 
