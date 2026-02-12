@@ -15,14 +15,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.os.LocaleListCompat
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.lifecycle.ViewModelStoreOwner
 import com.apollo.timeflow.R
+import com.apollo.timeflow.RootConfig
 import com.apollo.timeflow.component.DefaultText
 import com.apollo.timeflow.module.homefeed.uistate.DateUIState
 import com.apollo.timeflow.module.moduleNavHost.NavHostDateFormatSelectorConfigurationConfirmDialogArgument
+import com.apollo.timeflow.module.moduleNavHost.NavHostFontConfigurationConfirmDialogArgs
 import com.apollo.timeflow.module.moduleNavHost.NavHostLanguageConfigurationConfirmDialogArgument
 import com.apollo.timeflow.module.moduleNavHost.NavHostRouteConfig
 import com.apollo.timeflow.module.settings.uiState.ConfirmDialogUIState
+import com.apollo.timeflow.module.settings.utils.FontMappingType
 import com.apollo.timeflow.module.settings.utils.LanguageType
 import com.apollo.timeflow.module.settings.utils.mappedToAStringResByName
 import com.apollo.timeflow.utils.getFontSizeInSetting
@@ -33,14 +35,15 @@ import com.apollo.timeflow.viewmodel.TimeViewModel
 @Composable
 fun ConfirmDialog(
     route: String,
-    viewModelStoreOwner: ViewModelStoreOwner,
     bundle: Bundle = Bundle(),
     navigatePopBack: ((String, Boolean) -> Unit) = { _, _ -> }
 ) {
-    val timeViewModel = hiltViewModel<TimeViewModel>(viewModelStoreOwner)
+    val timeViewModel = hiltViewModel<TimeViewModel>(RootConfig.LocalActivityViewModelStoreOwner.current)
+    val themeViewModel = hiltViewModel<ThemeViewModel>(RootConfig.LocalActivityViewModelStoreOwner.current)
+
+    // To Huge and need to move some code
     val confirmDialogUIState = when (route) {
         NavHostRouteConfig.Dialog.THEME_FORMAT -> {
-            val themeViewModel = hiltViewModel<ThemeViewModel>(viewModelStoreOwner)
             val (current, next) = if (themeViewModel.currentThemeFlow.collectAsState(initial = 0).value == 0) {
                 R.string.light_mode to R.string.dark_mode
             } else {
@@ -139,13 +142,32 @@ fun ConfirmDialog(
             )
         }
 
+        NavHostRouteConfig.Dialog.FontConfig.CONFIRM -> {
+            val currentFontName = themeViewModel.fontFlow.collectAsState(FontMappingType.PoppinsBold.name).value
+
+            val nextFontName = bundle.getString(
+                NavHostFontConfigurationConfirmDialogArgs.SELECT_FONT,
+                FontMappingType.PoppinsBold.name,
+            )
+
+            val currentFontNameRes = FontMappingType.getFontMappingTypeByName(currentFontName).nameRes
+            val nextFontNameRes = FontMappingType.getFontMappingTypeByName(nextFontName).nameRes
+
+            ConfirmDialogUIState(pageName = R.string.update_language_confirm_title,
+                current = currentFontNameRes,
+                next = nextFontNameRes,
+                onClickEvent = {
+                    themeViewModel.updateFont(nextFontName)
+                })
+        }
+
 
         else -> throw Exception("Unknown Route, Please check it again!")
     }
 
     val fontSize = getFontSizeInSetting(timeViewModel.deviceUIState.value)
 
-    val hostActivityViewModel = hiltViewModel<HostActivityViewModel>(viewModelStoreOwner)
+    val hostActivityViewModel = hiltViewModel<HostActivityViewModel>()
     AlertDialog(
         containerColor = Color.White,
         shape = RoundedCornerShape(size = 8.dp),

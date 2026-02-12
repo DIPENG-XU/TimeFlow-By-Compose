@@ -26,28 +26,28 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelStoreOwner
 import com.apollo.timeflow.R
+import com.apollo.timeflow.RootConfig
 import com.apollo.timeflow.component.DefaultText
-import com.apollo.timeflow.component.HiddenBarEffect
 import com.apollo.timeflow.module.moduleNavHost.NavHostRouteConfig
 import com.apollo.timeflow.module.settings.uiState.SettingsUIState
 import com.apollo.timeflow.module.settings.viewmodel.SettingsViewModel
-import com.apollo.timeflow.utils.defaultFontFamily
+import com.apollo.timeflow.utils.DeviceUIState
+import com.apollo.timeflow.utils.currentFontRes
 import com.apollo.timeflow.utils.getFontSizeInSetting
 import com.apollo.timeflow.viewmodel.TimeViewModel
 
 @Composable
 fun TimeFlowSettings(
-    viewModelStoreOwner: ViewModelStoreOwner,
     navigateEvent: ((String) -> Unit)? = null,
 ) {
-    val timeViewModel: TimeViewModel = hiltViewModel(viewModelStoreOwner)
-    val viewModel: SettingsViewModel = hiltViewModel(viewModelStoreOwner)
+    val timeViewModel: TimeViewModel = hiltViewModel(RootConfig.LocalActivityViewModelStoreOwner.current)
+    val viewModel: SettingsViewModel = hiltViewModel(RootConfig.LocalActivityViewModelStoreOwner.current)
 
     val uiState = viewModel.settingsUIState.value
     val versionCode = viewModel.packageVersionName.value
@@ -111,8 +111,6 @@ fun TimeFlowSettings(
         viewModel.fetchSettings()
         viewModel.fetchVersion()
     }
-
-    HiddenBarEffect()
 }
 
 @Composable
@@ -158,6 +156,7 @@ private fun SettingsElementItem(
                     R.string.update_date_format -> NavHostRouteConfig.Dialog.DateFormatSelector.ROUTE
                     R.string.time_format -> NavHostRouteConfig.Dialog.TIME_FORMAT
                     R.string.update_language -> NavHostRouteConfig.Dialog.LanguageConfig.ROUTE
+                    R.string.update_font -> NavHostRouteConfig.Dialog.FontConfig.ROUTE
                     R.string.config_power_by -> NavHostRouteConfig.Dialog.POWER_BY
                     else -> NavHostRouteConfig.Dialog.THEME_FORMAT
                 }
@@ -177,7 +176,7 @@ private fun SettingsElementItem(
                 text = stringResource(id = settingsElementUIState.nameRes),
                 color = MaterialTheme.colorScheme.primary,
                 fontSize = fontSize,
-                fontFamily = defaultFontFamily,
+                fontFamily = currentFontRes,
                 maxLines = 1,
                 modifier = Modifier
                     .wrapContentWidth()
@@ -194,4 +193,15 @@ private fun SettingsElementItem(
             )
         }
     }
+}
+
+@Preview
+@Composable
+private fun SettingsElementItemPreview() {
+    val deviceUIState = DeviceUIState.Phone
+
+    SettingsElementItem(
+        SettingsUIState.SettingsElementUIState(R.string.theme_mode),
+        fontSize = getFontSizeInSetting(deviceUIState),
+    )
 }

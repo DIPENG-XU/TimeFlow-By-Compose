@@ -8,6 +8,10 @@ object NavHostDateFormatSelectorConfigurationConfirmDialogArgument {
     const val SELECTED_DATE_FORMAT = "selected_date_format"
 }
 
+object NavHostFontConfigurationConfirmDialogArgs {
+    const val SELECT_FONT = "selected_font"
+}
+
 object NavHostRouteConfig {
 
     object Launch {
@@ -31,13 +35,16 @@ object NavHostRouteConfig {
         object LanguageConfig {
             const val ROUTE = "dialog_language_config"
             const val CONFIRM = "dialog_language_config_confirm"
-            const val ARG_SELECTED_AREA = "selected_area"
+        }
+
+        object FontConfig {
+            const val ROUTE = "dialog_font_config"
+            const val CONFIRM = "dialog_font_config_confirm"
         }
 
         object DateFormatSelector {
             const val ROUTE = "dialog_date_format_selector"
             const val CONFIRM = "dialog_date_format_selector_confirm"
-            const val ARG_SELECTED_FORMAT = "selected_date_format"
         }
     }
 }

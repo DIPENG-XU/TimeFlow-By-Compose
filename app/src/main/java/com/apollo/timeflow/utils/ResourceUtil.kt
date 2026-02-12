@@ -1,9 +1,11 @@
 package com.apollo.timeflow.utils
 
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import com.apollo.timeflow.R
+import com.apollo.timeflow.RootConfig
 
 internal val imageHash = HashMap<Int, Int>().apply {
     put(0, R.drawable.ic_number0)
@@ -18,6 +20,9 @@ internal val imageHash = HashMap<Int, Int>().apply {
     put(9, R.drawable.ic_number9)
 }
 
-internal val defaultFontFamily = FontFamily(
-    fonts = listOf(Font(R.font.poppins_bold, FontWeight.Light))
-)
+
+@get:Composable
+internal val currentFontRes
+    get() = FontFamily(
+        fonts = listOf(Font(RootConfig.getCurrentFontRes(), FontWeight.Light))
+    )

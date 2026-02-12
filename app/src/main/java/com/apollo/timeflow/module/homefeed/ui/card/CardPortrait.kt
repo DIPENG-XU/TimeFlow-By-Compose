@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.lifecycle.ViewModelStoreOwner
+import com.apollo.timeflow.RootConfig
 import com.apollo.timeflow.module.homefeed.ui.component.DateText
 import com.apollo.timeflow.module.homefeed.ui.component.TimeCard
 import com.apollo.timeflow.module.homefeed.uistate.DateUIState
@@ -21,7 +21,6 @@ import com.apollo.timeflow.viewmodel.TimeViewModel
 
 @Composable
 fun CardPortrait(
-    viewModelStoreOwner: ViewModelStoreOwner,
     navigateClickable: (() -> Unit)? = null
 ) {
     "CardPortrait recombination".monitorRecombination()
@@ -30,7 +29,7 @@ fun CardPortrait(
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background),
     ) {
-        val viewModel: TimeViewModel = hiltViewModel(viewModelStoreOwner)
+        val viewModel: TimeViewModel = hiltViewModel(RootConfig.LocalActivityViewModelStoreOwner.current)
         val timeFormat = viewModel.timeFormatRecordDataStoreFlow.collectAsState(initial = false)
         val timeUIState = viewModel.timeUIState.value ?: return
         val dateUIState = viewModel.dateUIStateFlow.collectAsState(initial = DateUIState()).value

@@ -18,7 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.apollo.timeflow.utils.DeviceUIState
-import com.apollo.timeflow.utils.defaultFontFamily
+import com.apollo.timeflow.utils.currentFontRes
 import com.apollo.timeflow.utils.getFontSizeInHomeFeed
 
 
@@ -61,7 +61,7 @@ fun TimeCard(
                 amOrPm ?: "AM",
                 modifier = Modifier.align(Alignment.BottomEnd),
                 color = MaterialTheme.colorScheme.primary,
-                fontFamily = defaultFontFamily,
+                fontFamily = currentFontRes,
                 fontSize = getFontSizeInHomeFeed(deviceUIState),
             )
         }

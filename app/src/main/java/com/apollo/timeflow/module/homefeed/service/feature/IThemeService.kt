@@ -1,5 +1,7 @@
 package com.apollo.timeflow.module.homefeed.service.feature
 
+import com.apollo.timeflow.module.settings.utils.FONT_LIST
+import com.apollo.timeflow.module.settings.utils.FontMappingType
 import kotlinx.coroutines.flow.Flow
 
 interface IThemeService {
@@ -12,6 +14,13 @@ interface IThemeService {
     val themeFlow: Flow<Int>
 
     suspend fun updateThemeRecord(value: Int)
+
+    /**
+     * Refer the Font Mapping [FontMappingType] and [FONT_LIST]
+     */
+    val fontFlow: Flow<String>
+
+    suspend fun updateFont(fontName: String)
 
     companion object {
         const val LIGHT = 0

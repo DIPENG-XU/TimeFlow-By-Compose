@@ -8,6 +8,7 @@
     <string name="update_the_date_display">Update The Date Display</string>
     <string name="update_date_format">Update Date Format</string>
     <string name="config_power_by">PowerBy-LaunchPage</string>
+    <string name="update_font" translatable="false">Update Font</string>
     <string name="update_language" translatable="false">Language Configuration</string>
 
     <string name="title_confirm">%s</string>
@@ -41,6 +42,14 @@
     <string name="language" translatable="false">Please select your language</string>
     <string name="unknown_language">Unknown Language</string>
     <string name="system_language">System Language</string>
+
+    <string name="update_font_confirm_title" translatable="false">Update Font</string>
+    <string name="font_poppins_bold" translatable="false">Poppins Bold</string>
+    <string name="font_rain_day" translatable="false">Rain Day</string>
+    <string name="font_street_culture" translatable="false">Street Culture</string>
+    <string name="font_deary_book" translatable="false">Deary Book</string>
+    <string name="font_like_style" translatable="false">Like Style</string>
+    <string name="font_night_pump_kind" translatable="false">Night Pump Kind</string>
 
     <string name="yyyyMMdd" translatable="false">yyyy.MM.dd</string>
     <string name="ddMMyyyy" translatable="false">dd.MM.yyyy</string>

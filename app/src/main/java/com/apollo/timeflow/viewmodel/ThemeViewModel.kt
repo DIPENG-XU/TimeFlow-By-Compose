@@ -1,8 +1,12 @@
 package com.apollo.timeflow.viewmodel
 
 import android.app.Application
+import androidx.annotation.FontRes
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.compositionLocalOf
 import androidx.lifecycle.AndroidViewModel
 import com.apollo.timeflow.module.homefeed.service.feature.IThemeService
+import com.apollo.timeflow.module.settings.utils.FontMappingType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.cancel
@@ -43,6 +47,12 @@ class ThemeViewModel @Inject constructor(
             else -> throw Exception("Unknown Type")
         }
         iThemeService.updateThemeRecord(next)
+    }
+
+    val fontFlow: Flow<String> get() = iThemeService.fontFlow
+
+    fun updateFont(name: String) = _coroutineScope.launch {
+        iThemeService.updateFont(name)
     }
 
     override fun onCleared() {
