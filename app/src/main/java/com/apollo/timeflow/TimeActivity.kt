@@ -18,17 +18,20 @@ import com.apollo.timeflow.viewmodel.TimeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TimeActivity : BaseActivity("TimeActivity") {
+class TimeActivity : BaseActivity("TimeActivity"), TimeFlowBroadcastReceiver.ITimeCallback {
     private val timeViewModel: TimeViewModel by viewModels<TimeViewModel>()
     private val themeViewModel: ThemeViewModel by viewModels<ThemeViewModel>()
+
+    private lateinit var timeChangeReceiver: TimeFlowBroadcastReceiver
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         if (savedInstanceState == null) {
             this.window.requestFeature(Window.FEATURE_NO_TITLE)
-            this.addBroadcast()
         }
+
+        this.addBroadcast()
 
         setContent {
             val fontName = themeViewModel.fontFlow.collectAsStateWithLifecycle(
@@ -48,35 +51,51 @@ class TimeActivity : BaseActivity("TimeActivity") {
 
     override fun onResume() {
         super.onResume()
-        this.timeViewModel.updateDate()
+        this.onUpdateTime()
+        this.onUpdateDate()
     }
 
     private fun addBroadcast() {
         val intentFilterTimeChange = IntentFilter().apply {
             this.addAction(Intent.ACTION_TIME_TICK)
             this.addAction(Intent.ACTION_TIME_CHANGED)
-
             this.addAction(Intent.ACTION_DATE_CHANGED)
-
             this.addAction(Intent.ACTION_TIMEZONE_CHANGED)
             this.addAction(Intent.ACTION_LOCALE_CHANGED)
         }
 
-        val timeChangeReceiver = TimeFlowBroadcastReceiver(
-            updateTime = {
-                this.timeViewModel.updateTime()
-                this.themeViewModel.autoUpdateThemeCauseProtected()
-            },
-            updateDate = {
-                this.timeViewModel.updateDate()
-            }
-        )
-
+        timeChangeReceiver = TimeFlowBroadcastReceiver()
+        timeChangeReceiver.addCallback(this)
         ContextCompat.registerReceiver(
             applicationContext,
             timeChangeReceiver,
             intentFilterTimeChange,
             ContextCompat.RECEIVER_NOT_EXPORTED
         )
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (::timeChangeReceiver.isInitialized) {
+            try {
+                timeChangeReceiver.removeCallback(this)
+                unregisterReceiver(timeChangeReceiver)
+            } catch (e: IllegalArgumentException) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    override fun onUpdateTime() {
+        if (this.isDestroyed) return
+
+        this.timeViewModel.updateTime()
+        this.themeViewModel.autoUpdateThemeCauseProtected()
+    }
+
+    override fun onUpdateDate() {
+        if (this.isDestroyed) return
+
+        this.timeViewModel.updateDate()
     }
 }

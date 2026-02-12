@@ -13,8 +13,6 @@ fun DefaultText(
     modifier: Modifier = Modifier,
     text: String,
     fontSize: TextUnit,
-    lineHeight: TextUnit = TextUnit.Unspecified,
-    textAlign: TextAlign? = null,
     color: Color = Color.Black,
 ) {
     Text(
@@ -22,8 +20,6 @@ fun DefaultText(
         fontSize = fontSize,
         fontFamily = currentFontRes,
         color = color,
-        lineHeight = lineHeight,
-        textAlign = textAlign,
         modifier = modifier,
     )
 }
