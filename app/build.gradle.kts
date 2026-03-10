@@ -30,15 +30,14 @@ android {
         }
     }
 
-    applicationVariants.all { variant ->
-        variant.outputs
-            .map { it as com.android.build.gradle.internal.api.ApkVariantOutputImpl }
-            .all { output ->
-                val customApkName =
-                    "${variant.productFlavors.first().name}-${variant.productFlavors.first().versionName}.apk"
-                output.outputFileName = customApkName
-                true
-            }
+
+    signingConfigs {
+        create("release") {
+            storeFile = file("../key/TimeFlow")
+            storePassword = System.getenv("STORE_PASSWORD") ?: "timeflow"
+            keyAlias = System.getenv("KEY_ALIAS") ?: "key0"
+            keyPassword = System.getenv("KEY_PASSWORD") ?: "timeflow"
+        }
     }
 
     buildTypes {
@@ -48,6 +47,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 

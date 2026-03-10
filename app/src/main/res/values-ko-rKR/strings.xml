@@ -20,7 +20,7 @@
     <string name="open">열기</string>
     <string name="close">닫기</string>
 
-    <string name="success_to_update">%s에서 %s(으)로 성공적으로 변경되었습니다</string>
+    <string name="success_to_update" formatted="false">%s에서 %s(으)로 성공적으로 변경되었습니다</string>
     <string name="dismiss_to_update">변경이 취소되었습니다</string>
 
     <string name="current_version">현재 버전: %s</string>
@@ -43,5 +43,5 @@
     <string name="midnight">즐거운 자정</string>
     <string name="evening">고요한 저녁</string>
 
-    <string name="welcome_in_launch_page">오늘은 %s입니다!\nTimeFlow에 오신 것을 환영합니다. 멋진 %s 보내세요!</string>
+    <string name="welcome_in_launch_page" formatted="false">오늘은 %s입니다!\nTimeFlow에 오신 것을 환영합니다. 멋진 %s 보내세요!</string>
 </resources>

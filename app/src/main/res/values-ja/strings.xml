@@ -20,7 +20,7 @@
     <string name="open">開く</string>
     <string name="close">閉じる</string>
 
-    <string name="success_to_update">%s を %s に正常に変更しました</string>
+    <string name="success_to_update" formatted="false">%s を %s に正常に変更しました</string>
     <string name="dismiss_to_update">操作がキャンセルされました</string>
 
     <string name="current_version">現在のバージョン：%s</string>
@@ -44,5 +44,5 @@
     <string name="midnight">楽しい真夜中</string>
     <string name="evening">静かな夜</string>
 
-    <string name="welcome_in_launch_page">今日は %s です！\nTimeFlowへようこそ。この%sに素敵な時間をお過ごしください！</string>
+    <string name="welcome_in_launch_page" formatted="false">今日は %s です！\nTimeFlowへようこそ。この%sに素敵な時間をお過ごしください！</string>
 </resources>

@@ -1,7 +1,6 @@
 # Gradle files
 .gradle/
 build/
-
 # Local configuration file (sdk path, etc)
 local.properties
 
@@ -36,3 +35,4 @@ app/release
 app/timeflow
 app/.DS_Store
 .DS_Store
+timeflow/release
