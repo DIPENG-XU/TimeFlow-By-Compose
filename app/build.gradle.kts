@@ -1,3 +1,6 @@
+private val mKeyAlias = "key0"
+private val mPassword = "timeflow"
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.org.jetbrains.kotlin.android)
@@ -14,8 +17,8 @@ android {
         applicationId = "com.apollo.timeflow"
         minSdk = 26
         targetSdk = 36
-        versionCode = 22
-        versionName = "2.3.0"
+        versionCode = 23
+        versionName = "2.3.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -34,9 +37,9 @@ android {
     signingConfigs {
         create("release") {
             storeFile = file("../key/TimeFlow")
-            storePassword = System.getenv("STORE_PASSWORD") ?: "timeflow"
-            keyAlias = System.getenv("KEY_ALIAS") ?: "key0"
-            keyPassword = System.getenv("KEY_PASSWORD") ?: "timeflow"
+            storePassword = System.getenv("STORE_PASSWORD") ?: mPassword
+            keyAlias = System.getenv("KEY_ALIAS") ?: mKeyAlias
+            keyPassword = System.getenv("KEY_PASSWORD") ?: mPassword
         }
     }
 

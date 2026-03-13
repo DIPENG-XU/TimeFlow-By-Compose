@@ -18,7 +18,8 @@
         <activity
             android:name=".TimeActivity"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:configChanges="locale|layoutDirection"
+            android:theme="@style/Theme.TimeFlow.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

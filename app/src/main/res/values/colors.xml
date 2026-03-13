@@ -5,5 +5,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="black">#FF000000</color>
 
+    <color name="transparent">#00000000</color>
+
     <color name="mc_donald_background">#E01FD7</color>
 </resources>
