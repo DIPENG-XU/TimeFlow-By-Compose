@@ -24,7 +24,7 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
 
-    <string name="success_to_update">It have successfully changed %s to %s for you</string>
+    <string name="success_to_update" formatted="false">It have successfully changed %s to %s for you</string>
     <string name="dismiss_to_update">It have been dismissed</string>
 
     <string name="current_version">Current Version: %s</string>
@@ -69,6 +69,6 @@
     <string name="midnight">Merry Midnight</string>
     <string name="evening">Tranquil Evening</string>
 
-    <string name="welcome_in_launch_page">Today is %s!\nWelcome to TimeFlow and hope you have a Good Moment\nin this %s!</string>
+    <string name="welcome_in_launch_page" formatted="false">Today is %s!\nWelcome to TimeFlow and hope you have a Good Moment\nin this %s!</string>
     <string name="power_by_apollo" translatable="false">Power By DIPENG-XU</string>
 </resources>

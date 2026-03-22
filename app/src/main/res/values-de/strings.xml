@@ -19,7 +19,7 @@
     <string name="open">Öffnen</string>
     <string name="close">Schließen</string>
 
-    <string name="success_to_update">%s wurde erfolgreich in %s geändert</string>
+    <string name="success_to_update" formatted="false">%s wurde erfolgreich in %s geändert</string>
     <string name="dismiss_to_update">Die Änderung wurde abgebrochen</string>
 
     <string name="current_version">Aktuelle Version: %s</string>
@@ -42,5 +42,5 @@
     <string name="midnight">Fröhliche Mitternacht</string>
     <string name="evening">Ruhiger Abend</string>
 
-    <string name="welcome_in_launch_page">Heute ist %s!\nWillkommen bei TimeFlow – wir wünschen Ihnen eine schöne Zeit\nan diesem %s!</string>
+    <string name="welcome_in_launch_page" formatted="false">Heute ist %s!\nWillkommen bei TimeFlow – wir wünschen Ihnen eine schöne Zeit\nan diesem %s!</string>
 </resources>
