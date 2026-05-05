@@ -38,8 +38,8 @@ fun ConfirmDialog(
     bundle: Bundle = Bundle(),
     navigatePopBack: ((String, Boolean) -> Unit) = { _, _ -> }
 ) {
-    val timeViewModel = hiltViewModel<TimeViewModel>(RootConfig.LocalActivityViewModelStoreOwner.current)
-    val themeViewModel = hiltViewModel<ThemeViewModel>(RootConfig.LocalActivityViewModelStoreOwner.current)
+    val timeViewModel = hiltViewModel<TimeViewModel>(RootConfig.getCurrentActivityVMStore())
+    val themeViewModel = hiltViewModel<ThemeViewModel>(RootConfig.getCurrentActivityVMStore())
 
     // To Huge and need to move some code
     val confirmDialogUIState = when (route) {

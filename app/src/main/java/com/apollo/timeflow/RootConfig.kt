@@ -4,6 +4,7 @@ import androidx.annotation.FontRes
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.compositionLocalOf
 import androidx.lifecycle.ViewModelStoreOwner
+import androidx.navigation.NavHostController
 import com.apollo.timeflow.module.settings.utils.FontMappingType
 
 object RootConfig {
@@ -19,5 +20,19 @@ object RootConfig {
 
     val LocalActivityViewModelStoreOwner = compositionLocalOf<ViewModelStoreOwner> {
         error("It must provide the LocalActivityViewModelStoreOwner from The Host Activity")
+    }
+
+    @Composable
+    fun getCurrentActivityVMStore(): ViewModelStoreOwner {
+        return LocalActivityViewModelStoreOwner.current
+    }
+
+    val LocalNavigatorController = compositionLocalOf<NavHostController> {
+        error("It must provide the LocalNavigatorController from The Host Activity")
+    }
+
+    @Composable
+    fun getCurrentNavController(): NavHostController {
+        return LocalNavigatorController.current
     }
 }

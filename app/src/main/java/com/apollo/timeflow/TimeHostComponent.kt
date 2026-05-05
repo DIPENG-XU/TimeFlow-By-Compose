@@ -11,13 +11,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.navigation.NavHostController
 import com.apollo.timeflow.module.moduleNavHost.TimeFlowNavHost
 import com.apollo.timeflow.theme.TimeFlowTheme
 import com.apollo.timeflow.viewmodel.HostActivityViewModel
 
 @Composable
-fun TimeHostComponent(navController: NavHostController) {
+fun TimeHostComponent() {
     TimeFlowTheme {
         Scaffold(
             snackbarHost = {
@@ -35,7 +34,7 @@ fun TimeHostComponent(navController: NavHostController) {
                     .background(MaterialTheme.colorScheme.background)
                     .fillMaxSize()
             ) {
-                TimeFlowNavHost(navController)
+                TimeFlowNavHost()
             }
         }
     }

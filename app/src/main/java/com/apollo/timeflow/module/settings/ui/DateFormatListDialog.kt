@@ -31,7 +31,7 @@ fun DateFormatListDialog(
     navigateClickable: ((String) -> Unit) = { },
     navigatePopBackStack: (() -> Unit) = { },
 ) {
-    val timeViewModel = hiltViewModel<TimeViewModel>(RootConfig.LocalActivityViewModelStoreOwner.current)
+    val timeViewModel = hiltViewModel<TimeViewModel>(RootConfig.getCurrentActivityVMStore())
     AlertDialog(
         containerColor = Color.White,
         shape = RoundedCornerShape(size = 8.dp),

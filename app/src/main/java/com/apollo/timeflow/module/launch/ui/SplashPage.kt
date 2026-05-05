@@ -28,11 +28,11 @@ fun LaunchPage(
     launchEvent: (() -> Unit) = { }
 ) {
     val timeViewModel =
-        hiltViewModel<TimeViewModel>(RootConfig.LocalActivityViewModelStoreOwner.current)
+        hiltViewModel<TimeViewModel>(RootConfig.getCurrentActivityVMStore())
     val deviceType = timeViewModel.deviceUIState.value
 
     val launchViewModel =
-        hiltViewModel<SplashViewModel>(RootConfig.LocalActivityViewModelStoreOwner.current)
+        hiltViewModel<SplashViewModel>(RootConfig.getCurrentActivityVMStore())
 
     Box {
         Text(

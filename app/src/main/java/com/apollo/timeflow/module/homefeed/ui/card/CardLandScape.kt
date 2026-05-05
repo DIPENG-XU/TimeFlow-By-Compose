@@ -29,7 +29,7 @@ fun CardLandScape(
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background),
     ) {
-        val viewModel: TimeViewModel = hiltViewModel(RootConfig.LocalActivityViewModelStoreOwner.current)
+        val viewModel: TimeViewModel = hiltViewModel(RootConfig.getCurrentActivityVMStore())
         val timeFormat = viewModel.timeFormatRecordDataStoreFlow.collectAsState(initial = false)
         val timeUIState = viewModel.timeUIState.value ?: return
         val dateUIState = viewModel.dateUIStateFlow.collectAsState(initial = DateUIState()).value

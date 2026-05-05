@@ -46,8 +46,8 @@ import com.apollo.timeflow.viewmodel.TimeViewModel
 fun TimeFlowSettings(
     navigateEvent: ((String) -> Unit)? = null,
 ) {
-    val timeViewModel: TimeViewModel = hiltViewModel(RootConfig.LocalActivityViewModelStoreOwner.current)
-    val viewModel: SettingsViewModel = hiltViewModel(RootConfig.LocalActivityViewModelStoreOwner.current)
+    val timeViewModel: TimeViewModel = hiltViewModel(RootConfig.getCurrentActivityVMStore())
+    val viewModel: SettingsViewModel = hiltViewModel(RootConfig.getCurrentActivityVMStore())
 
     val uiState = viewModel.settingsUIState.value
     val versionCode = viewModel.packageVersionName.value

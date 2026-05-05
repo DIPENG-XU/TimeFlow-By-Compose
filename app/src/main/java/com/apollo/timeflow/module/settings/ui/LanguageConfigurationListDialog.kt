@@ -22,7 +22,7 @@ fun LanguageConfigurationListDialog(
     navigateClickable: ((String) -> Unit) = { },
     navigatePopBackStack: (() -> Unit) = { },
 ) {
-    val timeViewModel = hiltViewModel<TimeViewModel>(RootConfig.LocalActivityViewModelStoreOwner.current)
+    val timeViewModel = hiltViewModel<TimeViewModel>(RootConfig.getCurrentActivityVMStore())
     SettingDialogListUIComponent(
         deviceUIState = timeViewModel.deviceUIState.value,
         navigatePopBackStack = navigatePopBackStack,

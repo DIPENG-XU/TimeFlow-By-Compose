@@ -34,17 +34,21 @@ class TimeActivity : BaseActivity("TimeActivity"), TimeFlowBroadcastReceiver.ITi
         this.addBroadcast()
 
         setContent {
+
+            // Font name -> Global CompositionLocal
             val fontName = themeViewModel.fontFlow.collectAsStateWithLifecycle(
                 initialValue = FontMappingType.PoppinsBold.name
             ).value
 
+            // navigator controller -> Global CompositionLocal
             val navController = rememberNavController()
 
             CompositionLocalProvider(
                 RootConfig.LocalFontNameConfig provides fontName,
-                RootConfig.LocalActivityViewModelStoreOwner provides this@TimeActivity
+                RootConfig.LocalActivityViewModelStoreOwner provides this@TimeActivity,
+                RootConfig.LocalNavigatorController provides navController,
             ) {
-                TimeHostComponent(navController)
+                TimeHostComponent()
             }
         }
     }

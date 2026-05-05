@@ -25,11 +25,11 @@ fun FontConfigurationListDialog(
     navigatePopBackStack: (() -> Unit) = { },
 ) {
 
-    val deviceUIState = hiltViewModel<TimeViewModel>(RootConfig.LocalActivityViewModelStoreOwner.current)
+    val deviceUIState = hiltViewModel<TimeViewModel>(RootConfig.getCurrentActivityVMStore())
         .deviceUIState
         .value
 
-    val currentFontName = hiltViewModel<ThemeViewModel>(RootConfig.LocalActivityViewModelStoreOwner.current)
+    val currentFontName = hiltViewModel<ThemeViewModel>(RootConfig.getCurrentActivityVMStore())
         .fontFlow
         .collectAsState(FontMappingType.PoppinsBold.name)
         .value
