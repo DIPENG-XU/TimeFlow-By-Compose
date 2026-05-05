@@ -6,12 +6,13 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import com.apollo.timeflow.RootConfig
 import com.apollo.timeflow.component.HiddenBarEffect
 
 @Composable
-fun TimeFlowNavHost(navController: NavHostController) {
+fun TimeFlowNavHost() {
+    val navController = RootConfig.getCurrentNavController()
     NavHost(
         navController = navController,
         startDestination = NavHostRouteConfig.Launch.ROUTE,
