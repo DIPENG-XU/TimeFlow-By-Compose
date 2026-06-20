@@ -1,0 +1,61 @@
+﻿key,translatable,en,zh-CN,zh-HK,zh-TW,ja,ko,de,fr
+afternoon,true,Pleasant Afternoon,开启惬意的下午,愜意的晏晝,下午,心地よい午後,기분 좋은 오후,Angenehmer Nachmittag,Après-midi agréable
+base12,true,12-hour Base,12小时进制,12小時進制,12小時進制,12時間制,12시간제,12-Stunden-Format,Format 12 heures
+base24,true,24-hour Base,24小时进制,24小時進制,24小時進制,24時間制,24시간제,24-Stunden-Format,Format 24 heures
+close,true,Close,关闭,熄佐,關上,閉じる,닫기,Schließen,Fermer
+config_power_by,true,PowerBy-LaunchPage,启动页PowerBy设置,啓動頁PowerBy變更,啓動頁PowerBy變更,PowerBy-ランチページ,PowerBy-시작 페이지,PowerBy-Startseite,PowerBy-Page de démarrage
+confirm,true,Confirm,确认,揀定就系噉啦,想好了就這樣改,確認,확인,Bestätigen,Confirmer
+current_state_confirm,true,The Current State is: <u>%s</u>,旧状态: <u>%s</u>,而家噶狀態: <u>%s</u>,現在是這樣子: <u>%s</u>,現在の状態：<u>%s</u>,현재 상태: <u>%s</u>,Aktueller Status: <u>%s</u>,État actuel : <u>%s</u>
+current_version,true,Current Version: %s,当前版本: %s,現時版本: %s,軟體版本: %s,現在のバージョン：%s,현재 버전: %s,Aktuelle Version: %s,Version actuelle : %s
+dark_mode,true,Dark Mode,暗色模式,夜晚模式,夜晚模式,ダークモード,다크 모드,Dunkler Modus,Mode sombre
+dismiss,true,Dismiss,取消,比我再諗諗先,還沒想好啦,キャンセル,취소,Abbrechen,Annuler
+dismiss_to_update,true,It have been dismissed,已经取消更新,好，噉你再諗下先,已經先幫你取消了吼，想好了再來一次吼,操作がキャンセルされました,변경이 취소되었습니다,Die Änderung wurde abgebrochen,La modification a été annulée
+evening,true,Tranquil Evening,享受静谧的夜晚,靜謐的夜晚,靜謐的夜晚,静かな夜,고요한 저녁,Ruhiger Abend,Soir tranquille
+friday,true,Friday,周五,禮拜五,週五,金曜日,금요일,Freitag,Vendredi
+light_mode,true,Light Mode,亮色模式,日間模式,白天模式,ライトモード,라이트 모드,Heller Modus,Mode clair
+midnight,true,Merry Midnight,享受这曼妙的深夜,曼妙的深夜,深夜,楽しい真夜中,즐거운 자정,Fröhliche Mitternacht,Minuit joyeux
+monday,true,Monday,周一,禮拜一,週一,月曜日,월요일,Montag,Lundi
+morning,true,Relaxed Morning,开启这愉悦的上午,舒適的朝早,早上,穏やかな朝,평온한 아침,Entspannter Morgen,Matin détendu
+new_state_confirm,true,The NewState will be: <u>%s</u>,新状态: <u>%s</u>,下一個狀態: <u>%s</u>,往這個狀態變: <u>%s</u>,新しい状態：<u>%s</u>,새로운 상태: <u>%s</u>,Neuer Status: <u>%s</u>,Nouvel état : <u>%s</u>
+nightfall,true,Romantic Nightfall,享受这浪漫的黄昏,浪漫的日落時刻,傍晚,ロマンチックな夕暮れ,로맨틱한 황혼,Romantischer Abend,Soirée romantique
+open,true,Open,打开,揿開,打開,開く,열기,Öffnen,Ouvrir
+saturday,true,Saturday,周六,禮拜六,週六,土曜日,토요일,Samstag,Samedi
+success_to_update,true,It have successfully changed %s to %s for you,已经成功更新%s为%s,好噶，現時經已成功幫你將%s为%s,已經幫你成功更新%s爲%s了吼,%s を %s に正常に変更しました,%s에서 %s(으)로 성공적으로 변경되었습니다,%s wurde erfolgreich in %s geändert,%s a été modifié avec succès en %s
+sunday,true,Sunday,周日,禮拜日,週日,日曜日,일요일,Sonntag,Dimanche
+system_language,true,System Language,系统语言,系統語言,系統語言,システム言語,시스템 언어,Systemsprache,Langue du système
+theme_mode,true,Update Theme Mode,主题设置,主題變更,主題應用,テーマモードを更新,테마 모드 업데이트,Designmodus aktualisieren,Mettre à jour le mode de thème
+thursday,true,Thursday,周四,禮拜四,週四,木曜日,목요일,Donnerstag,Jeudi
+time_format,true,Update Time Format,时间格式设置,時間格式變更,時間格式應用,時間形式を更新,시간 형식 업데이트,Zeitformat aktualisieren,Mettre à jour le format de l’heure
+title_confirm,true,%s,%s,%s,%s,%s,%s,%s,%s
+tuesday,true,Tuesday,周二,禮拜二,週二,火曜日,화요일,Dienstag,Mardi
+unknown_language,true,Unknown Language,未知语言,未知語言,未知語言,不明な言語,알 수 없는 언어,Unbekannte Sprache,Langue inconnue
+update_date_format,true,Update Date Format,日期格式设置,日期格式變更,日期格式應用,日付フォーマットを更新,날짜 형식 업데이트,Datumsformat aktualisieren,Mettre à jour le format de date
+update_language_confirm_title,true,Update Language,语言设置,語言變更,語言變更,言語を更新,언어 업데이트,Sprache aktualisieren,Mettre à jour la langue
+update_the_date_display,true,Update The Date Display,日期显示设置,日期顯示變更,日期顯示應用,日付表示を更新,날짜 표시 업데이트,Datumsanzeige aktualisieren,Mettre à jour l’affichage de la date
+wednesday,true,Wednesday,周三,禮拜三,週三,水曜日,수요일,Mittwoch,Mercredi
+welcome_in_launch_page,true,Today is %s!\nWelcome to TimeFlow and hope you have a Good Moment\nin this %s!,今天是%s！欢迎使用TimeFlow！\n希望你以愉悦的心情%s！,今日系%s！欢迎黎到TimeFlow噶世界！\n希望你有一个愉悦的心情度过哩个%s！,今天是%s！欢迎来到TimeFlow的世界！\n希望你有一个美妙的心情度过这一个%s,今日は %s です！\nTimeFlowへようこそ。この%sに素敵な時間をお過ごしください！,오늘은 %s입니다!\nTimeFlow에 오신 것을 환영합니다. 멋진 %s 보내세요!,Heute ist %s!\nWillkommen bei TimeFlow – wir wünschen Ihnen eine schöne Zeit\nan diesem %s!,"Aujourd’hui, c’est %s !\nBienvenue dans TimeFlow et passez un excellent moment\npendant ce %s !"
+MMddyyyy,false,MM.dd.yyyy,MM.dd.yyyy,MM.dd.yyyy,MM.dd.yyyy,MM.dd.yyyy,MM.dd.yyyy,MM.dd.yyyy,MM.dd.yyyy
+am,false,AM,AM,AM,AM,AM,AM,AM,AM
+app_name,false,TimeFlow,TimeFlow,TimeFlow,TimeFlow,TimeFlow,TimeFlow,TimeFlow,TimeFlow
+chinese_zh_cn,false,简体中文,简体中文,简体中文,简体中文,简体中文,简体中文,简体中文,简体中文
+chinese_zh_hk,false,繁體中文(香港地區),繁體中文(香港地區),繁體中文(香港地區),繁體中文(香港地區),繁體中文(香港地區),繁體中文(香港地區),繁體中文(香港地區),繁體中文(香港地區)
+chinese_zh_jp,false,日本語,日本語,日本語,日本語,日本語,日本語,日本語,日本語
+chinese_zh_ko,false,한국어,한국어,한국어,한국어,한국어,한국어,한국어,한국어
+chinese_zh_tw,false,繁體中文(臺灣地區),繁體中文(臺灣地區),繁體中文(臺灣地區),繁體中文(臺灣地區),繁體中文(臺灣地區),繁體中文(臺灣地區),繁體中文(臺灣地區),繁體中文(臺灣地區)
+ddMMyyyy,false,dd.MM.yyyy,dd.MM.yyyy,dd.MM.yyyy,dd.MM.yyyy,dd.MM.yyyy,dd.MM.yyyy,dd.MM.yyyy,dd.MM.yyyy
+english,false,English,English,English,English,English,English,English,English
+font_deary_book,false,Deary Book,Deary Book,Deary Book,Deary Book,Deary Book,Deary Book,Deary Book,Deary Book
+font_like_style,false,Like Style,Like Style,Like Style,Like Style,Like Style,Like Style,Like Style,Like Style
+font_night_pump_kind,false,Night Pump Kind,Night Pump Kind,Night Pump Kind,Night Pump Kind,Night Pump Kind,Night Pump Kind,Night Pump Kind,Night Pump Kind
+font_poppins_bold,false,Poppins Bold,Poppins Bold,Poppins Bold,Poppins Bold,Poppins Bold,Poppins Bold,Poppins Bold,Poppins Bold
+font_rain_day,false,Rain Day,Rain Day,Rain Day,Rain Day,Rain Day,Rain Day,Rain Day,Rain Day
+font_street_culture,false,Street Culture,Street Culture,Street Culture,Street Culture,Street Culture,Street Culture,Street Culture,Street Culture
+france,false,français,français,français,français,français,français,français,français
+germany,false,Deutsch,Deutsch,Deutsch,Deutsch,Deutsch,Deutsch,Deutsch,Deutsch
+language,false,Please select your language,Please select your language,Please select your language,Please select your language,Please select your language,Please select your language,Please select your language,Please select your language
+pm,false,PM,PM,PM,PM,PM,PM,PM,PM
+power_by_apollo,false,Power By DIPENG-XU,Power By DIPENG-XU,Power By DIPENG-XU,Power By DIPENG-XU,Power By DIPENG-XU,Power By DIPENG-XU,Power By DIPENG-XU,Power By DIPENG-XU
+update_font,false,Update Font,Update Font,Update Font,Update Font,Update Font,Update Font,Update Font,Update Font
+update_font_confirm_title,false,Update Font,Update Font,Update Font,Update Font,Update Font,Update Font,Update Font,Update Font
+update_language,false,Language Configuration,Language Configuration,Language Configuration,Language Configuration,Language Configuration,Language Configuration,Language Configuration,Language Configuration
+yyyyMMdd,false,yyyy.MM.dd,yyyy.MM.dd,yyyy.MM.dd,yyyy.MM.dd,yyyy.MM.dd,yyyy.MM.dd,yyyy.MM.dd,yyyy.MM.dd

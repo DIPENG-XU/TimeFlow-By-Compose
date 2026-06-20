@@ -36,3 +36,5 @@ app/timeflow
 app/.DS_Store
 .DS_Store
 timeflow/release
+
+i18n/__pycache__/

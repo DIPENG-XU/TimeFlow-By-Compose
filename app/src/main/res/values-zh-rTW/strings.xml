@@ -1,46 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="theme_mode">主題應用</string>
-    <string name="time_format">時間格式應用</string>
-    <string name="update_the_date_display">日期顯示應用</string>
-    <string name="update_date_format">日期格式應用</string>
-    <string name="config_power_by">啓動頁PowerBy變更</string>
 
-    <string name="title_confirm">%s</string>
-    <string name="current_state_confirm">現在是這樣子: <u>%s</u></string>
-    <string name="new_state_confirm">往這個狀態變: <u>%s</u></string>
-    <string name="confirm">想好了就這樣改</string>
-    <string name="dismiss">還沒想好啦</string>
-
+    <string name="afternoon">下午</string>
     <string name="base12">12小時進制</string>
     <string name="base24">24小時進制</string>
-    <string name="light_mode">白天模式</string>
-    <string name="dark_mode">夜晚模式</string>
-    <string name="open">打開</string>
     <string name="close">關上</string>
-
-    <string name="success_to_update" formatted="false">已經幫你成功更新%s爲%s了吼</string>
-    <string name="dismiss_to_update">已經先幫你取消了吼，想好了再來一次吼</string>
-
-    <string name="update_language_confirm_title">語言變更</string>
-    <string name="unknown_language">未知語言</string>
-    <string name="system_language">系統語言</string>
-
+    <string name="config_power_by">啓動頁PowerBy變更</string>
+    <string name="confirm">想好了就這樣改</string>
+    <string name="current_state_confirm">現在是這樣子: <u>%s</u></string>
     <string name="current_version">軟體版本: %s</string>
-
-    <string name="monday">週一</string>
-    <string name="tuesday">週二</string>
-    <string name="wednesday">週三</string>
-    <string name="thursday">週四</string>
-    <string name="friday">週五</string>
-    <string name="saturday">週六</string>
-    <string name="sunday">週日</string>
-
-    <string name="morning">早上</string>
-    <string name="afternoon">下午</string>
-    <string name="nightfall">傍晚</string>
+    <string name="dark_mode">夜晚模式</string>
+    <string name="dismiss">還沒想好啦</string>
+    <string name="dismiss_to_update">已經先幫你取消了吼，想好了再來一次吼</string>
     <string name="evening">靜謐的夜晚</string>
+    <string name="friday">週五</string>
+    <string name="light_mode">白天模式</string>
     <string name="midnight">深夜</string>
-
+    <string name="monday">週一</string>
+    <string name="morning">早上</string>
+    <string name="new_state_confirm">往這個狀態變: <u>%s</u></string>
+    <string name="nightfall">傍晚</string>
+    <string name="open">打開</string>
+    <string name="saturday">週六</string>
+    <string name="success_to_update" formatted="false">已經幫你成功更新%s爲%s了吼</string>
+    <string name="sunday">週日</string>
+    <string name="system_language">系統語言</string>
+    <string name="theme_mode">主題應用</string>
+    <string name="thursday">週四</string>
+    <string name="time_format">時間格式應用</string>
+    <string name="title_confirm">%s</string>
+    <string name="tuesday">週二</string>
+    <string name="unknown_language">未知語言</string>
+    <string name="update_date_format">日期格式應用</string>
+    <string name="update_language_confirm_title">語言變更</string>
+    <string name="update_the_date_display">日期顯示應用</string>
+    <string name="wednesday">週三</string>
     <string name="welcome_in_launch_page" formatted="false">今天是%s！欢迎来到TimeFlow的世界！\n希望你有一个美妙的心情度过这一个%s</string>
 </resources>
