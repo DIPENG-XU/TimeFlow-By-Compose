@@ -1,74 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">TimeFlow</string>
-    <string name="am" translatable="false">AM</string>
-    <string name="pm" translatable="false">PM</string>
-
-    <string name="theme_mode">Update Theme Mode</string>
-    <string name="time_format">Update Time Format</string>
-    <string name="update_the_date_display">Update The Date Display</string>
-    <string name="update_date_format">Update Date Format</string>
-    <string name="config_power_by">PowerBy-LaunchPage</string>
-    <string name="update_font" translatable="false">Update Font</string>
-    <string name="update_language" translatable="false">Language Configuration</string>
-
-    <string name="title_confirm">%s</string>
-    <string name="current_state_confirm">The Current State is: <u>%s</u></string>
-    <string name="new_state_confirm">The NewState will be: <u>%s</u></string>
-    <string name="confirm">Confirm</string>
-    <string name="dismiss">Dismiss</string>
-
+    <string name="afternoon">Pleasant Afternoon</string>
     <string name="base12">12-hour Base</string>
     <string name="base24">24-hour Base</string>
-    <string name="light_mode">Light Mode</string>
-    <string name="dark_mode">Dark Mode</string>
-    <string name="open">Open</string>
     <string name="close">Close</string>
-
-    <string name="success_to_update" formatted="false">It have successfully changed %s to %s for you</string>
-    <string name="dismiss_to_update">It have been dismissed</string>
-
+    <string name="config_power_by">PowerBy-LaunchPage</string>
+    <string name="confirm">Confirm</string>
+    <string name="current_state_confirm">The Current State is: <u>%s</u></string>
     <string name="current_version">Current Version: %s</string>
-
+    <string name="dark_mode">Dark Mode</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="dismiss_to_update">It have been dismissed</string>
+    <string name="evening">Tranquil Evening</string>
+    <string name="friday">Friday</string>
+    <string name="light_mode">Light Mode</string>
+    <string name="midnight">Merry Midnight</string>
+    <string name="monday">Monday</string>
+    <string name="morning">Relaxed Morning</string>
+    <string name="new_state_confirm">The NewState will be: <u>%s</u></string>
+    <string name="nightfall">Romantic Nightfall</string>
+    <string name="open">Open</string>
+    <string name="saturday">Saturday</string>
+    <string name="success_to_update" formatted="false">It have successfully changed %s to %s for you</string>
+    <string name="sunday">Sunday</string>
+    <string name="system_language">System Language</string>
+    <string name="theme_mode">Update Theme Mode</string>
+    <string name="thursday">Thursday</string>
+    <string name="time_format">Update Time Format</string>
+    <string name="title_confirm">%s</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="unknown_language">Unknown Language</string>
+    <string name="update_date_format">Update Date Format</string>
     <string name="update_language_confirm_title">Update Language</string>
-    <string name="english" translatable="false">English</string>
+    <string name="update_the_date_display">Update The Date Display</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="welcome_in_launch_page" formatted="false">Today is %s!\nWelcome to TimeFlow and hope you have a Good Moment\nin this %s!</string>
+    <string name="MMddyyyy" translatable="false">MM.dd.yyyy</string>
+    <string name="am" translatable="false">AM</string>
+    <string name="app_name" translatable="false">TimeFlow</string>
     <string name="chinese_zh_cn" translatable="false">简体中文</string>
     <string name="chinese_zh_hk" translatable="false">繁體中文(香港地區)</string>
-    <string name="chinese_zh_tw" translatable="false">繁體中文(臺灣地區)</string>
     <string name="chinese_zh_jp" translatable="false">日本語</string>
     <string name="chinese_zh_ko" translatable="false">한국어</string>
-    <string name="germany" translatable="false">Deutsch</string>
-    <string name="france" translatable="false">français</string>
-
-    <string name="language" translatable="false">Please select your language</string>
-    <string name="unknown_language">Unknown Language</string>
-    <string name="system_language">System Language</string>
-
-    <string name="update_font_confirm_title" translatable="false">Update Font</string>
-    <string name="font_poppins_bold" translatable="false">Poppins Bold</string>
-    <string name="font_rain_day" translatable="false">Rain Day</string>
-    <string name="font_street_culture" translatable="false">Street Culture</string>
+    <string name="chinese_zh_tw" translatable="false">繁體中文(臺灣地區)</string>
+    <string name="ddMMyyyy" translatable="false">dd.MM.yyyy</string>
+    <string name="english" translatable="false">English</string>
     <string name="font_deary_book" translatable="false">Deary Book</string>
     <string name="font_like_style" translatable="false">Like Style</string>
     <string name="font_night_pump_kind" translatable="false">Night Pump Kind</string>
-
-    <string name="yyyyMMdd" translatable="false">yyyy.MM.dd</string>
-    <string name="ddMMyyyy" translatable="false">dd.MM.yyyy</string>
-    <string name="MMddyyyy" translatable="false">MM.dd.yyyy</string>
-
-    <string name="monday">Monday</string>
-    <string name="tuesday">Tuesday</string>
-    <string name="wednesday">Wednesday</string>
-    <string name="thursday">Thursday</string>
-    <string name="friday">Friday</string>
-    <string name="saturday">Saturday</string>
-    <string name="sunday">Sunday</string>
-
-    <string name="morning">Relaxed Morning</string>
-    <string name="afternoon">Pleasant Afternoon</string>
-    <string name="nightfall">Romantic Nightfall</string>
-    <string name="midnight">Merry Midnight</string>
-    <string name="evening">Tranquil Evening</string>
-
-    <string name="welcome_in_launch_page" formatted="false">Today is %s!\nWelcome to TimeFlow and hope you have a Good Moment\nin this %s!</string>
+    <string name="font_poppins_bold" translatable="false">Poppins Bold</string>
+    <string name="font_rain_day" translatable="false">Rain Day</string>
+    <string name="font_street_culture" translatable="false">Street Culture</string>
+    <string name="france" translatable="false">français</string>
+    <string name="germany" translatable="false">Deutsch</string>
+    <string name="language" translatable="false">Please select your language</string>
+    <string name="pm" translatable="false">PM</string>
     <string name="power_by_apollo" translatable="false">Power By DIPENG-XU</string>
+    <string name="update_font" translatable="false">Update Font</string>
+    <string name="update_font_confirm_title" translatable="false">Update Font</string>
+    <string name="update_language" translatable="false">Language Configuration</string>
+    <string name="yyyyMMdd" translatable="false">yyyy.MM.dd</string>
 </resources>

@@ -120,3 +120,17 @@ dependencies {
     ksp(libs.hilt.android.compiler)
     ksp(libs.androidx.hilt.compiler)
 }
+
+tasks.register<Exec>("syncI18nFromCsv") {
+    group = "i18n"
+    description = "Sync i18n/strings.csv to strings.xml (Python wrapper)"
+    workingDir = rootProject.layout.projectDirectory.asFile
+    commandLine("python3", "i18n/sync-from-csv.py")
+}
+
+tasks.register<Exec>("exportI18nToCsv") {
+    group = "i18n"
+    description = "Export strings.xml to i18n/strings.csv (Python wrapper)"
+    workingDir = rootProject.layout.projectDirectory.asFile
+    commandLine("python3", "i18n/export-to-csv.py")
+}
