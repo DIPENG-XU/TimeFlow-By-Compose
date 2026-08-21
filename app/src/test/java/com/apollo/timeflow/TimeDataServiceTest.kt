@@ -42,7 +42,6 @@ class TimeDataServiceTest {
                 override fun fetchDate(): Date = amDate
 
             },
-            coroutineScope = coroutineScope,
         )
         pmService = TimeDataService(
             iDateModule = object : IDateModule {
@@ -52,7 +51,6 @@ class TimeDataServiceTest {
 
                 override fun fetchDate(): Date = pmDate
             },
-            coroutineScope = coroutineScope,
         )
     }
 
