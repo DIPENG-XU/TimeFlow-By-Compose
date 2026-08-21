@@ -19,10 +19,10 @@ internal fun getDeviceType(context: Context): DeviceUIState {
     display.getMetrics(dm)
     val x = ((dm.widthPixels / dm.xdpi)).toDouble().pow(2.0)
     val y = ((dm.heightPixels / dm.ydpi)).toDouble().pow(2.0)
-    val screenInches = sqrt(x + y)
+    val screenInches = sqrt(x + y).toFloat()
     return when {
         (screenInches < 7.0f) -> DeviceUIState.Phone
-        (screenInches >= 7.0f && screenInches < 15.0f) -> DeviceUIState.Tablet
+        (screenInches in 7.0f..<15.0f) -> DeviceUIState.Tablet
         else -> DeviceUIState.TV
     }
 }

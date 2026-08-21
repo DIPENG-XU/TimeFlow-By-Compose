@@ -14,10 +14,9 @@ import java.util.Locale
 import javax.inject.Inject
 
 class TimeDataService @Inject constructor(
-    private val coroutineScope: CoroutineScope,
     private val iDateModule: IDateModule,
 ) : ITimeDataService {
-    override suspend fun getCurrentTime(timeFormat: Int): TimeUIState = withContext(coroutineScope.coroutineContext) {
+    override suspend fun getCurrentTime(timeFormat: Int): TimeUIState {
         val calendar: Calendar = iDateModule.fetchCalendar()
         val hours = when {
             timeFormat == BASE24 -> calendar.get(Calendar.HOUR_OF_DAY)
@@ -26,7 +25,7 @@ class TimeDataService @Inject constructor(
         }
         val minutes = calendar.get(Calendar.MINUTE)
 
-        TimeUIState(
+        return TimeUIState(
             hoursLeft = hours / 10,
             hoursRight = hours % 10,
             minutesLeft = minutes / 10,
@@ -35,14 +34,14 @@ class TimeDataService @Inject constructor(
         )
     }
 
-    override suspend fun amOrPm(): Int = withContext(coroutineScope.coroutineContext) {
+    override suspend fun amOrPm(): Int {
         val calendar: Calendar = iDateModule.fetchCalendar()
-        if (calendar.get(Calendar.HOUR_OF_DAY) > 12) R.string.pm else R.string.am
+        return if (calendar.get(Calendar.HOUR_OF_DAY) > 12) R.string.pm else R.string.am
     }
 
-    override suspend fun getCurrentDate(dateFormatPattern: String): String = withContext(coroutineScope.coroutineContext) {
+    override suspend fun getCurrentDate(dateFormatPattern: String): String  {
         val date = iDateModule.fetchDate()
-        try {
+        return try {
             SimpleDateFormat(dateFormatPattern, Locale.CHINA)
         } catch (e: Exception) {
             e.printStackTrace()
