@@ -30,7 +30,6 @@ class SplashServiceTest {
         date = Date(1704803400000L)
 
         launchService = SplashService(
-            coroutineScope,
             object : IDateModule {
                 override fun fetchCalendar(): Calendar = Calendar.getInstance().apply {
                     this.time = date
