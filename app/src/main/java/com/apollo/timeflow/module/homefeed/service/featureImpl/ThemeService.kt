@@ -21,30 +21,27 @@ private val Context.themeDataStore: DataStore<Preferences> by preferencesDataSto
 private val Context.fontDataStore: DataStore<Preferences> by preferencesDataStore(name = "Font Record DataStore")
 
 class ThemeService @Inject constructor(
-    private val coroutineScope: CoroutineScope,
-    @ApplicationContext private val context: Context,
+    @param:ApplicationContext private val context: Context,
 ) : IThemeService {
     override val themeFlow: Flow<Int> = this.context.themeDataStore.data.map { preferences ->
         preferences[THEME_DATA_STORE_KEY] ?: 1
     }
 
-    override suspend fun updateThemeRecord(value: Int): Unit =
-        withContext(coroutineScope.coroutineContext) {
-            context.themeDataStore.edit { preferences ->
-                preferences[THEME_DATA_STORE_KEY] = value
-            }
+    override suspend fun updateThemeRecord(value: Int) {
+        context.themeDataStore.edit { preferences ->
+            preferences[THEME_DATA_STORE_KEY] = value
         }
+    }
 
     override val fontFlow: Flow<String> = this.context.fontDataStore.data.map { preferences ->
         preferences[FONT_DATA_STORE_KEY] ?: FontMappingType.PoppinsBold.name
     }
 
-    override suspend fun updateFont(fontName: String): Unit =
-        withContext(coroutineScope.coroutineContext) {
-            context.fontDataStore.edit { preferences ->
-                preferences[FONT_DATA_STORE_KEY] = fontName
-            }
+    override suspend fun updateFont(fontName: String) {
+        context.fontDataStore.edit { preferences ->
+            preferences[FONT_DATA_STORE_KEY] = fontName
         }
+    }
 
     companion object {
         val THEME_DATA_STORE_KEY = intPreferencesKey("theme data store key")

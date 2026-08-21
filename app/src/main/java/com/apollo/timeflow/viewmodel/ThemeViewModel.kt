@@ -5,6 +5,7 @@ import androidx.annotation.FontRes
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.compositionLocalOf
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
 import com.apollo.timeflow.module.homefeed.service.feature.IThemeService
 import com.apollo.timeflow.module.settings.utils.FontMappingType
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,13 +19,12 @@ import javax.inject.Inject
 @HiltViewModel
 class ThemeViewModel @Inject constructor(
     private val iThemeService: IThemeService,
-    private val _coroutineScope: CoroutineScope,
     application: Application,
 ) : AndroidViewModel(application) {
 
     val currentThemeFlow: Flow<Int> = iThemeService.themeFlow
 
-    fun updateTheme() = _coroutineScope.launch {
+    fun updateTheme() = viewModelScope.launch {
         val last = currentThemeFlow.stateIn(this).value
         val next = when (last) {
             in IThemeService.LIGHT_ALL_SET -> IThemeService.DARK
@@ -40,7 +40,7 @@ class ThemeViewModel @Inject constructor(
      * - To Fixed the possible risk of burning the screen, every three minutes, the color will change slightly.
      * - For the time being, only changes to color in Light mode and Dark mode are added. If more theme changes are added later, these changes need to be considered.
      */
-    fun autoUpdateThemeCauseProtected() = _coroutineScope.launch {
+    fun autoUpdateThemeCauseProtected() = viewModelScope.launch {
         val next = when (val last = currentThemeFlow.stateIn(this).value) {
             in IThemeService.LIGHT_ALL_SET -> ((last - 1) % IThemeService.LIGHT_ALL_SET.size)
             in IThemeService.DARK_ALL_SET -> last % IThemeService.DARK_ALL_SET.size + 1
@@ -51,12 +51,7 @@ class ThemeViewModel @Inject constructor(
 
     val fontFlow: Flow<String> get() = iThemeService.fontFlow
 
-    fun updateFont(name: String) = _coroutineScope.launch {
+    fun updateFont(name: String) = viewModelScope.launch {
         iThemeService.updateFont(name)
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        _coroutineScope.cancel()
     }
 }
