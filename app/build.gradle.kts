@@ -3,7 +3,6 @@ private val mPassword = "timeflow"
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.org.jetbrains.kotlin.android)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.ksp)
@@ -54,13 +53,11 @@ android {
         }
     }
 
-    android {
-        splits {
-            abi {
-                this.reset()
-                this.isUniversalApk = false
-                this.include("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
-            }
+    splits {
+        abi {
+            this.reset()
+            this.isUniversalApk = false
+            this.include("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
         }
     }
 
@@ -68,14 +65,8 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "17"
-    }
     buildFeatures {
         compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
     }
     packaging {
         resources {
@@ -93,6 +84,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.material.icons.extended)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
