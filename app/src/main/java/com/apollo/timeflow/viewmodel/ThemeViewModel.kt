@@ -1,16 +1,10 @@
 package com.apollo.timeflow.viewmodel
 
 import android.app.Application
-import androidx.annotation.FontRes
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.compositionLocalOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.apollo.timeflow.module.homefeed.service.feature.IThemeService
-import com.apollo.timeflow.module.settings.utils.FontMappingType
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch

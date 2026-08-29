@@ -8,16 +8,14 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
 import com.apollo.timeflow.module.homefeed.service.feature.ITimeFormatRecordDataStoreService
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "Time Unit Record DataStore")
 
 class TimeFormatRecordDataStoreService @Inject constructor(
-    @ApplicationContext private val context: Context,
+    @param:ApplicationContext private val context: Context,
 ): ITimeFormatRecordDataStoreService {
 
     override val dateFlow: Flow<Boolean> = this.context.dataStore.data.map { preferences ->

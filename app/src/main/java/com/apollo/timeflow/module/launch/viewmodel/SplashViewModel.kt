@@ -9,10 +9,8 @@ import androidx.lifecycle.viewModelScope
 import com.apollo.timeflow.R
 import com.apollo.timeflow.module.launch.service.feature.ISplashService
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

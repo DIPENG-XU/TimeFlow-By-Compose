@@ -10,10 +10,8 @@ import androidx.datastore.preferences.preferencesDataStore
 import com.apollo.timeflow.module.homefeed.service.feature.IThemeService
 import com.apollo.timeflow.module.settings.utils.FontMappingType
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 private val Context.themeDataStore: DataStore<Preferences> by preferencesDataStore(name = "Theme Record DataStore")

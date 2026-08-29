@@ -5,9 +5,6 @@ import com.apollo.timeflow.module.homefeed.service.dependency.IDateModule
 import com.apollo.timeflow.module.homefeed.service.feature.ITimeDataService
 import com.apollo.timeflow.module.homefeed.uistate.TimeUIState
 import com.apollo.timeflow.utils.BASE24
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.withContext
-import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale

@@ -21,7 +21,7 @@ private val Context.powerByShowOrHide: DataStore<Preferences> by preferencesData
 
 class SplashService @Inject constructor(
     private val _iDateModule: IDateModule,
-    @ApplicationContext private val _context: Context,
+    @param:ApplicationContext private val _context: Context,
 ) : ISplashService {
     override suspend fun fetchTimeStage(): TimeStage {
         return when (_iDateModule.fetchCalendar().get(Calendar.HOUR_OF_DAY)) {

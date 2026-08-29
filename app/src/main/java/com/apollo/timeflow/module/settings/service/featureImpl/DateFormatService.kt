@@ -15,7 +15,7 @@ import javax.inject.Inject
 private val Context.dateFormatDataStore: DataStore<Preferences> by preferencesDataStore(name = "Date Format Record DataStore")
 
 class DateFormatService @Inject constructor(
-    @ApplicationContext private val context: Context,
+    @param:ApplicationContext private val context: Context,
 ) : IDateFormatService {
     override val dateFormatFlow: Flow<String> =
         this.context.dateFormatDataStore.data.map { preferences ->

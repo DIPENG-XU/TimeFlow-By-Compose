@@ -3,8 +3,6 @@ package com.apollo.timeflow.module.settings.service.featureImpl
 import com.apollo.timeflow.R
 import com.apollo.timeflow.module.settings.service.feature.ISettingsService
 import com.apollo.timeflow.module.settings.uiState.SettingsUIState
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class SettingsService @Inject constructor(): ISettingsService {
